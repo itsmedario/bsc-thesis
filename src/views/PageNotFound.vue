@@ -1,14 +1,10 @@
 <template>
   <div class="about">
-    <h1>About this platform</h1>
-    <p> This Platform was created in accordance with the ABZ textbook "einfach Informatik 3/4".
-    <br/>
-    Feedback is warmly welcomed:
+    <h1>Page not found! Error 404</h1>
+    <p>Feedback is warmly welcomed:
     <a href="mailto:dario@naepfer.ch">dario@naepfer.ch</a>
     </p>
-    <h3>Author: Dario Naepfer</h3>
-    <br/>
-    <img :src="require('@/assets/transport/beaver_transport.png')"/>
+    <img :src="require('@/assets/transport/load_boat.png')"/>
     <hr/>
     <Footer/>
 
@@ -27,7 +23,7 @@ import Footer from '@/components/Footer.vue';
     Footer,
   },
 })
-export default class About extends Vue {}
+export default class PageNotFound extends Vue {}
 </script>
 
 <style scoped>

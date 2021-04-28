@@ -1,14 +1,14 @@
 <template>
   <div id="home">
     <Header/>
-    <br/>
+    <hr/>
     <div>{{ this.tasks }}</div>
     <div v-for="task in this.views" :key="task.id"
-     class="flex-item flex-row flex-center flex-wrap card clickable">
+     class="flex-item flex-row flex-center flex-wrap card clickable"
+     style="display: inline-block">
       {{ task.title }}
       <img :src="require('@/assets/beavers/beaver.png')" style="padding:15px"/>
     </div>
-    <Footer/>
   </div>
 </template>
 

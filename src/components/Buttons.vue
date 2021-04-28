@@ -8,12 +8,12 @@
       </button>
     </router-link>
 
-    <button class="flex-item flex-center card clickable responsive" @click="emitNewStart()">
+    <button class="flex-item flex-center card clickable responsive" @click="$emit('next-task')">
       <h3>Nächste Aufgabe</h3>
       <img :src="require('/src/assets/icons/skip.png')"/>
     </button>
 
-    <button class="flex-item flex-center card clickable responsive" @click="$emit('new-start')">
+    <button class="flex-item flex-center card clickable responsive" @click="$emit('restart')">
       <h3>Neu starten</h3>
       <img :src="require('/src/assets/icons/restart.png')"/>
     </button>
@@ -42,12 +42,6 @@ import { Component, Vue } from 'vue-property-decorator';
 })
 export default class Buttons extends Vue {
   showAnimation = false;
-
-  x = 'back';
-
-  emitNewStart() {
-    this.showAnimation = false;
-  }
 }
 </script>
 

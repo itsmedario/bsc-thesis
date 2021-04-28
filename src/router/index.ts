@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 import Home from '@/views/Home.vue';
+import PageNotFound from '@/views/PageNotFound.vue';
 import views from '@/views/Views';
 
 Vue.use(VueRouter);
@@ -49,7 +50,7 @@ routes = routes.concat(
 
 routes.push({
   path: '/*',
-  component: Home,
+  component: PageNotFound,
 });
 
 const router = new VueRouter({

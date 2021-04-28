@@ -128,8 +128,8 @@ canvas {
   border: 2px dashed #324197;
   background: none;
   border-radius: 5px;
-  min-height: 1em;
-  min-width: 1em;
+  min-height: 5em;
+  min-width: 8em;
   margin: 1em;
 }
 .equal-space {
