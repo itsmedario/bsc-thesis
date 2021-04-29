@@ -1,11 +1,12 @@
 <template>
   <div>
-  <div  @click="checkSolution()">Testdata:  Sum = {{ sum }} solution:  {{ sumArray() }}</div>
+  <div  @click="checkSolution()">Testdata:  weight sum = {{ sum }},
+     solution:  {{ sumArray() }}, all used: {{  allWeightsUsed() }}</div>
     <table>
       <tr id="0">
         <td>
           <h3>Boot 1</h3>
-          <img src="@/assets/transport/boat1.png" style="width: 30%">
+          <img src="@/assets/transport/boat1.png" style="width: 55%" draggable="false">
         </td>
         <td v-for="i in colNumbers" :key="i" class="dropzone responsive" @click="dropItem(i, 1)"
          @dragstart="dropItem(i, 1)" @dragover.prevent @dragend.prevent
@@ -17,9 +18,9 @@
       <tr>
         <td>
           <h3>Boot 2</h3>
-          <img src="@/assets/transport/boat1.png" style="width: 30%">
+          <img src="@/assets/transport/boat1.png" style="width: 55%" draggable="false">
         </td>
-        <td v-for="i in colNumbers" :key="i" class="dropzone responsive" @click="dropItem(i, 2)"
+        <td v-for="i in colNumbers" :key="i" class="dropzone responsive " @click="dropItem(i, 2)"
          @dragstart="dropItem(i, 2)" @dragover.prevent @dragend.prevent
          @drop.stop.prevent="dropItem(i, 2)">
           <img :src="require(`@/assets/weights/size${rows[1][i-1]}.png`)"
@@ -29,7 +30,7 @@
       <tr>
         <td>
           <h3>Boot 3</h3>
-          <img src="@/assets/transport/boat1.png" style="width: 30%">
+          <img src="@/assets/transport/boat1.png" style="width: 55%" draggable="false">
         </td>
         <td v-for="i in colNumbers" :key="i" class="dropzone responsive" @click="dropItem(i, 3)"
          @dragstart="dropItem(i, 3)" @dragover.prevent @dragend.prevent
@@ -61,6 +62,8 @@ export default class Weights extends Vue {
 
   weights = [1, 2, 3, 4, 5, 6, 7, 8, 10, 12];
 
+  weightSum = 0;
+
   colNumbers = [1, 2, 3, 4, 5, 6];
 
   rows = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
@@ -69,7 +72,7 @@ export default class Weights extends Vue {
 
   sum = 0;
 
-  i = 0;
+  usedWeights = new Set();
 
   correctSolution = false;
 
@@ -89,16 +92,21 @@ export default class Weights extends Vue {
     },
   ];
 
-  /*
-  checkField(i:number, j:number): void {
-    if (this.row1[i - 1] === 0) {
-      this.dropItem(i, j);
+  addUpWeights():void {
+    let sum = 0;
+    for (let i = 0; i < this.weights.length; i += 1) {
+      sum += this.weights[i];
     }
-  } */
+    this.weightSum = sum;
+  }
 
   dropItem(i:number, j:number): void {
+    if (this.rows[j - 1][i - 1] !== 0) {
+      this.rows[j - 1][i - 1] = 0;
+    }
     this.rows[j - 1][i - 1] = this.selectedItem;
     this.selectedItem = 0;
+    this.checkSolution();
   }
 
   restart(): void {
@@ -107,28 +115,55 @@ export default class Weights extends Vue {
   }
 
   checkSolution():void {
-    this.sum = 1;
-    if (this.sumArray()) {
-      // this.$emit('correct-solution');
+    if (this.sumArray() && this.allWeightsUsed()) {
+      this.$emit('correct-solution');
+    } else {
+      this.$emit('false-solution');
     }
   }
 
   sumArray():boolean {
+    this.addUpWeights();
+
     let rowSum = 0;
 
     let totalSum = 0;
+
+    let boatOverload = false;
 
     for (let i = 0; i < 3; i += 1) {
       for (let j = 0; j < 6; j += 1) {
         rowSum += this.rows[i][j];
       }
       if (rowSum > 20) {
-        return false;
+        boatOverload = true;
       }
       totalSum += rowSum;
+      rowSum = 0;
     }
 
-    return totalSum === 48;
+    this.sum = totalSum;
+
+    return totalSum === this.weightSum && !boatOverload;
+  }
+
+  allWeightsUsed():boolean {
+    this.usedWeights.clear();
+
+    for (let i = 0; i < 3; i += 1) {
+      for (let j = 0; j < 6; j += 1) {
+        if (this.usedWeights.has(this.rows[i][j]) && (this.rows[i][j] !== 0)) {
+          return false;
+        }
+        this.usedWeights.add(this.rows[i][j]);
+      }
+    }
+
+    if (this.usedWeights.size === this.weights.length + 1) {
+      return true;
+    }
+
+    return false;
   }
 }
 </script>
@@ -137,12 +172,13 @@ export default class Weights extends Vue {
 <style scoped>
 
 table {
-  border-spacing: 0.7em;
+  border-spacing: 0.6em 1.4em;
 }
 
 tr h3, img {
   display: inline-block;
   margin: 0.5em;
+  vertical-align: middle;
 }
 
 td img {
@@ -155,6 +191,6 @@ td img {
 }
 
 .weight-depot img {
-  width: 100px;
+  width: 80px;
 }
 </style>

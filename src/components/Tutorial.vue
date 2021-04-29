@@ -4,7 +4,7 @@
     <div class="modal-wrapper">
       <div class="modal-container" @mousedown.stop >
         <div class="modal-header">
-          <p>Dies ist eine Anleitung zum Spiel.</p>
+          <h3>Anleitung zum Spiel</h3>
           <button style="margin:0.5em;" @click="showModal = false;
            $emit('close-tutorial')">
            &times;

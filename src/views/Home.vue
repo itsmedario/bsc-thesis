@@ -2,12 +2,17 @@
   <div id="home">
     <Header/>
     <hr/>
-    <div>{{ this.tasks }}</div>
-    <div v-for="task in this.views" :key="task.id"
-     class="flex-item flex-row flex-center flex-wrap card clickable"
-     style="display: inline-block">
-      {{ task.title }}
-      <img :src="require('@/assets/beavers/beaver.png')" style="padding:15px"/>
+    <div v-for="task in getItems()" :key="task.id"
+     class="card clickable">
+      <router-link :to="task.path">
+        <div class="card-container">
+          <div style="display: inline-block">{{ task.title }}</div>
+          <div class="card-image flex-item flex-center responsive" style="display: inline-block">
+            <img :src="require(`@/assets/${task.img}`)" style="max-width: 150px;
+            max-height: 70px; padding:15px"/>
+          </div>
+        </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -16,7 +21,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import Footer from '@/components/Footer.vue';
 import Header from '@/components/Header.vue';
-import tasks from '@/views/Views';
+import views from '@/views/Views';
 
 @Component({
   components: {
@@ -25,11 +30,13 @@ import tasks from '@/views/Views';
   },
 })
 export default class Home extends Vue {
-  static get items() {
-    return tasks;
+  // eslint-disable-next-line class-methods-use-this
+  getItems(): { id: number; path: string; title: string;
+   img: string; view: string; component: string; }[] {
+    return views;
   }
 
-views: Array<{
+views2: Array<{
   id: number;
   path: string;
   title: string;
@@ -92,5 +99,26 @@ views: Array<{
 <style scoped>
 #home {
    background-image: url('/src/assets/logo.jpg');
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: auto;
+  grid-gap: 1em;
+}
+.card-image {
+  height: 3em;
+}
+.card-image > img {
+  border-radius: 5px 5px 0 0;
+}
+.card-container {
+  margin-top: 6px;
+  padding: 2px 16px;
+}
+/* router-link */
+a {
+  text-decoration: none;
+  color: black;
 }
 </style>

@@ -21,28 +21,13 @@ let routes: Array<RouteConfig> = [
     name: 'About',
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
-  {
-    path: '/check-weights',
-    name: 'Check Weights',
-    component: () => import(/* webpackChunkName: "about" */ '../views/CheckWeights.vue'),
-  },
-  {
-    path: '/build-towers',
-    name: 'Build Towers',
-    component: () => import(/* webpackChunkName: "about" */ '../views/BuildTowers.vue'),
-  },
-  {
-    path: '/build-bridges',
-    name: 'Build Bridges',
-    component: () => import(/* webpackChunkName: "about" */ '../views/BuildBridges.vue'),
-  },
 ];
 
 routes = routes.concat(
   views.map((el) => {
     const rc: RouteConfig = {
       path: el.path,
-      component: () => import(`@/views/${el.view}`),
+      component: () => import(`../views/${el.view}.vue`),
     };
     return rc;
   }),

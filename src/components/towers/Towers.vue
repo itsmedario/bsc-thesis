@@ -14,26 +14,6 @@
 import { Component, Vue } from 'vue-property-decorator';
 import ItemSelection from '@/components/ItemSelection.vue';
 
-const items = [
-  {
-    id: 3,
-    type: 3,
-    value: 3,
-    img: 'bridges/tower.png',
-  },
-];
-
-const values = [
-  {
-    id: 3,
-    path: '/towers/check',
-    title: 'Türme überprüfen',
-    img: 'bridges/tower.png',
-    view: 'CheckTowers',
-    component: 'CheckWeights',
-  },
-];
-
 @Component({
   components: {
     ItemSelection,

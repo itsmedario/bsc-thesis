@@ -13,8 +13,9 @@
         </div>
         <div slot="body" class="flex-item flex-center flex-space-between flex-col">
           <div class="flex-item flex-center flex-space-between flex-row">
-            <img v-if="correctSolution" :src="require('@/assets/beavers/correct.png')"/>
-            <img v-else :src="require('@/assets/beavers/wrong.png')"/>
+            <img v-if="correctSolution" :src="require('@/assets/beavers/correct.png')"
+             style="animation: shake 1s"/>
+            <img v-else :src="require('@/assets/beavers/wrong.png')" style="animation: shake 0.5s"/>
           </div>
         </div>
        </div>

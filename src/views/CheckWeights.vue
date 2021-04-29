@@ -3,6 +3,7 @@
     <Game :type="'Weights'">
       <h2 slot="title">Ladungen überprüfen</h2>
       <p slot="description">Überprüfe, ob alle Gewichte korrekt verteilt wurden</p>
+      <p>Text als Test</p>
     </Game>
   </div>
 </template>
@@ -18,9 +19,7 @@ import Game from '../components/Game.vue';
   },
 })
 
-export default class CheckWeights extends Vue {
-  x = 'Test';
-}
+export default class DistributeWeights extends Vue {}
 </script>
 
 <style scoped></style>

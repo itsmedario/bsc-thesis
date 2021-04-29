@@ -11,8 +11,8 @@
             <button class="card clickable">About</button>
           </router-link>
           </transition>
-          <router-link to="/check-weights">
-            <button class="card clickable">Check Weights</button>
+          <router-link to="/distribute-weights">
+            <button class="card clickable">Distribute Weights</button>
           </router-link>
           <router-link to="/build-towers">
             <button class="card clickable">Build Towers</button>

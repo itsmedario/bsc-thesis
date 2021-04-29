@@ -28,19 +28,19 @@ export default class Footer extends Vue {
 
 footer {
   display: flex;
-  padding: 0.5em 2em;
+  padding: 0em 1.5em;
   justify-content: right;
 }
 
 footer .seperator{
   width: 3px;
   height: 50px;
-  margin: 10px 15px;
+  margin: 0px 15px;
   background: #111111;
 }
 
 h1 {
-  margin: 40px 0 0;
+  margin: 40px 0 0 0;
   margin-left: 20px;
   margin-right: 20px;
   float: right;
