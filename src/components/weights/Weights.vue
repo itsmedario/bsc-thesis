@@ -1,12 +1,14 @@
 <template>
   <div>
-  <div  @click="checkSolution()">Testdata:  weight sum = {{ sum }},
-     solution:  {{ sumArray() }}, all used: {{  allWeightsUsed() }}</div>
+  <div  @click="checkSolution()">Testdata:  load sum = {{ loadSum }},
+     boat overloaded: {{ boatOverload }}, solution:  {{ sumArray() }},
+     all used: {{  allWeightsUsed() }}</div>
     <table>
       <tr id="0">
         <td>
           <h3>Boot 1</h3>
-          <img src="@/assets/transport/boat1.png" style="width: 55%" draggable="false">
+          <img :src="require(`@/assets/transport/boat${boatsMaxLoad[0]}.png`)"
+           style="width: 55%" draggable="false">
         </td>
         <td v-for="i in colNumbers" :key="i" class="dropzone responsive" @click="dropItem(i, 1)"
          @dragstart="dropItem(i, 1)" @dragover.prevent @dragend.prevent
@@ -18,7 +20,8 @@
       <tr>
         <td>
           <h3>Boot 2</h3>
-          <img src="@/assets/transport/boat1.png" style="width: 55%" draggable="false">
+            <img :src="require(`@/assets/transport/boat${boatsMaxLoad[1]}.png`)"
+             style="width: 55%" draggable="false">
         </td>
         <td v-for="i in colNumbers" :key="i" class="dropzone responsive " @click="dropItem(i, 2)"
          @dragstart="dropItem(i, 2)" @dragover.prevent @dragend.prevent
@@ -30,9 +33,10 @@
       <tr>
         <td>
           <h3>Boot 3</h3>
-          <img src="@/assets/transport/boat1.png" style="width: 55%" draggable="false">
+          <img :src="require(`@/assets/transport/boat${boatsMaxLoad[2]}.png`)"
+           style="width: 55%" draggable="false">
         </td>
-        <td v-for="i in colNumbers" :key="i" class="dropzone responsive" @click="dropItem(i, 3)"
+        <td v-for="i in colNumbers" :key="i" class="dropzone responsive" @click="cardClicked(i, 3)"
          @dragstart="dropItem(i, 3)" @dragover.prevent @dragend.prevent
          @drop.stop.prevent="dropItem(i, 3)">
           <img :src="require(`@/assets/weights/size${rows[2][i-1]}.png`)"
@@ -42,7 +46,7 @@
     </table>
 
     <div class="weight-depot card clickable" v-for="i in weights"
-     :key="i" :class="{ selected: selectedItem == i }" @click="selectedItem = i"
+     :key="i" :class="{ selected: selectedItem == i }" @click="selectWeight(i)"
       @dragstart="selectedItem = i">
       <img :src="require(`@/assets/weights/size${i}.png`)">
     </div>
@@ -62,15 +66,17 @@ export default class Weights extends Vue {
 
   weights = [1, 2, 3, 4, 5, 6, 7, 8, 10, 12];
 
-  weightSum = 0;
+  boatsMaxLoad = [10, 20, 30];
+
+  boatOverload = false;
+
+  loadSum = 0;
 
   colNumbers = [1, 2, 3, 4, 5, 6];
 
   rows = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
 
   selectedItem = 0;/* selectedItem = [0, -1, -1]; */
-
-  sum = 0;
 
   usedWeights = new Set();
 
@@ -97,13 +103,26 @@ export default class Weights extends Vue {
     for (let i = 0; i < this.weights.length; i += 1) {
       sum += this.weights[i];
     }
-    this.weightSum = sum;
+    this.loadSum = sum;
+  }
+
+  selectWeight(i:number):void {
+    if (this.selectedItem === i) {
+      this.selectedItem = 0;
+    } else {
+      this.selectedItem = i;
+    }
+  }
+
+  cardClicked(i:number, j:number):void {
+    if (this.rows[j - 1][i - 1] !== 0) {
+      this.rows[j - 1][i - 1] = 0;
+    } else {
+      this.dropItem(i, j);
+    }
   }
 
   dropItem(i:number, j:number): void {
-    if (this.rows[j - 1][i - 1] !== 0) {
-      this.rows[j - 1][i - 1] = 0;
-    }
     this.rows[j - 1][i - 1] = this.selectedItem;
     this.selectedItem = 0;
     this.checkSolution();
@@ -129,22 +148,20 @@ export default class Weights extends Vue {
 
     let totalSum = 0;
 
-    let boatOverload = false;
+    this.boatOverload = false;
 
     for (let i = 0; i < 3; i += 1) {
       for (let j = 0; j < 6; j += 1) {
         rowSum += this.rows[i][j];
       }
-      if (rowSum > 20) {
-        boatOverload = true;
+      if (rowSum > this.boatsMaxLoad[i]) {
+        this.boatOverload = true;
       }
       totalSum += rowSum;
       rowSum = 0;
     }
 
-    this.sum = totalSum;
-
-    return totalSum === this.weightSum && !boatOverload;
+    return totalSum === this.loadSum && !this.boatOverload; // achtung falscher Bool
   }
 
   allWeightsUsed():boolean {
