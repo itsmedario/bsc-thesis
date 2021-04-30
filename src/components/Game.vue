@@ -6,7 +6,7 @@
     </Tutorial>
 
     <Verifier :showSolution=showSolution :correctSolution="correctSolution"
-     @close-verifier="showSolution = false; correctSolution = false"/>
+     @close-verifier="showSolution = false"/>
 
     <Buttons @next-task="nextTask()" @restart="this.$refs.restart.restart()"
      @check-solution="checkSolution()" @show-tutorial="activateTutorial()"/>

@@ -148,11 +148,11 @@ video {
 }
 .selected {
   background: #4ea1ee !important;
-  border: 3px solid #4ea1ee;
+  border: 4px solid #4ea1ee;
 }
 .locked {
   background: lightgray !important;
-  border: 3px solid #cccccc;
+  border: 4px solid #cccccc;
 }
 
 @keyframes shake {

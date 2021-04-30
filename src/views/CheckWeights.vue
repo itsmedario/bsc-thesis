@@ -2,7 +2,11 @@
   <div>
     <Game :type="'Weights'">
       <h2 slot="title">Ladungen überprüfen</h2>
-      <p slot="description">Überprüfe, ob alle Gewichte korrekt verteilt wurden</p>
+      <p slot="intro">Überprüfe, ob alle Gewichte korrekt verteilt wurden</p>
+      <p slot="description">Überprüfe, ob alle Gewichte korrekt verteilt wurden. Pass auf, dass
+         kein Boot zu schwer beladen wird. Jedes Boot darf maximal so viele Kilogramm aufladen,
+         wie auf seinem Segel geschrieben steht. Zur Überprüfung kannst du die Gewichte so auf die
+          Boote verteilen, wie es vorgeschlagen wurde. Viel Erfolg!</p>
       <p>Text als Test</p>
     </Game>
   </div>

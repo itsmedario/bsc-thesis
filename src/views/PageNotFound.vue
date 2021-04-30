@@ -2,7 +2,8 @@
   <div class="about">
     <h1>Page not found! Error 404</h1>
     <p>Feedback is warmly welcomed:
-    <a href="mailto:dario@naepfer.ch">dario@naepfer.ch</a>
+    <a href="mailto:dario@naepfer.ch?subject=Feedback for online learning platform">
+      dario@naepfer.ch</a>
     </p>
     <img :src="require('@/assets/transport/load_boat.png')"/>
     <hr/>
