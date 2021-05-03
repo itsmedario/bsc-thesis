@@ -1,8 +1,11 @@
 <template>
   <div ref="comp">
-  <div  @click="restart ()">Testdata:  load sum = {{ loadSum }},
-     boat overloaded: {{ boatOverload }}, solution:  {{ sumArray() }},
-     all used: {{  allWeightsUsed() }}</div>
+    <div>Testdata:  load sum = {{ loadSum }},
+      boat overloaded: {{ boatOverload }}, solution:  {{ sumArray() }},
+      all used: {{  allWeightsUsed() }}
+    </div>
+    <div @click="restart()">Restart</div>
+    <div @click="nextTask()">Next Task</div>
     <table>
       <tr id="0">
         <td>
