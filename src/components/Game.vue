@@ -8,7 +8,7 @@
     <Verifier :showSolution=showSolution :correctSolution="correctSolution"
      @close-verifier="showSolution = false"/>
 
-    <Buttons @next-task="nextTask()" @restart="this.$refs.restart.restart()"
+    <Buttons @next-task="nextTask()" @restart="$refs.comp.restart()"
      @check-solution="checkSolution()" @show-tutorial="activateTutorial()"/>
 
     <div class="flex-center flex-row">

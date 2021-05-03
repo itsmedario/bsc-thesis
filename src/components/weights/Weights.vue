@@ -1,6 +1,6 @@
 <template>
-  <div>
-  <div  @click="checkSolution()">Testdata:  load sum = {{ loadSum }},
+  <div ref="comp">
+  <div  @click="restart ()">Testdata:  load sum = {{ loadSum }},
      boat overloaded: {{ boatOverload }}, solution:  {{ sumArray() }},
      all used: {{  allWeightsUsed() }}</div>
     <table>
@@ -10,37 +10,40 @@
           <img :src="require(`@/assets/transport/boat${boatsMaxLoad[0]}.png`)"
            style="width: 55%" draggable="false">
         </td>
-        <td v-for="i in colNumbers" :key="i" class="dropzone responsive" @click="dropItem(i, 1)"
-         @dragstart="dropItem(i, 1)" @dragover.prevent @dragend.prevent
-         @drop.stop.prevent="dropItem(i, 1)">
+        <td v-for="i in colNumbers" :key="i" class="dropzone { selected: selectedItem == i }"
+         @click="fieldClicked(1,i)" @dragover.prevent
+         @dragstart="selectedItem = rows[0][i - 1]; rows[0][i - 1] = 0"
+         @drop.stop.prevent="dropItem(1, i)">
           <img :src="require(`@/assets/weights/size${rows[0][i-1]}.png`)"
-           v-if="rows[0][i-1] != 0">
+           >
         </td>
       </tr>
-      <tr>
+      <tr id="1">
         <td>
           <h3>Boot 2</h3>
-            <img :src="require(`@/assets/transport/boat${boatsMaxLoad[1]}.png`)"
-             style="width: 55%" draggable="false">
+          <img :src="require(`@/assets/transport/boat${boatsMaxLoad[1]}.png`)"
+           style="width: 55%" draggable="false">
         </td>
-        <td v-for="i in colNumbers" :key="i" class="dropzone responsive " @click="dropItem(i, 2)"
-         @dragstart="dropItem(i, 2)" @dragover.prevent @dragend.prevent
-         @drop.stop.prevent="dropItem(i, 2)">
+        <td v-for="i in colNumbers" :key="i" class="dropzone { selected: selectedItem == i }"
+         @click="fieldClicked(2,i)" @dragover.prevent
+         @dragstart="selectedItem = rows[1][i - 1]; rows[1][i - 1] = 0"
+         @drop.stop.prevent="dropItem(2, i)">
           <img :src="require(`@/assets/weights/size${rows[1][i-1]}.png`)"
-           v-if="rows[1][i-1] != 0">
+           >
         </td>
       </tr>
-      <tr>
+      <tr id="2">
         <td>
           <h3>Boot 3</h3>
           <img :src="require(`@/assets/transport/boat${boatsMaxLoad[2]}.png`)"
            style="width: 55%" draggable="false">
         </td>
-        <td v-for="i in colNumbers" :key="i" class="dropzone responsive" @click="cardClicked(i, 3)"
-         @dragstart="dropItem(i, 3)" @dragover.prevent @dragend.prevent
-         @drop.stop.prevent="dropItem(i, 3)">
+        <td v-for="i in colNumbers" :key="i" class="dropzone { selected: selectedItem == i }"
+         @click="fieldClicked(3,i)" @dragover.prevent
+         @dragstart="selectedItem = rows[2][i - 1]; rows[2][i - 1] = 0"
+         @drop.stop.prevent="dropItem(3, i)">
           <img :src="require(`@/assets/weights/size${rows[2][i-1]}.png`)"
-           v-if="rows[2][i-1] != 0">
+           >
         </td>
       </tr>
     </table>
@@ -114,18 +117,19 @@ export default class Weights extends Vue {
     }
   }
 
-  cardClicked(i:number, j:number):void {
-    if (this.rows[j - 1][i - 1] !== 0) {
-      this.rows[j - 1][i - 1] = 0;
-    } else {
+  fieldClicked(i:number, j:number):void {
+    if (this.selectedItem !== 0) {
       this.dropItem(i, j);
+    } else {
+      this.selectedItem = this.rows[i - 1][j - 1];
+      this.rows[i - 1][j - 1] = 0;
+      this.selectedItem = 0;
     }
   }
 
-  dropItem(i:number, j:number): void {
-    this.rows[j - 1][i - 1] = this.selectedItem;
+  dropItem(i:number, j:number):void {
+    this.rows[i - 1][j - 1] = this.selectedItem;
     this.selectedItem = 0;
-    this.checkSolution();
   }
 
   restart(): void {
