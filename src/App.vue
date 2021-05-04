@@ -151,8 +151,8 @@ video {
   border: 4px solid #4ea1ee;
 }
 .locked {
-  background: lightgray !important;
-  border: 4px solid #cccccc;
+  background: rgb(184, 183, 183) !important;
+  border: 4px solid rgb(184, 183, 183);
 }
 
 @keyframes shake {

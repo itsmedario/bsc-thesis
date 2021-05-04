@@ -8,8 +8,10 @@
     <Verifier :showSolution=showSolution :correctSolution="correctSolution"
      @close-verifier="showSolution = false"/>
 
-    <Buttons @next-task="nextTask()" @restart="$refs.comp.restart()"
-     @check-solution="checkSolution()" @show-tutorial="activateTutorial()"/>
+    <Buttons @next-task="$refs.gameComp.nextTask()"
+     @restart="$refs.gameComp.restart()"
+     @check-solution="$refs.gameComp.checkSolution(); showSolution = true"
+     @show-tutorial="showTutorial = true"/>
 
     <div class="flex-center flex-row">
       <slot name="title">Unintentionally empty title!</slot>
@@ -17,7 +19,7 @@
     </div>
 
     <component
-      :is="this.type" :restartGame=restartGame :nextTask=nextTask
+      :is="this.type" ref="gameComp"
       @correct-solution="correctSolution = true"
       @false-solution="correctSolution = false"
     />
@@ -47,10 +49,6 @@ export default class Game extends Vue {
   @Prop({ required: true })
   type!: string;
 
-  nextTask = false;
-
-  restartGame = false;
-
   showTutorial = false;
 
   correctSolution = false;
@@ -59,14 +57,6 @@ export default class Game extends Vue {
 
   get currentGameComponent(): string {
     return this.type;
-  }
-
-  activateTutorial(): void {
-    this.showTutorial = true;
-  }
-
-  checkSolution(): void {
-    this.showSolution = true;
   }
 }
 </script>

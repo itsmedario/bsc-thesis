@@ -1,8 +1,8 @@
 <template>
   <div id="home">
     <Header/>
-    <hr/>
-    <div v-for="task in getItems()" :key="task.id"
+  <hr/>
+  <!--    <div v-for="task in getItems()" :key="task.id"
      class="card clickable">
       <router-link :to="task.path">
         <div class="card-container">
@@ -13,7 +13,7 @@
           </div>
         </div>
       </router-link>
-    </div>
+    </div>-->
   </div>
 </template>
 

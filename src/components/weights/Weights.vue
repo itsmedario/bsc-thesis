@@ -1,16 +1,15 @@
 <template>
-  <div ref="comp">
-    <div>Testdata:  load sum = {{ loadSum }},
-      boat overloaded: {{ boatOverload }}, solution:  {{ sumArray() }},
-      all used: {{  allWeightsUsed() }}
+  <div>
+    <div>Testdata: sum of all weights = {{ weightSum }},
+      boat overloaded: {{ boatOverload }}, sum of loaded weights:  {{ sumArray() }},
+      all weights used: {{  allWeightsUsed() }}
     </div>
-    <div @click="restart()">Restart</div>
-    <div @click="nextTask()">Next Task</div>
+
     <table>
       <tr id="0">
         <td>
           <h3>Boot 1</h3>
-          <img :src="require(`@/assets/transport/boat${boatsMaxLoad[0]}.png`)"
+          <img :src="require(`@/assets/transport/boat${boatsCapacities[0]}.png`)"
            style="width: 55%" draggable="false">
         </td>
         <td v-for="i in colNumbers" :key="i" class="dropzone { selected: selectedItem == i }"
@@ -24,7 +23,7 @@
       <tr id="1">
         <td>
           <h3>Boot 2</h3>
-          <img :src="require(`@/assets/transport/boat${boatsMaxLoad[1]}.png`)"
+          <img :src="require(`@/assets/transport/boat${boatsCapacities[1]}.png`)"
            style="width: 55%" draggable="false">
         </td>
         <td v-for="i in colNumbers" :key="i" class="dropzone { selected: selectedItem == i }"
@@ -38,7 +37,7 @@
       <tr id="2">
         <td>
           <h3>Boot 3</h3>
-          <img :src="require(`@/assets/transport/boat${boatsMaxLoad[2]}.png`)"
+          <img :src="require(`@/assets/transport/boat${boatsCapacities[2]}.png`)"
            style="width: 55%" draggable="false">
         </td>
         <td v-for="i in colNumbers" :key="i" class="dropzone { selected: selectedItem == i }"
@@ -52,7 +51,8 @@
     </table>
 
     <div class="weight-depot card clickable" v-for="i in weights"
-     :key="i" :class="{ selected: selectedItem == i }" @click="selectWeight(i)"
+     :key="i" :class="{ selected: selectedItem == i,
+      locked: usedWeights.has(i) }" @click="selectWeight(i)"
       @dragstart="selectedItem = i">
       <img :src="require(`@/assets/weights/size${i}.png`)">
     </div>
@@ -60,23 +60,22 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 
 @Component({
   components: {},
 })
 
 export default class Weights extends Vue {
-  @Prop({ required: true })
-  restartGame!: boolean;
-
   weights = [1, 2, 3, 4, 5, 6, 7, 8, 10, 12];
 
-  boatsMaxLoad = [10, 20, 30];
+  weightSum = 0;
+
+  boatsCapacities = [10, 20, 30];
+
+  boatsMaxLoad = 0;
 
   boatOverload = false;
-
-  loadSum = 0;
 
   colNumbers = [1, 2, 3, 4, 5, 6];
 
@@ -104,15 +103,15 @@ export default class Weights extends Vue {
     },
   ];
 
-  addUpWeights():void {
+  addUpWeights():void { // calculates the sum of all given weights
     let sum = 0;
     for (let i = 0; i < this.weights.length; i += 1) {
       sum += this.weights[i];
     }
-    this.loadSum = sum;
+    this.weightSum = sum;
   }
 
-  selectWeight(i:number):void {
+  selectWeight(i:number):void { // select a weight in the inventory
     if (this.selectedItem === i) {
       this.selectedItem = 0;
     } else {
@@ -120,7 +119,7 @@ export default class Weights extends Vue {
     }
   }
 
-  fieldClicked(i:number, j:number):void {
+  fieldClicked(i:number, j:number):void { // drop or delete a weight in a ship
     if (this.selectedItem !== 0) {
       this.dropItem(i, j);
     } else {
@@ -128,11 +127,13 @@ export default class Weights extends Vue {
       this.rows[i - 1][j - 1] = 0;
       this.selectedItem = 0;
     }
+    this.checkSolution();
   }
 
   dropItem(i:number, j:number):void {
     this.rows[i - 1][j - 1] = this.selectedItem;
     this.selectedItem = 0;
+    this.checkSolution();
   }
 
   restart(): void {
@@ -140,15 +141,47 @@ export default class Weights extends Vue {
     this.rows = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
   }
 
+  nextTask():void {
+    this.restart();
+    let ship1 = 0;
+    let ship2 = 0;
+    let ship3 = 0;
+    const max = 60;
+    let newWeightSum = 0;
+    let chosenWeightSum = 0;
+    const chosenWeights = new Set([1]);
+
+    // choose ship sizes
+    do {
+      ship1 = Math.floor(1 + Math.random() * 3) * 10;
+      ship2 = Math.floor(1 + Math.random() * 3) * 10;
+      ship3 = Math.floor(1 + Math.random() * 3) * 10;
+      newWeightSum = ship1 + ship2 + ship3;
+    } while (newWeightSum > max);
+    this.boatsCapacities = [ship1, ship2, ship3];
+
+    // choose weights
+    let w = 0;
+    while (chosenWeightSum <= newWeightSum) {
+      w = Math.floor(1 + Math.random() * 12);
+      if (!chosenWeights.has(w)) {
+        chosenWeights.add(w);
+        chosenWeightSum += w;
+      }
+    }
+    chosenWeights.delete(w);
+    this.weights = Array.from(chosenWeights).sort();
+  }
+
   checkSolution():void {
-    if (this.sumArray() && this.allWeightsUsed()) {
+    if (this.sumArray() === this.weightSum && this.allWeightsUsed() && !this.boatOverload) {
       this.$emit('correct-solution');
     } else {
-      this.$emit('false-solution');
+      this.$emit('false-solution'); // add tip what to improve (conditioned on what bool is false, include in emit)
     }
   }
 
-  sumArray():boolean {
+  sumArray():number { // calculate sum of used weights
     this.addUpWeights();
 
     let rowSum = 0;
@@ -161,14 +194,14 @@ export default class Weights extends Vue {
       for (let j = 0; j < 6; j += 1) {
         rowSum += this.rows[i][j];
       }
-      if (rowSum > this.boatsMaxLoad[i]) {
+      if (rowSum > this.boatsCapacities[i]) {
         this.boatOverload = true;
       }
       totalSum += rowSum;
       rowSum = 0;
     }
 
-    return totalSum === this.loadSum && !this.boatOverload; // achtung falscher Bool
+    return totalSum; // achtung falscher Bool
   }
 
   allWeightsUsed():boolean {
