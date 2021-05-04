@@ -2,8 +2,14 @@
   <div>
     <Game :type="'Towers'">
       <h2 slot="title">Türme bauen</h2>
+      <p slot="intro">Setze die Türme so, dass man mit
+         den Türmen alle Kanäle überwachen kann.</p>
       <p slot="description">Setze die Türme so, dass man mit
          den Türmen alle Kanäle überwachen kann.</p>
+      <video loop controls muted slot="video">
+        <source :src="require('@/assets/tutorials/distribute-weights.mp4')" />
+        Your browser does not support the video tag.
+      </video>
     </Game>
   </div>
 </template>

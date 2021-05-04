@@ -4,22 +4,20 @@
       <div id="button-menu" class="flex-item flex-row flex-center flex-wrap">
         <router-link to="/home">
           <button id="home" class="card clickable"
-           @click="selectedTab = 'Home'">Home</button>
+           @click="selectedTab = 'Home'">Startseite</button>
         </router-link>
-          <transition name="fade" mode="out-in">
-          <router-link  to="/about">
-            <button class="card clickable">About</button>
-          </router-link>
-          </transition>
-          <router-link to="/distribute-weights">
-            <button class="card clickable">Distribute Weights</button>
-          </router-link>
-          <router-link to="/build-towers">
-            <button class="card clickable">Build Towers</button>
-          </router-link>
+        <router-link  to="/about">
+          <button class="card clickable" @click="selectedTab = 'About'">Impressum</button>
+        </router-link>
+        <router-link to="/distribute-weights">
+          <button class="card clickable">Boote beladen</button>
+        </router-link>
+        <!--<router-link to="/build-towers">
+          <button class="card clickable">Türme bauen</button>
+        </router-link>
         <router-link to="/build-bridges">
-          <button class="card clickable">Build Bridges</button>
-        </router-link>
+          <button class="card clickable">Brücken bauen</button>
+        </router-link>-->
       </div>
     <hr>
     </div>

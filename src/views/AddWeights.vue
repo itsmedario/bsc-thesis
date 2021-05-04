@@ -20,9 +20,7 @@ import Game from '../components/Game.vue';
   },
 })
 
-export default class CheckWeights extends Vue {
-  x = 'Test';
-}
+export default class AddWeights extends Vue {}
 </script>
 
 <style scoped></style>

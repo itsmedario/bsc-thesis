@@ -1,51 +1,22 @@
 <template>
   <div>
-    <div>Testdata: sum of all weights = {{ weightSum }},
+    <!--<div>Testdata: sum of all weights = {{ weightSum }},
       boat overloaded: {{ boatOverload }}, sum of loaded weights:  {{ sumArray() }},
       all weights used: {{  allWeightsUsed() }}
-    </div>
+    </div>-->
 
     <table>
-      <tr id="0">
+      <tr id="0" v-for="i in 3" :key="i">
         <td>
-          <h3>Boot 1</h3>
-          <img :src="require(`@/assets/transport/boat${boatsCapacities[0]}.png`)"
+          <h3>Boot {{ i }}</h3>
+          <img :src="require(`@/assets/transport/boat${boatsCapacities[i - 1]}.png`)"
            style="width: 55%" draggable="false">
         </td>
-        <td v-for="i in colNumbers" :key="i" class="dropzone { selected: selectedItem == i }"
-         @click="fieldClicked(1,i)" @dragover.prevent
-         @dragstart="selectedItem = rows[0][i - 1]; rows[0][i - 1] = 0"
-         @drop.stop.prevent="dropItem(1, i)">
-          <img :src="require(`@/assets/weights/size${rows[0][i-1]}.png`)"
-           >
-        </td>
-      </tr>
-      <tr id="1">
-        <td>
-          <h3>Boot 2</h3>
-          <img :src="require(`@/assets/transport/boat${boatsCapacities[1]}.png`)"
-           style="width: 55%" draggable="false">
-        </td>
-        <td v-for="i in colNumbers" :key="i" class="dropzone { selected: selectedItem == i }"
-         @click="fieldClicked(2,i)" @dragover.prevent
-         @dragstart="selectedItem = rows[1][i - 1]; rows[1][i - 1] = 0"
-         @drop.stop.prevent="dropItem(2, i)">
-          <img :src="require(`@/assets/weights/size${rows[1][i-1]}.png`)"
-           >
-        </td>
-      </tr>
-      <tr id="2">
-        <td>
-          <h3>Boot 3</h3>
-          <img :src="require(`@/assets/transport/boat${boatsCapacities[2]}.png`)"
-           style="width: 55%" draggable="false">
-        </td>
-        <td v-for="i in colNumbers" :key="i" class="dropzone { selected: selectedItem == i }"
-         @click="fieldClicked(3,i)" @dragover.prevent
-         @dragstart="selectedItem = rows[2][i - 1]; rows[2][i - 1] = 0"
-         @drop.stop.prevent="dropItem(3, i)">
-          <img :src="require(`@/assets/weights/size${rows[2][i-1]}.png`)"
-           >
+        <td v-for="j in colNumbers" :key="j" class="dropzone { selected: selectedItem == j }"
+         @click="fieldClicked(i,j)" @dragover.prevent
+         @dragstart="selectedItem = rows[i - 1][j - 1]; rows[i - 1][j - 1] = 0"
+         @drop.stop.prevent="dropItem(i, j)">
+          <img :src="require(`@/assets/weights/size${rows[i - 1][j - 1]}.png`)">
         </td>
       </tr>
     </table>
@@ -170,7 +141,9 @@ export default class Weights extends Vue {
       }
     }
     chosenWeights.delete(w);
-    this.weights = Array.from(chosenWeights).sort();
+    this.weights = Array.from(chosenWeights);
+    this.weights.sort((a, b): number => a - b);
+    console.log(this.weights);
   }
 
   checkSolution():void {

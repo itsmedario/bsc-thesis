@@ -7,7 +7,10 @@
          kein Boot zu schwer beladen wird. Jedes Boot darf maximal so viele Kilogramm aufladen,
          wie auf seinem Segel geschrieben steht. Zur Überprüfung kannst du die Gewichte so auf die
           Boote verteilen, wie es vorgeschlagen wurde. Viel Erfolg!</p>
-      <p>Text als Test</p>
+      <video loop controls muted slot="video">
+        <source :src="require('@/assets/tutorials/distribute-weights.mp4')" />
+        Your browser does not support the video tag.
+      </video>
     </Game>
   </div>
 </template>

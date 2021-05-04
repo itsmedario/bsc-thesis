@@ -9,6 +9,10 @@
          entfernen. Jedes Gewicht soll genau einmal verwendet werden. Pass auf, dass kein Boot zu
          schwer beladen wird. Jedes Boot darf maximal so viele Kilogramm aufladen, wie auf seinem
          Segel geschrieben steht. Viel Erfolg!</p>
+      <video loop controls muted slot="video">
+        <source :src="require('@/assets/tutorials/distribute-weights.mp4')" />
+        Your browser does not support the video tag.
+      </video>
     </Game>
   </div>
 </template>
