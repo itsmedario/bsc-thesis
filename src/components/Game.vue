@@ -6,7 +6,9 @@
     </Tutorial>
 
     <Verifier :showSolution=showSolution :correctSolution="correctSolution"
-     @close-verifier="showSolution = false"/>
+     :tip="tip"
+     @close-verifier="showSolution = false">
+    </Verifier>
 
     <Buttons @next-task="$refs.gameComp.nextTask()"
      @restart="$refs.gameComp.restart()"
@@ -23,6 +25,7 @@
       @correct-solution="correctSolution = true"
       @false-solution="correctSolution = false"
     />
+
   </div>
 </template>
 
@@ -34,6 +37,7 @@ import Buttons from '@/components/Buttons.vue';
 import Towers from '@/components/towers/Towers.vue';
 import Bridges from '@/components/bridges/Bridges.vue';
 import Weights from '@/components/weights/Weights.vue';
+import Weights2 from '@/components/weights/Weights2.vue';
 
 @Component({
   components: {
@@ -43,6 +47,7 @@ import Weights from '@/components/weights/Weights.vue';
     Towers,
     Bridges,
     Weights,
+    Weights2,
   },
 })
 export default class Game extends Vue {
@@ -55,6 +60,8 @@ export default class Game extends Vue {
 
   showSolution = false;
 
+  tip = 'Guter Versuch! Probiere es noch einmal!';
+
   get currentGameComponent(): string {
     return this.type;
   }
@@ -65,6 +72,6 @@ export default class Game extends Vue {
 <style scoped>
 
 #Game{
-  margin-left: 90px;
+  margin-left: 0%;
 }
 </style>

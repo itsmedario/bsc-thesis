@@ -51,6 +51,7 @@ export default class Buttons extends Vue {
 .buttons {
   position: absolute;
   left: 0;
+  top: 20%;
   font-size: 20px;
 }
 

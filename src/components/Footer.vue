@@ -1,5 +1,5 @@
 <template>
-  <footer id="footer">
+  <footer id="footer" class="responsive">
     <div class="logo-ethz">
       <a href="https://ethz.ch" target="blank">
         <img _ngcontent-c1="" src="@/assets/ethz-logo.svg" style="height:40px; margin-top:10px;"/>

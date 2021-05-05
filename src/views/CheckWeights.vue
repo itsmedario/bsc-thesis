@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Game :type="'Weights'">
+    <Game :type="'Weights2'">
       <h2 slot="title">Ladungen überprüfen</h2>
       <p slot="intro">Überprüfe, ob alle Gewichte korrekt verteilt wurden</p>
       <p slot="description">Überprüfe, ob alle Gewichte korrekt verteilt wurden. Pass auf, dass

@@ -5,16 +5,22 @@
       all weights used: {{  allWeightsUsed() }}
     </div>-->
 
+    <div class="card info-card responsive" style="max-width: 1300px">
+        <img :src="require(`@/assets/faces/face${(counter%8) + 1}.png`)"
+        style="width: 5%" draggable="false">
+        <h2>{{ names[(counter%8)] }}s Vorschlag:</h2>
+    </div>
+
     <table>
-      <tr id="i" v-for="i in 3" :key="i">
+      <tr id="0" v-for="i in 3" :key="i">
         <td>
-          <h3 class="hidden-mobile">Boot {{ i }}</h3>
+          <h3>Boot {{ i }}</h3>
           <img :src="require(`@/assets/transport/boat${boatsCapacities[i - 1]}.png`)"
-           style="width: 55%; min-width:120px; max-width:150px" draggable="false">
+           style="width: 55%" draggable="false">
         </td>
-        <td v-for="j in 5" :key="j" class="dropzone { selected: selectedItem == j }"
+        <td v-for="j in colNumbers" :key="j" class="dropzone { selected: selectedItem == j }"
          @click="fieldClicked(i,j)" @dragover.prevent
-         @dragstart="dragStart(i,j)"
+         @dragstart="selectedItem = rows[i - 1][j - 1]; rows[i - 1][j - 1] = 0"
          @drop.stop.prevent="dropItem(i, j)">
           <img :src="require(`@/assets/weights/size${rows[i - 1][j - 1]}.png`)">
         </td>
@@ -38,7 +44,11 @@ import { Component, Vue } from 'vue-property-decorator';
   components: {},
 })
 
-export default class Weights extends Vue {
+export default class Weights2 extends Vue {
+  names = ['Michael', 'Jaqueline', 'Kubko', 'Anna', 'Peter', 'Steffi', 'Jan', 'Angelica'];
+
+  counter = 0;
+
   weights = [1, 2, 3, 4, 5, 6, 7, 8, 10, 12];
 
   weightSum = 0;
@@ -48,6 +58,8 @@ export default class Weights extends Vue {
   boatsMaxLoad = 0;
 
   boatOverload = false;
+
+  colNumbers = [1, 2, 3, 4, 5, 6];
 
   rows = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
 
@@ -94,23 +106,16 @@ export default class Weights extends Vue {
       this.dropItem(i, j);
     } else {
       this.selectedItem = this.rows[i - 1][j - 1];
-      this.usedWeights.delete(this.selectedItem);
       this.rows[i - 1][j - 1] = 0;
+      this.usedWeights.delete(this.selectedItem);
       this.selectedItem = 0;
     }
     this.checkSolution();
   }
 
-  dragStart(i:number, j:number):void {
-    this.selectedItem = this.rows[i - 1][j - 1];
-    this.rows[i - 1][j - 1] = 0;
-    this.usedWeights.delete(this.selectedItem);
-  }
-
   // place item on a boat
   dropItem(i:number, j:number):void {
     if (!this.usedWeights.has(this.selectedItem)) {
-      this.usedWeights.delete(this.rows[i - 1][j - 1]);
       this.rows[i - 1][j - 1] = this.selectedItem;
       this.usedWeights.add(this.selectedItem);
       this.selectedItem = 0;
@@ -232,7 +237,7 @@ table {
   border-spacing: 0.6em 1.4em;
 }
 
-tr h3, img {
+h2, h3, img {
   display: inline-block;
   margin: 0.5em;
   vertical-align: middle;
@@ -240,6 +245,11 @@ tr h3, img {
 
 td img {
   width: 100px;
+}
+
+.info-card {
+  padding: 0em !important;
+  margin: 0em !important;
 }
 
 .weight-depot {

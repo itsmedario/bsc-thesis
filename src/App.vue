@@ -80,7 +80,6 @@ canvas {
   border: 4px solid #e7e7e7;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.9);
   transition: 0.3s;
-  padding: 0.5em;
   margin: 1em;
 }
 .clickable:hover {
@@ -151,6 +150,12 @@ video {
 .locked {
   background: rgb(184, 183, 183) !important;
   border: 4px solid rgb(184, 183, 183);
+}
+
+@media (max-width: 1430px) {
+        .hidden-mobile {
+          display: none !important;
+        }
 }
 
 @keyframes shake {
