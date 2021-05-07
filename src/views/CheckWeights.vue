@@ -2,11 +2,13 @@
   <div>
     <Game :type="'Weights2'">
       <h2 slot="title">Ladungen überprüfen</h2>
-      <p slot="intro">Überprüfe, ob alle Gewichte korrekt verteilt wurden</p>
-      <p slot="description">Überprüfe, ob alle Gewichte korrekt verteilt wurden. Pass auf, dass
+      <p slot="intro">-</p>
+      <p slot="description" style="font-size: 1.7em">Überprüfe, ob alle Gewichte (<img
+        :src="require('@/assets/weights/size6.png')" style="height: 1em"/>)
+         korrekt verteilt wurden. Pass auf, dass
          kein Boot zu schwer beladen wird. Jedes Boot darf maximal so viele Kilogramm aufladen,
-         wie auf seinem Segel geschrieben steht. Zur Überprüfung kannst du die Gewichte so auf die
-          Boote verteilen, wie es vorgeschlagen wurde. Viel Erfolg!</p>
+         wie auf seinem Segel geschrieben steht. Beantworte dann die untenstehenden Fragen,
+         indem du auf Richtig oder Falsch klickst. Viel Erfolg!</p>
       <video loop controls muted slot="video">
         <source :src="require('@/assets/tutorials/distribute-weights.mp4')" />
         Your browser does not support the video tag.
@@ -26,7 +28,7 @@ import Game from '../components/Game.vue';
   },
 })
 
-export default class DistributeWeights extends Vue {}
+export default class CheckWeights extends Vue {}
 </script>
 
 <style scoped></style>

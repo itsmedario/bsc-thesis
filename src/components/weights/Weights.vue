@@ -6,7 +6,7 @@
     </div>-->
 
     <table>
-      <tr id="i" v-for="i in 3" :key="i">
+      <tr id="i" v-for="i in boatsCapacities.length" :key="i">
         <td>
           <h3 class="hidden-mobile">Boot {{ i }}</h3>
           <img :src="require(`@/assets/transport/boat${boatsCapacities[i - 1]}.png`)"
@@ -39,6 +39,8 @@ import { Component, Vue } from 'vue-property-decorator';
 })
 
 export default class Weights extends Vue {
+  level = 0;
+
   weights = [1, 2, 3, 4, 5, 6, 7, 8, 10, 12];
 
   weightSum = 0;
@@ -54,24 +56,6 @@ export default class Weights extends Vue {
   selectedItem = 0;
 
   usedWeights = new Set();
-
-  correctSolution = false;
-
-  items: Array<{
-    id: number;
-    type: number;
-    value: number;
-    max: number;
-    img: string;
-  }> = [
-    {
-      id: 1,
-      type: 1,
-      value: 1,
-      max: 1,
-      img: '/weights/size1.png',
-    },
-  ];
 
   addUpWeights():void { // calculates the sum of all given weights
     let sum = 0;
@@ -120,7 +104,7 @@ export default class Weights extends Vue {
 
   restart(): void {
     this.selectedItem = 0;
-    this.rows = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
+    this.rows = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
     this.usedWeights.clear();
   }
 
@@ -129,7 +113,7 @@ export default class Weights extends Vue {
     let ship1 = 0;
     let ship2 = 0;
     let ship3 = 0;
-    let maxBoatSize = 12;
+    let maxWeightSize = 12;
     const max = 60;
     let newWeightSum = 0;
     let chosenWeightSum = 0;
@@ -146,20 +130,21 @@ export default class Weights extends Vue {
 
     // prevent impossible assignments for boats with low capacities
     if (ship1 === ship2 && ship2 === ship3 && ship3 === 10) {
-      maxBoatSize = 10;
+      maxWeightSize = 10;
     } else if ((ship1 === ship2 && ship2 === 10)
      || (ship2 === ship3 && ship3 === 10)
      || (ship1 === ship3 && ship3 === 10)) {
-      maxBoatSize = 11;
+      maxWeightSize = 11;
     }
 
     // choose weights
+    const sentinel = 4 - this.level;
     let w = 0;
-    while (chosenWeightSum + 4 <= newWeightSum) {
+    while (chosenWeightSum + sentinel <= newWeightSum) {
       chosenWeightSum = 0;
       chosenWeights.clear();
       while (chosenWeightSum <= newWeightSum) {
-        w = Math.floor(1 + Math.random() * maxBoatSize);
+        w = Math.floor(1 + Math.random() * maxWeightSize);
         if (!chosenWeights.has(w)) {
           chosenWeights.add(w);
           chosenWeightSum += w;
@@ -172,10 +157,16 @@ export default class Weights extends Vue {
   }
 
   checkSolution():void {
-    if (this.sumArray() === this.weightSum && this.allWeightsUsed() && !this.boatOverload) {
+    const optimalWeightSum = this.sumArray();
+    const allUsed = this.allWeightsUsed();
+    if (optimalWeightSum === this.weightSum && allUsed && !this.boatOverload) {
       this.$emit('correct-solution');
-    } else {
-      this.$emit('false-solution'); // add tip what to improve (conditioned on what bool is false, include in emit)
+    } else if (!allUsed) {
+      this.$emit('false-solution', 'Tipp: Du hast noch nicht alle Gewichte verwendet');
+    } else if (optimalWeightSum !== this.weightSum) {
+      this.$emit('false-solution', 'Tipp: Verwende jedes Gewicht nur einmal');
+    } else if (this.boatOverload) {
+      this.$emit('false-solution', 'Tipp: Pass auf, dass kein Boot zu schwer beladen ist!');
     }
   }
 

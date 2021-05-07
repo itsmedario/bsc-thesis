@@ -1,9 +1,9 @@
 <template>
   <div class="about">
     <h1>Seite nicht gefunden! Error 404</h1>
-    <p>Feedback hinterlassen:
+    <p  style="font-size: 1.5em">Feedback hinterlassen:
     <a href="mailto:dnaepfer@student.ethz.ch?subject=Feedback zur Lernumgebung">
-      dario@naepfer.ch</a>
+      dnaepfer@student.ethz.ch</a>
     </p>
     <img :src="require('@/assets/transport/load_boat.png')"/>
     <hr/>

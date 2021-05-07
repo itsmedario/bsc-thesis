@@ -23,7 +23,7 @@
     <component
       :is="this.type" ref="gameComp"
       @correct-solution="correctSolution = true"
-      @false-solution="correctSolution = false"
+      @false-solution="showTip"
     />
 
   </div>
@@ -64,6 +64,11 @@ export default class Game extends Vue {
 
   get currentGameComponent(): string {
     return this.type;
+  }
+
+  showTip(msg: string):void {
+    this.correctSolution = false;
+    this.tip = msg;
   }
 }
 </script>

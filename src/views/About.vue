@@ -1,11 +1,12 @@
 <template>
   <div class="about">
     <h1>Über diese Plattform</h1>
-    <p> Diese Lernumgebung wurde im Zusammenhang mit dem Buch "einfach Informatik 3/4" erstellt.
+    <p style="font-size: 1.5em">
+      Diese Lernumgebung wurde im Zusammenhang mit dem Buch "einfach Informatik 3/4" erstellt.
     <br/>
     Feedback ist sehr erwünscht:
     <a href="mailto:dnaepfer@student.ethz.ch?subject=Feedback zur Lernumgebung">
-      dario@naepfer.ch</a>
+      dnaepfer@student.ethz.ch</a>
     </p>
     <h3>Autor: Dario Naepfer</h3>
     <br/>
