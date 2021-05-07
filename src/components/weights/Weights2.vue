@@ -1,14 +1,9 @@
 <template>
   <div>
-    <!--<div>Testdata: sum of all weights = {{ weightSum }},
-      boat overloaded: {{ boatOverload }}, sum of loaded weights:  {{ sumArray() }},
-      all weights used: {{  allWeightsUsed() }}
-    </div>-->
-
     <div class="card info-card responsive" style="max-width: 1500px">
         <img :src="require(`@/assets/faces/face${counter + 1}.png`)"
         style="width: 5%" draggable="false">
-        <p  style="font-size: 1.5em">{{ names[(counter)] }} wollte diese Gewichte verteilen:</p>
+        <p  style="font-size: 1.2em">{{ names[(counter)] }} wollte diese Gewichte verteilen:</p>
         <img v-for="i in weights" :key="i" :src="require(`@/assets/weights/size${i}.png`)"
          draggable="false" style="width: 5%">
     </div>
@@ -18,10 +13,10 @@
         <td>
           <h3>Boot {{ i }}</h3>
           <img :src="require(`@/assets/transport/boat${boatsCapacities[i - 1]}.png`)"
-           style="width: 55%" draggable="false">
+           style="width: 40%" draggable="false">
         </td>
-        <td v-for="j in 6" :key="j" class="dropzone">
-          <img :src="require(`@/assets/weights/size${rows[i - 1][j - 1]}.png`)">
+        <td v-for="j in 6" :key="j" class="fixed-field">
+          <img :src="require(`@/assets/weights/size${rows[i - 1][j - 1]}.png`)" draggable="false">
         </td>
       </tr>
     </table>
@@ -54,11 +49,11 @@ export default class Weights2 extends Vue {
 
   counter = 0;
 
-  eachWeightUsed = false; // s1
+  eachWeightUsed = true; // s1
 
-  multipleWeightUse = false; // s2
+  multipleWeightUse = true; // s2
 
-  boatOverload = false; // s3
+  boatOverload = true; // s3
 
   statements = [[1, 'Jedes Gewicht ist verwendet worden.'],
     [2, 'Kein Gewicht ist mehrmals verwendet worden.'],
@@ -77,17 +72,14 @@ export default class Weights2 extends Vue {
 
   boatsCapacities = [10, 20, 30];
 
-  actualBoatLoad = [0, 0, 0]; // actual load on each boat
+  actualBoatLoad = [10, 22, 30]; // actual load on each boat
 
-  rows = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]]; // actual weight distribution
+  // actual weight distribution
+  rows = [[5, 1, 4, 0, 0, 0], [12, 6, 4, 0, 0, 0], [7, 10, 8, 2, 3, 0]];
 
   chosenWeights = new Set(this.weights); // weights that are proposed
 
   actualWeights = new Set([0]); // weights that are actually distributed
-
-  start():void {
-    this.nextTask();
-  }
 
   toggleBox(n:number):void {
     if (n === 1) {
@@ -179,7 +171,7 @@ export default class Weights2 extends Vue {
     this.weights.sort((a, b): number => a - b);
 
     // distribute weights among boats
-    const tolerance = 2;
+    const tolerance = 4;
 
     for (let i = this.weights.length - 1; i >= 0; i -= 1) {
       // distribute weights as well as possible
@@ -194,9 +186,11 @@ export default class Weights2 extends Vue {
       // distribute remaining weights even if boat capacity is exceeded
       for (let j = 0; j < 3; j += 1) {
         if (this.weights[i] <= this.boatsCapacities[j] - this.actualBoatLoad[j] + tolerance
-         && !this.actualWeights.has(this.weights[i])) {
+         && !this.actualWeights.has(this.weights[i])
+         && !this.boatOverload) {
           this.addWeight(i, j);
           this.actualBoatLoad[j] += this.weights[i];
+          this.boatOverload = true;
           break;
         }
       }
@@ -225,7 +219,7 @@ export default class Weights2 extends Vue {
   // place weight i in boat j
   addWeight(i:number, j:number):void {
     for (let l = 0; l < 6; l += 1) {
-      if (this.rows[j][l] === 0) {
+      if (this.rows[j][l] === 0 && this.weights[i] !== 0) {
         this.rows[j][l] = this.weights[i];
         this.actualWeights.add(this.weights[i]);
         return;
@@ -251,13 +245,16 @@ export default class Weights2 extends Vue {
   weightCheck():void {
     this.actualWeights.clear();
     this.eachWeightUsed = true;
+    this.multipleWeightUse = false;
 
     for (let i = 0; i < this.rows.length; i += 1) {
       for (let j = 0; j < 5; j += 1) {
-        if (this.actualWeights.has(this.rows[i][j]) && this.rows[i][j] !== 0) {
+        if (this.actualWeights.has(this.rows[i][j])) {
           this.multipleWeightUse = true;
         }
-        this.actualWeights.add(this.rows[i][j]);
+        if (this.rows[i][j] !== 0) {
+          this.actualWeights.add(this.rows[i][j]);
+        }
       }
     }
     for (let i = 0; i < this.weights.length; i += 1) {
@@ -283,7 +280,7 @@ export default class Weights2 extends Vue {
      && this.s3 === !this.boatOverload) {
       this.$emit('correct-solution');
     } else {
-      this.$emit('false-solution');
+      this.$emit('false-solution', 'Tipp: Zähle die Gewichte für jedes einzelne Boot zusammen!');
     }
   }
 }
@@ -293,7 +290,7 @@ export default class Weights2 extends Vue {
 <style scoped>
 
 table {
-  border-spacing: 0.6em 1.4em;
+  border-spacing: 0.3em 0.7em;
 }
 
 p, table h3, img {
@@ -320,7 +317,7 @@ td img {
 
 .statements {
   display: inline-block;
-  font-size: 1.5em;
+  font-size: 1.1em;
   margin: 0.5em;
   padding: 0.4em;
 }
@@ -348,6 +345,7 @@ td img {
   background: rgb(160, 27, 27) !important;
   border-radius: 0px 10px 10px 0px;
   float: right;
+  margin-right: 30%;
 }
 
 .active {

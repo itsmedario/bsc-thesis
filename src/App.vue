@@ -12,6 +12,9 @@
         <router-link to="/distribute-weights">
           <button class="card clickable">Boote beladen</button>
         </router-link>
+        <router-link to="/check-weights">
+          <button class="card clickable">Boote überprüfen</button>
+        </router-link>
         <!--<router-link to="/build-towers">
           <button class="card clickable">Türme bauen</button>
         </router-link>
@@ -129,6 +132,13 @@ canvas {
   min-width: 8em;
   margin: 1em;
 }
+
+.fixed-field {
+  border: 1px solid black !important;
+  background: none;
+  border-radius: 5px;
+}
+
 .equal-space {
   flex: 1 1 0px;
 }
