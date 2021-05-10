@@ -21,17 +21,19 @@
       </tr>
     </table>
     <hr>
-    <div v-for="[n, s] in statements" :key="n">
-      <div class="statements" @click="toggleBox(n)"> {{ s }} </div>
-      <div class="check-button clickable false-button"
-        :class=" { active: checkState(n) == false }"
-        @click="setFalse(n)">
-        Falsch
-      </div>
-      <div class="check-button clickable true-button"
-        :class=" { active: checkState(n) == true }"
-        @click="setTrue(n)">
-        Richtig
+    <div  class="checkBox">
+      <div v-for="[n, s] in statements" :key="n">
+        <div class="statements" @click="toggleBox(n)"> {{ s }} </div>
+        <div class="check-button clickable false-button"
+          :class=" { activefalse: checkState(n) == false }"
+          @click="setFalse(n)">
+          Falsch
+        </div>
+        <div class="check-button clickable true-button"
+          :class=" { activetrue: checkState(n) == true }"
+          @click="setTrue(n)">
+          Richtig
+        </div>
       </div>
     </div>
   </div>
@@ -44,7 +46,7 @@ import { Component, Vue } from 'vue-property-decorator';
   components: {},
 })
 
-export default class Weights2 extends Vue {
+export default class WeightCheck extends Vue {
   names = ['Mike', 'Jane', 'Kubko', 'Anna', 'Peter', 'Steffi', 'Jan', 'Bea'];
 
   counter = 0;
@@ -171,7 +173,7 @@ export default class Weights2 extends Vue {
     this.weights.sort((a, b): number => a - b);
 
     // distribute weights among boats
-    const tolerance = 4;
+    const tolerance = 2;
 
     for (let i = this.weights.length - 1; i >= 0; i -= 1) {
       // distribute weights as well as possible
@@ -303,6 +305,13 @@ td img {
   width: 100px;
 }
 
+.checkBox {
+  position: relative;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+}
+
 .info-card {
   padding: 0em !important;
   margin: 0em !important;
@@ -311,8 +320,6 @@ td img {
 .statement-check {
   position: relative;
   text-align: left !important;
-  padding-left: 10%;
-  width: 70%;
 }
 
 .statements {
@@ -323,32 +330,36 @@ td img {
 }
 
 .check-button {
-  background-color: white;
-  opacity: 30%;
   color: black;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 16px;
+  float: right;
 }
 
 .true-button {
-  background: rgb(41, 241, 41) 2px !important;
+  background: rgb(192, 226, 192) 2px;
   border-radius: 10px 0px 0px 10px;
-  border-right:   2px solid black;
-  float: right;
+  border: 2px solid rgb(192, 226, 192);
+  border-right: 2px solid black;
 }
 
 .false-button {
-  background: rgb(160, 27, 27) !important;
+  background: rgb(230, 124, 124);
   border-radius: 0px 10px 10px 0px;
-  float: right;
-  margin-right: 30%;
+  border: 2px solid rgb(230, 124, 124);
+  border-left: 2px solid black;
 }
 
-.active {
-  opacity: 100% !important;
+.activetrue {
+  border: 2px solid black;
+  background: rgb(48, 194, 48)  !important;
+}
+
+.activefalse {
+  border: 2px solid black;
+  background: rgb(236, 46, 46)  !important;
 }
 
 </style>

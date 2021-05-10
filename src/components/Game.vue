@@ -37,7 +37,7 @@ import Buttons from '@/components/Buttons.vue';
 import Towers from '@/components/towers/Towers.vue';
 import Bridges from '@/components/bridges/Bridges.vue';
 import Weights from '@/components/weights/Weights.vue';
-import Weights2 from '@/components/weights/Weights2.vue';
+import WeightCheck from '@/components/weights/WeightCheck.vue';
 
 @Component({
   components: {
@@ -47,7 +47,7 @@ import Weights2 from '@/components/weights/Weights2.vue';
     Towers,
     Bridges,
     Weights,
-    Weights2,
+    WeightCheck,
   },
 })
 export default class Game extends Vue {
