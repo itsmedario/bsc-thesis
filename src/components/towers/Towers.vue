@@ -12,12 +12,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import ItemSelection from '@/components/ItemSelection.vue';
 
 @Component({
-  components: {
-    ItemSelection,
-  },
+  components: {},
 })
 
 export default class Towers extends Vue {}

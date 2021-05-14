@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Game :type="'Weights'">
+    <Game :type="'Weights'" :level="1">
       <h2 slot="title">Boote beladen</h2>
       <p slot="intro">Jedes Gewicht soll auf ein Boot verteilt werden,
          ohne dass ein Boot zu schwer beladen ist.</p>

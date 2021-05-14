@@ -2,6 +2,7 @@
   <div id="home">
     <Header/>
   <hr/>
+  <p>[Platzhalter für Aufgabenraster]</p>
   <!--    <div v-for="task in getItems()" :key="task.id"
      class="card clickable">
       <router-link :to="task.path">

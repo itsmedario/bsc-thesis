@@ -1,14 +1,15 @@
 <template>
-  <footer id="footer" class="responsive">
+  <footer id="footer" class="responsive cards">
     <div class="logo-ethz">
       <a href="https://ethz.ch" target="blank">
-        <img _ngcontent-c1="" src="@/assets/ethz-logo.svg" style="height:40px; margin-top:10px;"/>
+        <img src="@/assets/ethz-logo.svg" style="height:40px; margin-top:10px;"
+         draggable="false"/>
       </a>
     </div>
     <div class="seperator"></div>
     <div class="logo-abz">
       <a href="https://abz.inf.ethz.ch/" target="blank">
-        <img src="@/assets/abz-logo.png" style="height:80px;"/>
+        <img src="@/assets/abz-logo.png" style="height:80px;"  draggable="false"/>
       </a>
     </div>
   </footer>
@@ -29,7 +30,6 @@ export default class Footer extends Vue {
 footer {
   display: flex;
   padding: 0em 1.5em;
-  justify-content: right;
 }
 
 footer .seperator{

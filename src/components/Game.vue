@@ -12,7 +12,7 @@
 
     <Buttons @next-task="$refs.gameComp.nextTask()"
      @restart="$refs.gameComp.restart()"
-     @check-solution="$refs.gameComp.checkSolution(); showSolution = true"
+     @check-solution="$refs.gameComp.checkSolution(level); showSolution = true"
      @show-tutorial="showTutorial = true"/>
 
     <div class="flex-center flex-row">
@@ -21,7 +21,7 @@
     </div>
 
     <component
-      :is="this.type" ref="gameComp"
+      :is="this.type" :level="level" ref="gameComp"
       @correct-solution="correctSolution = true"
       @false-solution="showTip"
     />
@@ -31,9 +31,9 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import Tutorial from '@/components/Tutorial.vue';
-import Verifier from '@/components/Verifier.vue';
-import Buttons from '@/components/Buttons.vue';
+import Tutorial from '@/components/tools/Tutorial.vue';
+import Verifier from '@/components/tools/Verifier.vue';
+import Buttons from '@/components/tools/Buttons.vue';
 import Towers from '@/components/towers/Towers.vue';
 import Bridges from '@/components/bridges/Bridges.vue';
 import Weights from '@/components/weights/Weights.vue';
@@ -53,6 +53,9 @@ import WeightCheck from '@/components/weights/WeightCheck.vue';
 export default class Game extends Vue {
   @Prop({ required: true })
   type!: string;
+
+  @Prop({ required: true })
+  level!: number;
 
   showTutorial = false;
 

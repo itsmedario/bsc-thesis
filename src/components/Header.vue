@@ -1,7 +1,7 @@
 <template>
   <div id="header" class="responsive">
     <h1> Willkommen zur Lernplattform </h1>
-    <img :src="require('@/assets/transport/beaver_transport2.png')"/>
+    <img :src="require('@/assets/transport/beaver_transport2.png')" draggable="false"/>
   </div>
 </template>
 

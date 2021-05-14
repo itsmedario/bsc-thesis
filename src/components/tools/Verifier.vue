@@ -14,8 +14,9 @@
         <div class="flex-item flex-center flex-space-between flex-col">
           <div class="flex-item flex-center flex-space-between flex-row">
             <img v-if="correctSolution" :src="require('@/assets/beavers/correct.png')"
-             style="animation: shake 1s"/>
-            <img v-else :src="require('@/assets/beavers/wrong.png')" style="animation: shake 0.5s"/>
+             style="animation: shake 1s" draggable="false"/>
+            <img v-else :src="require('@/assets/beavers/wrong.png')"
+             style="animation: shake 0.5s" draggable="false"/>
           </div>
           <hr>
           <div v-if="!correctSolution">{{ tip }}</div>
@@ -44,6 +45,10 @@ export default class Verifier extends Vue {
 </script>
 
 <style scoped>
+
+hr {
+  width: 50%;
+}
 
 .exit-button {
   position: absolute;

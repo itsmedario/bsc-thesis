@@ -12,12 +12,10 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import Buttons from '../components/Buttons.vue';
 import Game from '../components/Game.vue';
 
 @Component({
   components: {
-    Buttons,
     Game,
   },
 })

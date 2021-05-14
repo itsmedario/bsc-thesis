@@ -10,7 +10,8 @@
     </p>
     <h3>Autor: Dario Naepfer</h3>
     <br/>
-    <img :src="require('@/assets/transport/beaver_transport.png')" style="width: 40%"/>
+    <img :src="require('@/assets/transport/beaver_transport.png')" style="width: 40%"
+     draggable="false"/>
     <hr/>
     <Footer/>
   </div>

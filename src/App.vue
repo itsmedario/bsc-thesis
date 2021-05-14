@@ -15,6 +15,15 @@
         <router-link to="/check-weights">
           <button class="card clickable">Boote überprüfen</button>
         </router-link>
+        <router-link to="/optimize-weights">
+          <button class="card clickable">Boote maximal beladen</button>
+        </router-link>
+        <router-link to="/*">
+          <button class="card clickable">Boote ergänzend beladen</button>
+        </router-link>
+        <router-link to="/*"> <!-- Link to come -->
+          <button class="card clickable">Türme überprüfen</button>
+        </router-link>
         <!--<router-link to="/build-towers">
           <button class="card clickable">Türme bauen</button>
         </router-link>
@@ -43,7 +52,7 @@ export default class App extends Vue {
 <style>
 
 body{
-  background-color: #926cff;
+  background-color: #a786ff;
 }
 
 hr{
@@ -160,6 +169,10 @@ video {
 .locked {
   background: rgb(184, 183, 183) !important;
   border: 4px solid rgb(184, 183, 183);
+}
+
+.locked:hover {
+  animation: shake ease-out 0.15s;
 }
 
 @media (max-width: 1430px) {

@@ -54,6 +54,22 @@ const views: Array<{
     view: 'BuildTowers',
     component: 'BuildTowers',
   },
+  {
+    id: 7,
+    path: '/add-weights',
+    title: 'Gewichte ergänzen',
+    img: 'transport/wood.png',
+    view: 'AddWeights',
+    component: 'AddWeights',
+  },
+  {
+    id: 8,
+    path: '/optimize-weights',
+    title: 'Gewichte optimmieren',
+    img: 'transport/wood.png',
+    view: 'OptimizeWeights',
+    component: 'OptimizeWeights',
+  },
 ];
 
 export default views;

@@ -5,15 +5,15 @@
         style="width: 5%" draggable="false">
         <p  style="font-size: 1.2em">{{ names[(counter)] }} wollte diese Gewichte verteilen:</p>
         <img v-for="i in weights" :key="i" :src="require(`@/assets/weights/size${i}.png`)"
-         draggable="false" style="width: 5%">
+         draggable="false" style="width: 5%; min-width: 80px">
     </div>
 
     <table>
       <tr id="0" v-for="i in 3" :key="i">
         <td>
-          <h3>Boot {{ i }}</h3>
-          <img :src="require(`@/assets/transport/boat${boatsCapacities[i - 1]}.png`)"
-           style="width: 40%" draggable="false">
+          <h3 class="hidden-mobile">Boot {{ i }}</h3>
+          <img :src="require(`@/assets/transport/boatmax${boatCapacities[i - 1]}.png`)"
+           style="width: 40%; min-width: 80px" draggable="false">
         </td>
         <td v-for="j in 6" :key="j" class="fixed-field">
           <img :src="require(`@/assets/weights/size${rows[i - 1][j - 1]}.png`)" draggable="false">
@@ -25,12 +25,12 @@
       <div v-for="[n, s] in statements" :key="n">
         <div class="statements" @click="toggleBox(n)"> {{ s }} </div>
         <div class="check-button clickable false-button"
-          :class=" { activefalse: checkState(n) == false }"
+          :class=" { activefalse: checkState(n) == 1 }"
           @click="setFalse(n)">
           Falsch
         </div>
         <div class="check-button clickable true-button"
-          :class=" { activetrue: checkState(n) == true }"
+          :class=" { activetrue: checkState(n) == 0 }"
           @click="setTrue(n)">
           Richtig
         </div>
@@ -40,13 +40,16 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Prop } from 'vue-property-decorator';
 
 @Component({
   components: {},
 })
 
 export default class WeightCheck extends Vue {
+  @Prop({ required: true })
+  level!: number;
+
   names = ['Mike', 'Jane', 'Kubko', 'Anna', 'Peter', 'Steffi', 'Jan', 'Bea'];
 
   counter = 0;
@@ -62,17 +65,17 @@ export default class WeightCheck extends Vue {
     [3, 'Kein Boot ist zu schwer beladen.'],
     /* [4, 'Es wurde ein Gewicht verwendet, das nicht zum Vorschlag gehört'] */];
 
-  s1 = false; // user's answer to statement 1
+  s1 = -1; // user's answer to statement 1
 
-  s2 = false;
+  s2 = -1;
 
-  s3 = false;
+  s3 = -1;
 
   weights = [1, 2, 3, 4, 5, 6, 7, 8, 10, 12]; // proposed weights
 
-  weightSum = -1; // sum of proposed weights
+  weightSum = 60; // sum of proposed weights
 
-  boatsCapacities = [10, 20, 30];
+  boatCapacities = [10, 20, 30];
 
   actualBoatLoad = [10, 22, 30]; // actual load on each boat
 
@@ -83,37 +86,41 @@ export default class WeightCheck extends Vue {
 
   actualWeights = new Set([0]); // weights that are actually distributed
 
+  // switch answer n to true if false and vice versa
   toggleBox(n:number):void {
     if (n === 1) {
-      this.s1 = !this.s1;
+      this.s1 = (this.s1 + 1) % 2;
     } else if (n === 2) {
-      this.s2 = !this.s2;
+      this.s2 = (this.s2 + 1) % 2;
     } else if (n === 3) {
-      this.s3 = !this.s3;
+      this.s3 = (this.s3 + 1) % 2;
     }
   }
 
+  // set answer n to true
   setTrue(n:number):void {
     if (n === 1) {
-      this.s1 = true;
+      this.s1 = 0;
     } else if (n === 2) {
-      this.s2 = true;
+      this.s2 = 0;
     } else if (n === 3) {
-      this.s3 = true;
+      this.s3 = 0;
     }
   }
 
+  // set answer n to false
   setFalse(n:number):void {
     if (n === 1) {
-      this.s1 = false;
+      this.s1 = 1;
     } else if (n === 2) {
-      this.s2 = false;
+      this.s2 = 1;
     } else if (n === 3) {
-      this.s3 = false;
+      this.s3 = 1;
     }
   }
 
-  checkState(n:number):boolean {
+  // check state of statement n
+  checkState(n:number):number {
     if (n === 1) {
       return this.s1;
     }
@@ -141,7 +148,7 @@ export default class WeightCheck extends Vue {
       ship3 = Math.floor(1 + Math.random() * 3) * 10;
       newWeightSum = ship1 + ship2 + ship3;
     } while (newWeightSum > max);
-    this.boatsCapacities = [ship1, ship2, ship3];
+    this.boatCapacities = [ship1, ship2, ship3];
 
     // choose weights
     const sentinel = 4;
@@ -178,7 +185,7 @@ export default class WeightCheck extends Vue {
     for (let i = this.weights.length - 1; i >= 0; i -= 1) {
       // distribute weights as well as possible
       for (let j = 0; j < 3; j += 1) {
-        if (this.weights[i] <= this.boatsCapacities[j] - this.actualBoatLoad[j]) {
+        if (this.weights[i] <= this.boatCapacities[j] - this.actualBoatLoad[j]) {
           this.addWeight(i, j);
           this.actualBoatLoad[j] += this.weights[i];
           break;
@@ -186,8 +193,8 @@ export default class WeightCheck extends Vue {
       }
 
       // distribute remaining weights even if boat capacity is exceeded
-      for (let j = 0; j < 3; j += 1) {
-        if (this.weights[i] <= this.boatsCapacities[j] - this.actualBoatLoad[j] + tolerance
+      for (let j = 0; j < this.boatCapacities.length; j += 1) {
+        if (this.actualBoatLoad[j] + this.weights[i] <= this.boatCapacities[j] + tolerance
          && !this.actualWeights.has(this.weights[i])
          && !this.boatOverload) {
           this.addWeight(i, j);
@@ -201,13 +208,14 @@ export default class WeightCheck extends Vue {
     // if boats not yet overloaded, add another random weight
     this.boatOverloadCheck();
     if (!this.boatOverload) {
-      randomWeight = Math.floor(Math.random() * 12);
-      for (let j = 0; j < 3; j += 1) {
-        if (this.weights[randomWeight]
-         <= this.boatsCapacities[j] - this.actualBoatLoad[j] + tolerance) {
+      randomWeight = Math.floor(Math.random() * maxWeightSize);
+      for (let j = 0; j < this.boatCapacities.length; j += 1) {
+        if (this.actualBoatLoad[j] + this.weights[randomWeight]
+         <= this.boatCapacities[j] + tolerance) {
           this.addWeight(randomWeight, j);
           this.actualBoatLoad[j] += this.weights[randomWeight];
-          console.log(this.weights[randomWeight]);
+          // eslint-disable-next-line prefer-template
+          console.log(this.weights[randomWeight] + ' extra distributed');
           break;
         }
       }
@@ -220,7 +228,7 @@ export default class WeightCheck extends Vue {
 
   // place weight i in boat j
   addWeight(i:number, j:number):void {
-    for (let l = 0; l < 6; l += 1) {
+    for (let l = 0; l < this.rows.length; l += 1) {
       if (this.rows[j][l] === 0 && this.weights[i] !== 0) {
         this.rows[j][l] = this.weights[i];
         this.actualWeights.add(this.weights[i]);
@@ -230,9 +238,9 @@ export default class WeightCheck extends Vue {
   }
 
   restart(): void {
-    this.s1 = false;
-    this.s2 = false;
-    this.s3 = false;
+    this.s1 = -1;
+    this.s2 = -1;
+    this.s3 = -1;
   }
 
   nextTask():void {
@@ -244,17 +252,18 @@ export default class WeightCheck extends Vue {
     this.generateSolution();
   }
 
+  // check if how many times each weight is used
   weightCheck():void {
     this.actualWeights.clear();
     this.eachWeightUsed = true;
     this.multipleWeightUse = false;
 
-    for (let i = 0; i < this.rows.length; i += 1) {
-      for (let j = 0; j < 5; j += 1) {
-        if (this.actualWeights.has(this.rows[i][j])) {
-          this.multipleWeightUse = true;
-        }
+    for (let i = 0; i < this.boatCapacities.length; i += 1) {
+      for (let j = 0; j < this.rows.length; j += 1) {
         if (this.rows[i][j] !== 0) {
+          if (this.actualWeights.has(this.rows[i][j])) {
+            this.multipleWeightUse = true;
+          }
           this.actualWeights.add(this.rows[i][j]);
         }
       }
@@ -266,23 +275,34 @@ export default class WeightCheck extends Vue {
     }
   }
 
+  // check if a boat is overloaded
   boatOverloadCheck():void {
     this.boatOverload = false;
     for (let i = 0; i < 3; i += 1) {
-      if (this.actualBoatLoad[i] > this.boatsCapacities[i]) {
+      if (this.actualBoatLoad[i] > this.boatCapacities[i]) {
         this.boatOverload = true;
         return;
       }
     }
   }
 
+  // check if user's answers are correct
   checkSolution():void {
-    if (this.s1 === this.eachWeightUsed
-     && this.s2 === !this.multipleWeightUse
-     && this.s3 === !this.boatOverload) {
+    const s1sol = this.s1 === 0;
+    const s2sol = this.s2 === 0;
+    const s3sol = this.s3 === 0;
+    if (this.s1 === -1 || this.s2 === -1 || this.s3 === -1) {
+      this.$emit('false-solution', 'Beantworte alle Fragen, bevor du auf Überprüfen klickst!');
+    } else if (s1sol === this.eachWeightUsed
+     && s2sol === !this.multipleWeightUse
+     && s3sol === !this.boatOverload) {
       this.$emit('correct-solution');
-    } else {
+    } else if (s3sol === this.boatOverload) {
       this.$emit('false-solution', 'Tipp: Zähle die Gewichte für jedes einzelne Boot zusammen!');
+    } else if (s2sol === this.multipleWeightUse) {
+      this.$emit('false-solution', 'Tipp: Ist jedes Gewicht genau einmal verwendet worden?');
+    } else if (s1sol === !this.eachWeightUsed) {
+      this.$emit('false-solution', 'Tipp: Überprüfe für jedes einzelne Gewicht, wo es platziert ist!');
     }
   }
 }
@@ -314,7 +334,7 @@ td img {
 
 .info-card {
   padding: 0em !important;
-  margin: 0em !important;
+  margin: 1em !important;
 }
 
 .statement-check {
@@ -346,7 +366,7 @@ td img {
 }
 
 .false-button {
-  background: rgb(230, 124, 124);
+  background: rgb(226, 130, 130);
   border-radius: 0px 10px 10px 0px;
   border: 2px solid rgb(230, 124, 124);
   border-left: 2px solid black;
@@ -354,12 +374,12 @@ td img {
 
 .activetrue {
   border: 2px solid black;
-  background: rgb(48, 194, 48)  !important;
+  background: rgb(88, 185, 88)  !important;
 }
 
 .activefalse {
   border: 2px solid black;
-  background: rgb(236, 46, 46)  !important;
+  background: rgb(170, 17, 17)  !important;
 }
 
 </style>
