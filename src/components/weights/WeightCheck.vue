@@ -9,13 +9,13 @@
     </div>
 
     <table>
-      <tr id="0" v-for="i in 3" :key="i">
+      <tr id="0" v-for="i in boatCapacities.length" :key="i">
         <td>
           <h3 class="hidden-mobile">Boot {{ i }}</h3>
           <img :src="require(`@/assets/transport/boatmax${boatCapacities[i - 1]}.png`)"
            style="width: 40%; min-width: 80px" draggable="false">
         </td>
-        <td v-for="j in 6" :key="j" class="fixedField">
+        <td v-for="j in rows[0].length" :key="j" class="fixedField">
           <img :src="require(`@/assets/weights/size${rows[i - 1][j - 1]}.png`)" draggable="false">
         </td>
       </tr>
@@ -184,7 +184,7 @@ export default class WeightCheck extends Vue {
 
     for (let i = this.weights.length - 1; i >= 0; i -= 1) {
       // distribute weights as well as possible
-      for (let j = 0; j < 3; j += 1) {
+      for (let j = 0; j < this.boatCapacities.length; j += 1) {
         if (this.weights[i] <= this.boatCapacities[j] - this.actualBoatLoad[j]) {
           this.addWeight(i, j);
           this.actualBoatLoad[j] += this.weights[i];
@@ -228,7 +228,7 @@ export default class WeightCheck extends Vue {
 
   // place weight i in boat j
   addWeight(i:number, j:number):void {
-    for (let l = 0; l < this.rows.length; l += 1) {
+    for (let l = 0; l < this.rows[0].length; l += 1) {
       if (this.rows[j][l] === 0 && this.weights[i] !== 0) {
         this.rows[j][l] = this.weights[i];
         this.actualWeights.add(this.weights[i]);
@@ -244,7 +244,7 @@ export default class WeightCheck extends Vue {
   }
 
   nextTask():void {
-    this.counter = (this.counter + 1) % 8;
+    this.counter = (this.counter + 1) % this.names.length;
     this.restart();
     this.rows = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
     this.weights = [0];
@@ -278,7 +278,7 @@ export default class WeightCheck extends Vue {
   // check if a boat is overloaded
   boatOverloadCheck():void {
     this.boatOverload = false;
-    for (let i = 0; i < 3; i += 1) {
+    for (let i = 0; i < this.boatCapacities.length; i += 1) {
       if (this.actualBoatLoad[i] > this.boatCapacities[i]) {
         this.boatOverload = true;
         return;

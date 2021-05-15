@@ -19,7 +19,8 @@
          @click="fieldClicked(i,j)" @dragover.prevent
          @dragstart="dragStart(i,j)"
          @drop.stop.prevent="dropItem(i, j)">
-          <img :src="require(`@/assets/weights/size${rows[i - 1][j - 1]}.png`)">
+          <img :src="require(`@/assets/weights/size${rows[i - 1][j - 1]}.png`)"
+         :draggable="!isFixedField(i,j)">
         </td>
       </tr>
     </table>
@@ -312,7 +313,7 @@ export default class Weights extends Vue {
 
     this.boatUsed = [false, false, false];
 
-    for (let i = 0; i < 3; i += 1) {
+    for (let i = 0; i < this.boatUsed.length; i += 1) {
       for (let j = 0; j < this.numberOfFields; j += 1) {
         rowSum += this.rows[i][j];
         if (this.rows[i][j] !== 0) {

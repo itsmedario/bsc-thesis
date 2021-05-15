@@ -1,11 +1,16 @@
 <template>
   <div>
-    <Game>
+    <Game :type="'TowerCheck'" :level="1">
       <h2 slot="title">Türme überprüfen</h2>
-      <p slot="description">Überprüfe, ob man mit den
+      <p slot="intro">Überprüfe, ob man mit den
          Türmen alle Kanäle überwachen kann.</p>
+      <p slot="description">Überprüfe, ob man mit den
+      Türmen alle Kanäle überwachen kann.</p>
+      <video loop controls muted slot="video">
+        <source :src="require('@/assets/tutorials/distribute-weights.mp4')" />
+        Your browser does not support the video tag.
+      </video>
     </Game>
-    <img :src="require('/src/assets/maps/map3_empty.png')" style="padding-left:15px"/>
   </div>
 </template>
 

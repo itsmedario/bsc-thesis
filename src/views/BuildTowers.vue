@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Game :type="'Towers'">
+    <Game :type="'Towers'" :level="1">
       <h2 slot="title">Türme bauen</h2>
       <p slot="intro">Setze die Türme so, dass man mit
          den Türmen alle Kanäle überwachen kann.</p>

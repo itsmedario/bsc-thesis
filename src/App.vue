@@ -6,23 +6,23 @@
           <button id="home" class="card clickable"
            @click="selectedTab = 'Home'">Startseite</button>
         </router-link>
-        <router-link  to="/about">
-          <button class="card clickable" @click="selectedTab = 'About'">Impressum</button>
+        <router-link to="/check-weights">
+          <button class="card clickable">Boote überprüfen</button>
         </router-link>
         <router-link to="/distribute-weights">
           <button class="card clickable">Boote beladen</button>
         </router-link>
-        <router-link to="/check-weights">
-          <button class="card clickable">Boote überprüfen</button>
+        <router-link to="/add-weights">
+          <button class="card clickable">Boote ergänzend beladen</button>
         </router-link>
         <router-link to="/optimize-weights">
           <button class="card clickable">Boote maximal beladen</button>
         </router-link>
-        <router-link to="/add-weights">
-          <button class="card clickable">Boote ergänzend beladen</button>
-        </router-link>
         <router-link to="/*"> <!-- Link to come -->
           <button class="card clickable">Türme überprüfen</button>
+        </router-link>
+        <router-link  to="/about">
+          <button class="card clickable" @click="selectedTab = 'About'">Impressum</button>
         </router-link>
         <!--<router-link to="/build-towers">
           <button class="card clickable">Türme bauen</button>
@@ -65,6 +65,7 @@ button {
   padding: 10px;
   font-weight: bold;
 }
+
 input:focus,
 select:focus,
 textarea:focus,
