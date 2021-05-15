@@ -15,7 +15,7 @@
           <img :src="require(`@/assets/transport/boatmax${boatCapacities[i - 1]}.png`)"
            style="width: 40%; min-width: 80px" draggable="false">
         </td>
-        <td v-for="j in 6" :key="j" class="fixed-field">
+        <td v-for="j in 6" :key="j" class="fixedField">
           <img :src="require(`@/assets/weights/size${rows[i - 1][j - 1]}.png`)" draggable="false">
         </td>
       </tr>

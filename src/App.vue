@@ -18,7 +18,7 @@
         <router-link to="/optimize-weights">
           <button class="card clickable">Boote maximal beladen</button>
         </router-link>
-        <router-link to="/*">
+        <router-link to="/add-weights">
           <button class="card clickable">Boote ergänzend beladen</button>
         </router-link>
         <router-link to="/*"> <!-- Link to come -->
@@ -142,7 +142,7 @@ canvas {
   margin: 1em;
 }
 
-.fixed-field {
+.fixedField {
   border: 1px solid black !important;
   background: none;
   border-radius: 5px;

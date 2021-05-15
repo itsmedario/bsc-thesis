@@ -14,7 +14,8 @@
            <img :src="require(`@/assets/transport/boat${boatCapacities[i - 1]}.png`)"
            v-if="level == 3" style="width: 55%; min-width:120px; max-width:150px" draggable="false">
         </td>
-        <td v-for="j in numberOfFields" :key="j" class="dropzone { fixed-field: isFixedField(i,j) }"
+        <td v-for="j in numberOfFields" :key="j" class="dropzone"
+         :class="{ fixedField: isFixedField(i,j) }"
          @click="fieldClicked(i,j)" @dragover.prevent
          @dragstart="dragStart(i,j)"
          @drop.stop.prevent="dropItem(i, j)">
@@ -62,6 +63,9 @@ export default class Weights extends Vue {
   // how ships are actually loaded
   rows = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
 
+  // stores fixed rows for l2
+  startRows = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
+
   selectedItem = 0; // momentarily chosen weight
 
   usedWeights = new Set(); // weights the user has distributed
@@ -85,26 +89,31 @@ export default class Weights extends Vue {
   }
 
   fieldClicked(i:number, j:number):void { // drop or delete a weight in a ship
-    if (this.selectedItem !== 0) {
-      this.dropItem(i, j);
-    } else {
-      this.selectedItem = this.rows[i - 1][j - 1];
-      this.usedWeights.delete(this.selectedItem);
-      this.rows[i - 1][j - 1] = 0;
-      this.selectedItem = 0;
+    if (!this.fixedWeights.has(this.rows[i - 1][j - 1])) {
+      if (this.selectedItem !== 0) {
+        this.dropItem(i, j);
+      } else {
+        this.selectedItem = this.rows[i - 1][j - 1];
+        this.usedWeights.delete(this.selectedItem);
+        this.rows[i - 1][j - 1] = 0;
+        this.selectedItem = 0;
+      }
+      this.checkSolution(this.level);
     }
-    this.checkSolution(this.level);
   }
 
   dragStart(i:number, j:number):void {
-    this.usedWeights.delete(this.rows[i - 1][j - 1]);
-    this.selectedItem = this.rows[i - 1][j - 1];
-    this.rows[i - 1][j - 1] = 0;
+    if (!this.fixedWeights.has(this.rows[i - 1][j - 1])) {
+      this.usedWeights.delete(this.rows[i - 1][j - 1]);
+      this.selectedItem = this.rows[i - 1][j - 1];
+      this.rows[i - 1][j - 1] = 0;
+    }
   }
 
   // place item on a boat
   dropItem(i:number, j:number):void {
-    if (!this.usedWeights.has(this.selectedItem)) {
+    if (!this.usedWeights.has(this.selectedItem)
+     && !this.fixedWeights.has(this.rows[i - 1][j - 1])) {
       this.usedWeights.delete(this.rows[i - 1][j - 1]);
       this.rows[i - 1][j - 1] = this.selectedItem;
       this.usedWeights.add(this.selectedItem);
@@ -122,6 +131,14 @@ export default class Weights extends Vue {
     this.rows = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
     this.usedWeights.clear();
     this.boatUsed = [false, false, false];
+    if (this.level === 2) {
+      for (let i = 0; i < this.rows.length; i += 1) {
+        for (let j = 0; j < this.rows[0].length; j += 1) {
+          this.rows[i][j] = this.startRows[i][j];
+        }
+      }
+      this.usedWeights = new Set(this.fixedWeights);
+    }
   }
 
   nextTask():void {
@@ -129,7 +146,7 @@ export default class Weights extends Vue {
     if (this.level === 1) {
       this.l1generator();
     } else if (this.level === 2) {
-      this.restart();
+      this.l2generator();
     } else if (this.level === 3) {
       this.l3generator();
     }
@@ -152,6 +169,7 @@ export default class Weights extends Vue {
       newWeightSum = ship1 + ship2 + ship3;
     } while (newWeightSum > max);
     this.boatCapacities = [ship1, ship2, ship3];
+    this.boatCapacities.sort();
 
     // prevent impossible assignments for boats with low capacities, e.g. 11kg weight to 10kg boat
     if (ship1 === ship2 && ship2 === ship3 && ship3 === 10) {
@@ -164,6 +182,17 @@ export default class Weights extends Vue {
 
     // choose weights
     this.chooseWeights(newWeightSum, maxWeightSize, tolerance);
+  }
+
+  l2generator():void {
+    do {
+      this.l1generator();
+    } while (this.fixedWeights.size < 2 || this.fixedWeights.size > this.weights.length / 2);
+    for (let i = 0; i < this.rows.length; i += 1) {
+      for (let j = 0; j < this.rows[0].length; j += 1) {
+        this.startRows[i][j] = this.rows[i][j];
+      }
+    }
   }
 
   l3generator():void {
@@ -193,11 +222,15 @@ export default class Weights extends Vue {
     const chosenWeights = new Set([1]);
     let chosenWeightSum = 0;
 
+    // start with every weight size once to see which distribution is possible
     for (let l = 0; l < maxWeightSize; l += 1) {
       chosenWeightSum = 0;
       remainingBoatCaps = [...this.boatCapacities];
-      remainingBoatCaps.sort();
       chosenWeights.clear();
+      this.rows = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
+      this.fixedWeights.clear();
+      this.usedWeights.clear();
+
       for (let i = maxWeightSize; i > 0; i -= 1) {
         for (let j = 0; j < this.boatCapacities.length; j += 1) {
           const index = ((i + startIndex + l) % maxWeightSize) + 1;
@@ -206,6 +239,12 @@ export default class Weights extends Vue {
             remainingBoatCaps[j] -= index;
             chosenWeights.add(index);
             chosenWeightSum += index;
+
+            // for l2, add pre-distributed weights
+            if (this.level === 2 && Math.random() < 0.4) {
+              this.fixWeight(index, j);
+              console.log(i, j);
+            }
           }
         }
       }
@@ -219,6 +258,18 @@ export default class Weights extends Vue {
     this.weights = Array.from(chosenWeights);
     this.weights.sort((a, b): number => a - b);
     this.addUpWeights();
+  }
+
+  // for l2, add pre-distributed weights
+  fixWeight(i: number, j:number):void {
+    for (let l = 0; l < this.rows[0].length; l += 1) {
+      if (this.rows[j][l] === 0) {
+        this.rows[j][l] = i;
+        this.fixedWeights.add(i);
+        this.usedWeights.add(i);
+        return;
+      }
+    }
   }
 
   checkSolution(level:number):void {
