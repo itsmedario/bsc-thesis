@@ -84,7 +84,7 @@ export default class WeightCheck extends Vue {
 
   chosenWeights = new Set(this.weights); // weights that are proposed
 
-  actualWeights = new Set([0]); // weights that are actually distributed
+  actualWeights = new Set(); // weights that are actually distributed
 
   // switch answer n to true if false and vice versa
   toggleBox(n:number):void {
@@ -362,24 +362,22 @@ td img {
   background: rgb(192, 226, 192) 2px;
   border-radius: 10px 0px 0px 10px;
   border: 2px solid rgb(192, 226, 192);
-  border-right: 2px solid black;
 }
 
 .false-button {
-  background: rgb(226, 130, 130);
+  background: rgb(255, 142, 142);
   border-radius: 0px 10px 10px 0px;
-  border: 2px solid rgb(230, 124, 124);
-  border-left: 2px solid black;
+  border: 2px solid rgb(255, 142, 142);
 }
 
 .activetrue {
   border: 2px solid black;
-  background: rgb(88, 185, 88)  !important;
+  background: #28a745 !important;
 }
 
 .activefalse {
   border: 2px solid black;
-  background: rgb(170, 17, 17)  !important;
+  background: #dc3545 !important;
 }
 
 </style>

@@ -9,7 +9,7 @@
     <div class="seperator"></div>
     <div class="logo-abz">
       <a href="https://abz.inf.ethz.ch/" target="blank">
-        <img src="@/assets/abz-logo.png" style="height:80px;"  draggable="false"/>
+        <img src="@/assets/logo_abz_weiss.png" style="height:80px;"  draggable="false"/>
       </a>
     </div>
   </footer>

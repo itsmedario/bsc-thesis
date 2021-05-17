@@ -50,6 +50,10 @@ hr {
   width: 50%;
 }
 
+img:hover {
+  animation: shake 0.5s;
+}
+
 .exit-button {
   position: absolute;
   top: 0;

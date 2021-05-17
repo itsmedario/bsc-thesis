@@ -1,19 +1,20 @@
 <template>
-  <div>
-    <div class="backgroundimage" :style="{'background-image':'url(https://raw.githubusercontent.com/itsmedario/bsc-thesis/master/src/assets/maps/map3_empty.png)'}">
+  <div class="tower-game">
+    <div class="map-container" :style="{'background-image':'url(https://raw.githubusercontent.com/itsmedario/bsc-thesis/master/src/assets/maps/map3_empty.png)'}">
       <table>
         <tr id="i" v-for="i in colNr" :key="i">
           <td id="j" v-for="j in rowNr" :key="j" class="square"
-           @click="fieldClicked(i,j)" @dragover.prevent
-           @drop.stop.prevent="fieldClicked(i, j)">
-            <img :src="require('@/assets/bridges/tower.png')"
-            v-if="getCell(0,0)" style="width:40%">
+           @click="fieldClicked(i - 1, j - 1)" @dragover.prevent
+           @drop.stop.prevent="fieldClicked(i - 1, j - 1)">
+            <img :src="require(`@/assets/bridges/tower_${cells[i - 1][j - 1]}.png`)"
+            style="width:40%" draggable="true"
+            @dragstart="fieldClicked(i - 1, j - 1); itemSelected = true">
           </td>
         </tr>
       </table>
     </div>
-    <div class="card clickable tower-field" @click="selectItem()"
-      @dragstart="itemSelected = true"
+    <div class="tower-field card clickable" @click="selectItem()"
+      @dragstart="itemSelected = true" draggable="false"
       :class="{ selected: itemSelected == true }">
       <img :src="require('/src/assets/bridges/tower.png')" draggable="true">
     </div>
@@ -37,10 +38,14 @@ export default class Towers extends Vue {
 
   itemSelected = false;
 
-  cell = [[true, false, false], [false, false, false], [false, false, false]];
+  cells = [[false, false, false], [false, false, false], [false, false, false]];
 
-  getCell(i:number, j:number):boolean {
-    return this.cell[i][j];
+  checkSolution():boolean {
+    return this.cells[0][0];
+  }
+
+  getcells(i:number, j:number):boolean {
+    return this.cells[i][j];
   }
 
   selectItem():void { // select a weight in the inventory
@@ -53,10 +58,21 @@ export default class Towers extends Vue {
 
   fieldClicked(i:number, j:number):void {
     if (this.itemSelected) {
-      this.cell[i][j] = true;
-    } else if (this.cell[i][j]) {
-      this.cell[i][j] = false;
+      this.cells[i][j] = true;
+    } else if (this.cells[i][j]) {
+      this.itemSelected = true; // ensure propagation
+      this.cells[i][j] = false;
+      this.itemSelected = false; // ensure propagation
     }
+    this.itemSelected = false;
+  }
+
+  nextTask():void {
+    this.restart();
+  }
+
+  restart():void {
+    this.cells = [[false, false, false], [false, false, false], [false, false, false]];
     this.itemSelected = false;
   }
 }
@@ -65,10 +81,6 @@ export default class Towers extends Vue {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-table {
-  border-spacing: 5.6em 1.3em;
-}
-
 .tower-game {
   position: relative;
   display: flex;
@@ -76,23 +88,29 @@ table {
   width: auto;
 }
 
-.backgroundimage {
-  background-image: url(https://raw.githubusercontent.com/itsmedario/bsc-thesis/master/src/assets/maps/map3_empty.png://itsmedario.github.io/img/map3_empty.ee45eda9.png.png);
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 100%;
-}
-
-.img-container {
+.map-container {
   position: relative;
+  align-content: center;
+  background-image: url('/src/assets/bridges/map3_empty.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 541px;
+  height: 286px;
 }
 
 .square {
   border: 2px dashed #324197;
   background: none;
   border-radius: 5px;
-  height: 2em !important;
-  width: 2em !important;
+  height: 60px !important;
+  width: 60px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.square img {
+  width: 50% !important;
+  height: auto;
 }
 
 .tower-field {
@@ -100,32 +118,27 @@ table {
   width: 10% !important;
   max-height: 120px;
   max-width: 90px;
-  padding: 0.5em;
+  padding: 0.1em 0 !important;
 }
 
 .tower-field img {
-  width: 50%;
+  width: 40%;
   height: auto;
 }
 
 .tower-game table {
   position: absolute;
-  top:0;
+  top: 0;
   left: 0;
-  align-content:center;
-  align-self: center;
-  border-spacing: 50px;
-  padding: 1em;
-  width: 60%;
-  z-index: 2;
+  border-spacing: 5.5em 1.3em;
 }
 
 tr {
-  padding: 1em;
+  padding: 0em;
 }
 
 td {
-  padding: 1em;
+  padding: 0em;
 }
 
 </style>

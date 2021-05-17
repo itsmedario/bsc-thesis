@@ -71,7 +71,7 @@ export default class Weights extends Vue {
 
   usedWeights = new Set(); // weights the user has distributed
 
-  fixedWeights = new Set([1]); // weights that are already pre-distributed
+  fixedWeights = new Set(); // weights that are already pre-distributed
 
   addUpWeights():void { // calculates the sum of all given weights
     let sum = 0;

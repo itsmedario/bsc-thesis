@@ -8,10 +8,10 @@
     <a href="mailto:dnaepfer@student.ethz.ch?subject=Feedback zur Lernumgebung">
       dnaepfer@student.ethz.ch</a>
     </p>
-    <h3>Autor: Dario Naepfer</h3>
     <br/>
     <img :src="require('@/assets/transport/beaver_transport.png')" style="width: 40%"
      draggable="false"/>
+    <h3>Autor: Dario Naepfer</h3>
     <hr/>
     <Footer/>
   </div>

@@ -7,13 +7,13 @@
            @click="selectedTab = 'Home'">Startseite</button>
         </router-link>
         <router-link to="/check-weights">
-          <button class="card clickable">Boote überprüfen</button>
+          <button class="card clickable">Ladungen überprüfen</button>
         </router-link>
         <router-link to="/distribute-weights">
           <button class="card clickable">Boote beladen</button>
         </router-link>
         <router-link to="/add-weights">
-          <button class="card clickable">Boote ergänzend beladen</button>
+          <button class="card clickable">Ladungen ergänzen</button>
         </router-link>
         <router-link to="/optimize-weights">
           <button class="card clickable">Boote maximal beladen</button>

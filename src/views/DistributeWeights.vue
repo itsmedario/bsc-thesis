@@ -2,8 +2,8 @@
   <div>
     <Game :type="'Weights'" :level="1">
       <h2 slot="title">Boote beladen</h2>
-      <p slot="intro">Jedes Gewicht soll auf ein Boot verteilt werden,
-         ohne dass ein Boot zu schwer beladen ist.</p>
+      <p slot="intro">Verteile alle Gewichte auf die drei Boote so,
+         dass kein Boot zu schwer beladen ist.</p>
       <p slot="description" style="font-size: 1.5em">Verteile die Gewichte (<img
         :src="require('@/assets/weights/size1.png')" style="height: 1em"/>)
          auf die Boote: Klicke auf ein Gewicht und ziehe
