@@ -1,7 +1,7 @@
 <template>
   <div>
     <Game>
-      <h2 slot="title">Brücken überprüfen</h2>
+      <p class="title" slot="title">Brücken überprüfen</p>
       <p slot="description">Überprüfe, ob man von jedem Landteil
          zu jedem anderen Landteil kommt.</p>
     </Game>

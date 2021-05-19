@@ -1,7 +1,7 @@
 <template>
   <div>
     <Game  :type="'Bridges'">
-      <h2 slot="title">Brücken bauen</h2>
+      <p class="title" slot="title">Brücken bauen</p>
       <p slot="intro">Baue so viele Brücken, dass man von jedem
          Landteil zu jedem anderen Landteil kommt.</p>
       <p slot="description">Baue so viele Brücken, dass man von jedem

@@ -1,9 +1,10 @@
 <template>
   <div>
     <Game :type="'Weights'" :level="3">
-      <h2 slot="title">Boote maximal beladen</h2>
-      <p slot="intro">Verteile alle Gewichte auf <b>möglichst wenig</b> Boote.
-       Jedes Boot soll <b>genau</b> so schwer beladen sein, wie auf seinem Segel geschrieben steht.
+      <p class="title" slot="title">Boote maximal beladen</p>
+      <p slot="intro">Verteile alle Gewichte auf <ins>möglichst wenig</ins> Boote.
+       Jedes Boot soll <ins>genau</ins> so schwer beladen sein,
+        wie auf seinem Segel geschrieben steht.
       <br>-<br>
        Tipp: Berechne zuerst die Summe aller Gewichte.</p>
       <p slot="description" style="font-size: 1.7em">Verteile alle Gewichte (<img
@@ -12,8 +13,8 @@
        Klicke auf
        ein Gewicht, um es wieder aus dem Boot zu entfernen. Jedes Gewicht soll genau einmal
        verwendet werden. Jedes Boot soll
-       <b>genau</b> so viele Kilogramm aufladen, wie auf seinem Segel geschrieben steht. Wenn es
-         mehrere Lösungen gibt, wähle die Boote mit weniger Gewicht auf dem Segel. <br> Viel Erfolg!
+       <ins>genau</ins> so viele Kilogramm aufladen, wie auf seinem Segel geschrieben steht. Wenn es
+         mehrere Lösungen gibt, wähle die Boote mit weniger Gewicht auf dem Segel. Viel Erfolg!
       </p>
       <video loop controls muted slot="video">
         <source :src="require('@/assets/tutorials/distribute-weights.mp4')" />

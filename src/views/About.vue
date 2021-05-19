@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1>Über diese Plattform</h1>
+    <p class="title">Über diese Plattform</p>
     <p style="font-size: 1.5em">
       Diese Lernumgebung wurde im Zusammenhang mit dem Buch "einfach Informatik 3/4" erstellt.
     <br/>
@@ -11,8 +11,8 @@
     <br/>
     <img :src="require('@/assets/transport/beaver_transport.png')" style="width: 40%"
      draggable="false"/>
-    <h3>Autor: Dario Naepfer</h3>
-    <hr/>
+    <p>Autor: Dario Naepfer</p>
+    <hr style="height:1px; border-width:0; color:black; background-color:black">
     <Footer/>
   </div>
 </template>

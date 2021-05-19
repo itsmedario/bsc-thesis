@@ -1,7 +1,7 @@
 <template>
   <div>
     <Game :type="'TowerCheck'" :level="1">
-      <h2 slot="title">Türme überprüfen</h2>
+      <p class="title" slot="title">Türme überprüfen</p>
       <p slot="intro">Überprüfe, ob man mit den
          Türmen alle Kanäle überwachen kann.</p>
       <p slot="description">Überprüfe, ob man mit den

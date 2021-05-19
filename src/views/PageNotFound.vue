@@ -1,13 +1,13 @@
 <template>
   <div class="about responsive">
-    <h1>Seite nicht gefunden! Error 404</h1>
+    <p class="title">Seite nicht gefunden! Error 404</p>
     <p  style="font-size: 1.5em">Diese Seite wird bald verfügbar sein. <br>
       Feedback hinterlassen:
     <a href="mailto:dnaepfer@student.ethz.ch?subject=Feedback zur Lernumgebung">
       dnaepfer@student.ethz.ch</a>
     </p>
     <img :src="require('@/assets/transport/load_boat.png')" draggable="false"/>
-    <hr/>
+    <hr style="height:1px; border-width:0; color:black; background-color:black">
     <Footer/>
 
   </div>

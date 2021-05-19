@@ -3,29 +3,29 @@
   <div class="buttons">
     <router-link to="/">
       <button class="flex-item flex-center card clickable responsive">
-        <h3>Zurück</h3>
+        <p>Zurück</p>
         <img :src="require('/src/assets/icons/back.png')"/>
       </button>
     </router-link>
 
     <button class="flex-item flex-center card clickable responsive" @click="$emit('next-task')">
-      <h3>Nächste Aufgabe</h3>
+      <p>Nächste Aufgabe</p>
       <img :src="require('/src/assets/icons/skip.png')"/>
     </button>
 
     <button class="flex-item flex-center card clickable responsive" @click="$emit('restart')">
-      <h3>Neu starten</h3>
+      <p>Neu starten</p>
       <img :src="require('/src/assets/icons/restart.png')"/>
     </button>
 
     <button class="flex-item flex-center card clickable responsive"
      @click="$emit('check-solution')">
-      <h3>Überprüfen</h3>
+      <p>Überprüfen</p>
       <img :src="require('/src/assets/icons/check.png')"/>
     </button>
 
     <button class="flex-item flex-center card clickable responsive" @click="$emit('show-tutorial')">
-      <h3>Anleitung</h3>
+      <p>Anleitung</p>
       <img :src="require('/src/assets/icons/help.png')"/>
     </button>
   </div>
@@ -49,10 +49,10 @@ export default class Buttons extends Vue {
 <style scoped>
 
 .buttons {
-  position: absolute !important;
+  position: fixed !important;
   left: 0;
-  top: 100px;
-  font-size: 20px;
+  top: 120px;
+  z-index: 9997;
 }
 
 .buttons a{
@@ -67,12 +67,13 @@ export default class Buttons extends Vue {
   width: 55px;
 }
 
-.buttons h3{
-  margin-right: 10px;
+.buttons p{
+  margin: 0 0.5em 0 0;
+  font-size: 1.1em !important;
   display: none;
 }
 
-.buttons button:hover h3 {
+.buttons button:hover p {
   display: block;
 }
 

@@ -1,6 +1,6 @@
 <template>
   <div id="header" class="responsive">
-    <h1> Willkommen zur Lernplattform </h1>
+    <p class="title"> Willkommen zur Lernplattform </p>
     <img :src="require('@/assets/transport/beaver_transport2.png')" draggable="false"/>
   </div>
 </template>

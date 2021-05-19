@@ -11,7 +11,7 @@
     <table>
       <tr id="0" v-for="i in boatCapacities.length" :key="i">
         <td>
-          <h3 class="hidden-mobile">Boot {{ i }}</h3>
+          <p style="font-size: 1.3em" class="hidden-mobile">Boot {{ i }}</p>
           <img :src="require(`@/assets/transport/boatmax${boatCapacities[i - 1]}.png`)"
            style="width: 40%; min-width: 80px" draggable="false">
         </td>
@@ -84,7 +84,11 @@ export default class WeightCheck extends Vue {
 
   chosenWeights = new Set(this.weights); // weights that are proposed
 
-  actualWeights = new Set(); // weights that are actually distributed
+  actualWeights = new Set(this.weights); // weights that are actually distributed
+
+  beforeMount():void{ // pre-computed function, gets executed when module is loaded/mounted
+    this.nextTask();
+  }
 
   // switch answer n to true if false and vice versa
   toggleBox(n:number):void {
@@ -199,7 +203,6 @@ export default class WeightCheck extends Vue {
          && !this.boatOverload) {
           this.addWeight(i, j);
           this.actualBoatLoad[j] += this.weights[i];
-          this.boatOverload = true;
           break;
         }
       }
@@ -258,8 +261,8 @@ export default class WeightCheck extends Vue {
     this.eachWeightUsed = true;
     this.multipleWeightUse = false;
 
-    for (let i = 0; i < this.boatCapacities.length; i += 1) {
-      for (let j = 0; j < this.rows.length; j += 1) {
+    for (let i = 0; i < this.rows.length; i += 1) {
+      for (let j = 0; j < this.rows[0].length; j += 1) {
         if (this.rows[i][j] !== 0) {
           if (this.actualWeights.has(this.rows[i][j])) {
             this.multipleWeightUse = true;

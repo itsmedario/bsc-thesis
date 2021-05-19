@@ -31,8 +31,8 @@
           <button class="card clickable">Brücken bauen</button>
         </router-link>-->
       </div>
-    <hr>
     </div>
+    <hr style="height:0.5px; border-width:0; color:black; background-color:black">
     <router-view id="container"/>
   </div>
 </template>
@@ -52,7 +52,7 @@ export default class App extends Vue {
 <style>
 
 body{
-  background-color: #a786ff;
+  background-color: #17a2b8;
 }
 
 hr{
@@ -62,8 +62,8 @@ hr{
 
 button {
   color: black;
-  padding: 10px;
-  font-weight: bold;
+  padding: 0.7em;
+  font-size: 1em;
 }
 
 input:focus,
@@ -77,7 +77,7 @@ canvas {
   max-height: 100%;
 }
 #app {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   text-align: center;
   margin: 0 auto;
 }
@@ -89,20 +89,35 @@ canvas {
 
 .card {
   border-radius: 10px;
-  background: white;
-  border: 4px solid #e7e7e7;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.9);
+  background: #f8f9fa;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.7);
   transition: 0.3s;
   margin: 1em;
 }
 .clickable:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 1);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1);
   cursor: pointer;
 }
 .clickable:active {
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
-  transform: scale(0.98);
+  transform: scale(0.95);
 }
+
+.exit-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  width: 2em;
+  height: 2em;
+  text-align: center;
+  padding: 0;
+  background: whitesmoke;
+  font-size: 1.5em;
+  line-height: 1.7em;
+  border-radius: 3px;
+}
+
 .flex-item {
   display: flex;
 }
@@ -116,7 +131,7 @@ canvas {
 .flex-center-horizontally {
   justify-content: center;
 }
-.flex-center-vertivally {
+.flex-center-vertically {
   align-items: center;
 }
 .flex-stretch {
@@ -134,6 +149,7 @@ canvas {
 .flex-flex {
   flex: 1;
 }
+
 .dropzone {
   border: 2px dashed #324197;
   background: none;
@@ -144,7 +160,7 @@ canvas {
 }
 
 .fixedField {
-  border: 1px solid black !important;
+  border: 2px solid #324197 !important;
   background: none;
   border-radius: 5px;
 }
@@ -165,15 +181,17 @@ video {
 }
 .selected {
   background: #4ea1ee !important;
-  border: 4px solid #4ea1ee;
 }
 .locked {
   background: rgb(184, 183, 183) !important;
-  border: 4px solid rgb(184, 183, 183);
 }
 
 .locked:hover {
   animation: shake ease-out 0.15s;
+}
+
+.title {
+  font-size: 2em;
 }
 
 @media (max-width: 1430px) {

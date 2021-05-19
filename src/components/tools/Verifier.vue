@@ -4,8 +4,8 @@
     <div class="modal-wrapper">
       <div class="modal-container"  @mousedown.stop>
         <div class="modal-header">
-          <h3 v-if="correctSolution">Du hast die Aufgabe richtig gelöst!</h3>
-          <h3 v-else>Das ist leider nicht richtig!</h3>
+          <p class="title" v-if="correctSolution">Du hast die Aufgabe richtig gelöst!</p>
+          <p class="title" v-else>Das ist leider nicht richtig!</p>
           <button class="exit-button" @click="showSolution = false;
            $emit('close-verifier')">
            &times;
@@ -54,24 +54,10 @@ img:hover {
   animation: shake 0.5s;
 }
 
-.exit-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 6px;
-  width: 2em;
-  height: 2em;
-  text-align: center;
-  padding: 0;
-  background: transparent;
-  font-size: 1.7em;
-  line-height: 1.7em;
-  border-radius: 3px;
-}
-
 .description > p {
   margin: 1em;
   text-align: justify;
+  font-size: 1.5em !important;
 }
 
 .modal-mask {

@@ -1,9 +1,9 @@
 <template>
   <div>
     <Game :type="'WeightCheck'" :level="1">
-      <h2 slot="title">Ladungen überprüfen</h2>
-      <p slot="intro">Beantworte die untenstehenden Fragen.</p>
-      <p slot="description" style="font-size: 1.7em">Überprüfe, ob alle Gewichte (<img
+      <p class="title" slot="title">Ladungen überprüfen</p>
+      <p slot="intro"></p>
+      <p slot="description">Überprüfe, ob alle Gewichte (<img
         :src="require('@/assets/weights/size6.png')" style="height: 1em"/>)
          korrekt verteilt wurden. Pass auf, dass
          kein Boot zu schwer beladen wird. Jedes Boot darf maximal so viele Kilogramm aufladen,

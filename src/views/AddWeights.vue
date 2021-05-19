@@ -1,9 +1,9 @@
 <template>
   <div>
     <Game :type="'Weights'" :level="2">
-      <h2 slot="title">Ladungen ergänzen</h2>
-      <p slot="intro">Verteile die übrigen Gewichte so, dass alle Gewichte verteilt wurden
-       und kein Boot zu schwer beladen ist.</p>
+      <p class="title" slot="title">Ladungen ergänzen</p>
+      <p slot="intro">Verteile alle übrigen Gewichte auf die drei Boote so,
+        dass kein Boot zu schwer beladen ist.</p>
       <p slot="description" style="font-size: 1.7em">Verteile die übrigen Gewichte (<img
       :src="require('@/assets/weights/size6.png')" style="height: 1em"/>)
        auf die Boote: Klicke auf ein Gewicht und ziehe es an den gewünschten Platz. Klicke auf

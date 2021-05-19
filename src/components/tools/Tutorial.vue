@@ -4,8 +4,8 @@
     <div class="modal-wrapper">
       <div class="modal-container" @mousedown.stop >
         <div class="modal-header">
-          <h3>Anleitung zum Spiel</h3>
-          <button style="margin:0.5em;" @click="showModal = false;
+          <p class="title">Anleitung zum Spiel</p>
+          <button class="exit-button" style="margin:0.5em;" @click="showModal = false;
            $emit('close-tutorial')">
            &times;
            </button>
@@ -40,8 +40,9 @@ export default class Tutorial extends Vue {
 <style scoped>
 
 .description > p {
-  margin: 1em;
+  margin: 0.8em;
   text-align: justify;
+  font-size: 1.5em !important;
 }
 
 .modal-mask {
@@ -68,12 +69,12 @@ export default class Tutorial extends Vue {
 .modal-container {
   width: 60%;
   margin: 0px auto;
+  position: relative;
   padding: 20px 30px;
   background-color: #fff;
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
-  font-family: Helvetica, Arial, sans-serif;
 }
 
 .modal-header h3 {

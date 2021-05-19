@@ -8,7 +8,7 @@
     <table>
       <tr id="i" v-for="i in boatCapacities.length" :key="i">
         <td>
-          <h3 class="hidden-mobile">Boot {{ i }}</h3>
+          <p style="font-size: 1.3em" class="hidden-mobile">Boot {{ i }}</p>
           <img :src="require(`@/assets/transport/boatmax${boatCapacities[i - 1]}.png`)"
            v-if="level != 3" style="width: 55%; min-width:120px; max-width:150px" draggable="false">
            <img :src="require(`@/assets/transport/boat${boatCapacities[i - 1]}.png`)"
@@ -73,6 +73,13 @@ export default class Weights extends Vue {
 
   fixedWeights = new Set(); // weights that are already pre-distributed
 
+  beforeMount():void{ // pre-computed function, gets executed when module is loaded/mounted
+    /* if (this.level === 2) {
+      this.l3init();
+    } */
+    this.nextTask();
+  }
+
   addUpWeights():void { // calculates the sum of all given weights
     let sum = 0;
     for (let i = 0; i < this.weights.length; i += 1) {
@@ -103,6 +110,7 @@ export default class Weights extends Vue {
     }
   }
 
+  // defines what happens when an element is dragged
   dragStart(i:number, j:number):void {
     if (!this.fixedWeights.has(this.rows[i - 1][j - 1])) {
       this.usedWeights.delete(this.rows[i - 1][j - 1]);
@@ -123,11 +131,16 @@ export default class Weights extends Vue {
     }
   }
 
-  isFixedField(i:number, j:number):boolean {
+  isFixedField(i:number, j:number):boolean { // returns boolean if field is pre-loaded/fixed
     return this.fixedWeights.has(this.rows[i - 1][j - 1]);
   }
 
-  restart(): void {
+  l3init():void {
+    this.startRows = [[5, 4, 0, 0, 0, 0], [2, 0, 0, 0, 0, 0], [11, 0, 0, 0, 0, 0]];
+    this.fixedWeights = new Set([2, 4, 5, 11]);
+  }
+
+  restart(): void { // restarts the actual task
     this.selectedItem = 0;
     this.rows = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
     this.usedWeights.clear();
@@ -142,7 +155,7 @@ export default class Weights extends Vue {
     }
   }
 
-  nextTask():void {
+  nextTask():void { // generates a new random task
     this.restart();
     if (this.level === 1) {
       this.l1generator();
@@ -153,7 +166,7 @@ export default class Weights extends Vue {
     }
   }
 
-  l1generator():void {
+  l1generator():void { // random generator for level 1
     let ship1 = 0;
     let ship2 = 0;
     let ship3 = 0;
@@ -185,7 +198,7 @@ export default class Weights extends Vue {
     this.chooseWeights(newWeightSum, maxWeightSize, tolerance);
   }
 
-  l2generator():void {
+  l2generator():void { // random generator for level 2
     do {
       this.l1generator();
     } while (this.fixedWeights.size < 2 || this.fixedWeights.size > this.weights.length / 2);
@@ -196,8 +209,30 @@ export default class Weights extends Vue {
     }
   }
 
-  l3generator():void {
+  l3generator():void { // random generator for level 3
+    /*
     // generate weight sum
+    let newWeightSum = 0;
+    let ship1 = 0;
+    let ship2 = 0;
+    let ship3 = 0;
+    const max = 60;
+
+    // choose ship sizes
+    do {
+      ship1 = Math.floor(1 + Math.random() * 3) * 10;
+      ship2 = Math.floor(1 + Math.random() * 3) * 10;
+      ship3 = Math.floor(1 + Math.random() * 3) * 10;
+      newWeightSum = ship1 + ship2 + ship3;
+    } while (newWeightSum > max);
+    this.boatCapacities = [ship1, ship2, ship3];
+    this.boatCapacities.sort();
+
+    // generate weight sum
+    newWeightSum = ((Math.random() * (newWeightSum - 20)) % 10) + 20;
+    console.log(newWeightSum); */
+
+    // delete when randomizing weights
     const newWeightSum = Math.floor(2 + Math.random() * 5) * 10;
     console.log(newWeightSum);
 
@@ -217,6 +252,7 @@ export default class Weights extends Vue {
     } while (this.weightSum % 10 !== 0 || this.weights.length < 3);
   }
 
+  // chooses random weights according to the inputs
   chooseWeights(newWeightSum:number, maxWeightSize:number, sentinel:number):void {
     const startIndex = Math.floor(Math.random() * maxWeightSize);
     let remainingBoatCaps = [...this.boatCapacities];
@@ -261,7 +297,7 @@ export default class Weights extends Vue {
     this.addUpWeights();
   }
 
-  // for l2, add pre-distributed weights
+  // for l2, adds pre-distributed weights
   fixWeight(i: number, j:number):void {
     for (let l = 0; l < this.rows[0].length; l += 1) {
       if (this.rows[j][l] === 0) {
@@ -273,6 +309,7 @@ export default class Weights extends Vue {
     }
   }
 
+  // tests if the user has solved the task correctly
   checkSolution(level:number):void {
     const optimalWeightSum = this.sumArray();
     const allUsed = this.allWeightsUsed();
@@ -280,15 +317,16 @@ export default class Weights extends Vue {
     if (optimalWeightSum === this.weightSum && allUsed && !this.boatOverload
      && isOptimal) {
       this.$emit('correct-solution');
-    } else if (this.boatOverload) {
-      this.$emit('false-solution', 'Tipp: Pass auf, dass kein Boot zu schwer beladen ist!');
     } else if (!allUsed) {
       this.$emit('false-solution', 'Tipp: Du hast noch nicht alle Gewichte verwendet');
+    } else if (this.boatOverload) {
+      this.$emit('false-solution', 'Tipp: Pass auf, dass kein Boot zu schwer beladen ist!');
     } else if (!isOptimal) {
       this.$emit('false-solution', 'Guter Versuch! Schaffst Du es, eine noch bessere Lösung zu finden?');
     }
   }
 
+  // for l3, tests if the solution is optimal, i.e. weights are maximally loaded
   isOptimalSolution(level:number):boolean {
     if (level <= 2) {
       return true;
@@ -348,7 +386,7 @@ table {
   border-spacing: 0.6em 1.4em;
 }
 
-tr h3, img {
+tr p, img {
   display: inline-block;
   margin: 0.5em;
   vertical-align: middle;
