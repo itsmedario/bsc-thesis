@@ -158,7 +158,7 @@ export default class WeightCheck extends Vue {
     const sentinel = 4;
     let randomWeight = 0;
 
-    while (chosenWeightSum + sentinel <= newWeightSum) {
+    while (chosenWeightSum + sentinel <= newWeightSum || this.chosenWeights.size < 4) {
       chosenWeightSum = 0;
       this.chosenWeights.clear();
       while (chosenWeightSum <= newWeightSum) {
@@ -190,41 +190,47 @@ export default class WeightCheck extends Vue {
       // distribute weights as well as possible
       for (let j = 0; j < this.boatCapacities.length; j += 1) {
         if (this.weights[i] <= this.boatCapacities[j] - this.actualBoatLoad[j]) {
-          this.addWeight(i, j);
+          this.addWeight(this.weights[i], j);
           this.actualBoatLoad[j] += this.weights[i];
           break;
         }
       }
-      /*
       // distribute remaining weights even if boat capacity is exceeded
       for (let j = 0; j < this.boatCapacities.length; j += 1) {
         if (this.actualBoatLoad[j] + this.weights[i] <= this.boatCapacities[j] + tolerance
          && !this.actualWeights.has(this.weights[i])
-         && !this.boatOverload) {
-          this.addWeight(i, j);
+         && !this.boatOverload
+         && Math.random() > 0.3) {
+          this.addWeight(this.weights[i], j);
           this.actualBoatLoad[j] += this.weights[i];
-          break;
-        }
-      } */
-    }
-
-    // if boats not yet overloaded, add another random weight
-    this.boatOverloadCheck();
-    if (!this.boatOverload) {
-      console.log('Try to distribute extra weight');
-      randomWeight = Math.floor(Math.random() * maxWeightSize);
-      for (let j = 0; j < this.boatCapacities.length; j += 1) {
-        if (this.actualBoatLoad[j] + this.weights[randomWeight]
-         <= this.boatCapacities[j] + tolerance) {
-          this.addWeight(randomWeight, j);
-          this.actualBoatLoad[j] += this.weights[randomWeight];
-          // eslint-disable-next-line prefer-template
-          console.log(this.weights[randomWeight] + ' extra distributed');
           break;
         }
       }
     }
 
+    // if boats not yet overloaded, add another random weight
+    this.boatOverloadCheck();
+    if (!this.boatOverload && Math.random() > 0.3) {
+      randomWeight = 1 + Math.floor(Math.random() * (maxWeightSize / 2));
+      // eslint-disable-next-line prefer-template
+      console.log('Try to distribute extra weight ' + randomWeight);
+      for (let j = 0; j < this.boatCapacities.length; j += 1) {
+        if (this.actualBoatLoad[j] + randomWeight
+         <= this.boatCapacities[j] + tolerance) {
+          this.addWeight(randomWeight, j);
+          this.actualBoatLoad[j] += randomWeight;
+          // eslint-disable-next-line prefer-template
+          console.log(randomWeight + ' extra distributed');
+          break;
+        }
+      }
+    }
+    /*
+    // sort weights s.t. its not apparent that a fake weight has been inserted
+    for (let i = 0; i < this.rows.length; i += 1) {
+      this.rows[i].sort((a, b): number => a - b);
+    }
+    */
     // check if statements are actually true
     this.weightCheck();
     this.boatOverloadCheck();
@@ -233,9 +239,9 @@ export default class WeightCheck extends Vue {
   // place weight i in boat j
   addWeight(i:number, j:number):void {
     for (let l = 0; l < this.rows[0].length; l += 1) {
-      if (this.rows[j][l] === 0 && this.weights[i] !== 0) {
-        this.rows[j][l] = this.weights[i];
-        this.actualWeights.add(this.weights[i]);
+      if (this.rows[j][l] === 0 && i !== 0) {
+        this.rows[j][l] = i;
+        this.actualWeights.add(i);
         return;
       }
     }
