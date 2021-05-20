@@ -11,7 +11,7 @@
          indem du auf Richtig oder Falsch klickst. Viel Erfolg!
       </p>
       <video loop controls muted slot="video">
-        <source :src="require('@/assets/tutorials/distribute-weights.mp4')" />
+        <source :src="require('@/assets/tutorials/check-weights.mp4')" />
         Your browser does not support the video tag.
       </video>
     </Game>

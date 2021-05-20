@@ -195,7 +195,7 @@ export default class WeightCheck extends Vue {
           break;
         }
       }
-
+      /*
       // distribute remaining weights even if boat capacity is exceeded
       for (let j = 0; j < this.boatCapacities.length; j += 1) {
         if (this.actualBoatLoad[j] + this.weights[i] <= this.boatCapacities[j] + tolerance
@@ -205,12 +205,13 @@ export default class WeightCheck extends Vue {
           this.actualBoatLoad[j] += this.weights[i];
           break;
         }
-      }
+      } */
     }
 
     // if boats not yet overloaded, add another random weight
     this.boatOverloadCheck();
     if (!this.boatOverload) {
+      console.log('Try to distribute extra weight');
       randomWeight = Math.floor(Math.random() * maxWeightSize);
       for (let j = 0; j < this.boatCapacities.length; j += 1) {
         if (this.actualBoatLoad[j] + this.weights[randomWeight]
@@ -348,12 +349,37 @@ td img {
 .statements {
   display: inline-block;
   font-size: 1.1em;
-  margin: 0.5em;
-  padding: 0.4em;
+  margin: 1.1em;
+  padding: 0.1em;
+  border-bottom: 3px solid transparent;
+  transition: all 0.25s linear;
+  position: relative;
+}
+
+.statements:hover {
+  cursor: pointer;
+}
+
+.statements:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: black;
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  transform-origin: left;
+  transform: scale(0);
+  transition: 0.25s linear;
+}
+
+.statements:hover:before {
+  transform: scale(1);
 }
 
 .check-button {
-  color: black;
+  color: white;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -362,25 +388,27 @@ td img {
 }
 
 .true-button {
-  background: rgb(192, 226, 192) 2px;
+  background: #28a745;
   border-radius: 10px 0px 0px 10px;
-  border: 2px solid rgb(192, 226, 192);
+  border: 2px solid #28a745;
+  opacity: 50%;
 }
 
 .false-button {
-  background: rgb(255, 142, 142);
+  background: #dc3545;
   border-radius: 0px 10px 10px 0px;
-  border: 2px solid rgb(255, 142, 142);
+  border: 2px solid #dc3545;
+  opacity: 50%;
 }
 
 .activetrue {
-  border: 2px solid black;
-  background: #28a745 !important;
+  border: 2px solid white;
+  opacity: 100%;
 }
 
 .activefalse {
-  border: 2px solid black;
-  background: #dc3545 !important;
+  border: 2px solid white;
+  opacity: 100%;
 }
 
 </style>

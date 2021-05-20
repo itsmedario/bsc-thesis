@@ -233,7 +233,7 @@ export default class Weights extends Vue {
     console.log(newWeightSum); */
 
     // delete when randomizing weights
-    const newWeightSum = Math.floor(2 + Math.random() * 5) * 10;
+    const newWeightSum = Math.floor(1 + Math.random() * 6) * 10;
     console.log(newWeightSum);
 
     // choose boats that are used in the optimal case

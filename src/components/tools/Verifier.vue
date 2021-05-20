@@ -4,7 +4,7 @@
     <div class="modal-wrapper">
       <div class="modal-container"  @mousedown.stop>
         <div class="modal-header">
-          <p class="title" v-if="correctSolution">Du hast die Aufgabe richtig gelöst!</p>
+          <p class="title" v-if="correctSolution">Das ist richtig!</p>
           <p class="title" v-else>Das ist leider nicht richtig!</p>
           <button class="exit-button" @click="showSolution = false;
            $emit('close-verifier')">

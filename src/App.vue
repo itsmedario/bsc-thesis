@@ -151,7 +151,7 @@ canvas {
 }
 
 .dropzone {
-  border: 2px dashed #324197;
+  border: 2px dashed black;
   background: none;
   border-radius: 5px;
   min-height: 5em;
@@ -160,7 +160,7 @@ canvas {
 }
 
 .fixedField {
-  border: 2px solid #324197 !important;
+  border: 2px solid black !important;
   background: none;
   border-radius: 5px;
 }
@@ -184,6 +184,10 @@ video {
 }
 .locked {
   background: rgb(184, 183, 183) !important;
+}
+
+.locked img {
+  opacity: 0.5;
 }
 
 .locked:hover {

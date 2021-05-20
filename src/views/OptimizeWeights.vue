@@ -17,7 +17,7 @@
          mehrere Lösungen gibt, wähle die Boote mit weniger Gewicht auf dem Segel. Viel Erfolg!
       </p>
       <video loop controls muted slot="video">
-        <source :src="require('@/assets/tutorials/distribute-weights.mp4')" />
+        <source :src="require('@/assets/tutorials/add-weights.mp4')" />
         Your browser does not support the video tag.
       </video>
     </Game>

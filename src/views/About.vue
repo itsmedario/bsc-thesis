@@ -3,15 +3,20 @@
     <p class="title">Über diese Plattform</p>
     <p style="font-size: 1.5em">
       Diese Lernumgebung wurde im Zusammenhang mit dem Buch "einfach Informatik 3/4" erstellt.
-    <br/>
-    Feedback ist sehr erwünscht:
-    <a href="mailto:dnaepfer@student.ethz.ch?subject=Feedback zur Lernumgebung">
-      dnaepfer@student.ethz.ch</a>
+      <br>
+      Feedback ist sehr erwünscht:
+      <a href="mailto:dnaepfer@student.ethz.ch?subject=Feedback zur Lernumgebung">
+        dnaepfer@student.ethz.ch</a>
     </p>
-    <br/>
+    <br>
     <img :src="require('@/assets/transport/beaver_transport.png')" style="width: 40%"
      draggable="false"/>
-    <p>Autor: Dario Naepfer</p>
+    <p>Autor: Dario Naepfer
+      <hr style="height:1px; border-width:0; color:black; background-color:black; width: 10%;
+       margin: 0.5em auto">
+      Version 2.0 -- Updates: Neues Gesamt-Design, fixiertes Buttonmenü,
+       Tutorial-Layout überarbeitet.
+    <p>
     <hr style="height:1px; border-width:0; color:black; background-color:black">
     <Footer/>
   </div>
