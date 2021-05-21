@@ -3,7 +3,7 @@
   <div class="buttons">
     <router-link to="/">
       <button class="flex-item flex-center card clickable responsive">
-        <p>Zurück</p>
+        <p>Zur Hauptseite</p>
         <img :src="require('/src/assets/icons/back.png')"/>
       </button>
     </router-link>

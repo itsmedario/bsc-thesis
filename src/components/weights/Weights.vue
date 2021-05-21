@@ -318,7 +318,7 @@ export default class Weights extends Vue {
      && isOptimal) {
       this.$emit('correct-solution');
     } else if (!allUsed) {
-      this.$emit('false-solution', 'Tipp: Du hast noch nicht alle Gewichte verwendet');
+      this.$emit('false-solution', 'Tipp: Du hast noch nicht alle Gewichte verwendet!');
     } else if (this.boatOverload) {
       this.$emit('false-solution', 'Tipp: Pass auf, dass kein Boot zu schwer beladen ist!');
     } else if (!isOptimal) {

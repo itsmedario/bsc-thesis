@@ -2,10 +2,6 @@
   <div id="app">
     <div id="nav">
       <div id="button-menu" class="flex-item flex-row flex-center flex-wrap">
-        <router-link to="/home">
-          <button id="home" class="card clickable"
-           @click="selectedTab = 'Home'">Startseite</button>
-        </router-link>
         <router-link to="/check-weights">
           <button class="card clickable">Ladungen überprüfen</button>
         </router-link>
@@ -32,7 +28,7 @@
         </router-link>-->
       </div>
     </div>
-    <hr style="height:0.5px; border-width:0; color:black; background-color:black">
+    <hr style="height:1px; border-width:0; color:black; background-color:black">
     <router-view id="container"/>
   </div>
 </template>
@@ -53,6 +49,7 @@ export default class App extends Vue {
 
 body{
   background-color: #17a2b8;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 hr{
@@ -62,6 +59,7 @@ hr{
 
 button {
   color: black;
+  font-family: Georgia, 'Times New Roman', Times, serif !important;
   padding: 0.7em;
   font-size: 1em;
 }
@@ -77,9 +75,9 @@ canvas {
   max-height: 100%;
 }
 #app {
-  font-family: Georgia, 'Times New Roman', Times, serif;
   text-align: center;
   margin: 0 auto;
+  max-width: 1500px;
 }
 
 #container {
@@ -90,7 +88,7 @@ canvas {
 .card {
   border-radius: 10px;
   background: #f8f9fa;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.7);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
   transition: 0.3s;
   margin: 1em;
 }
@@ -101,6 +99,12 @@ canvas {
 .clickable:active {
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
   transform: scale(0.95);
+}
+
+.description {
+  padding: 1em;
+  box-shadow: none !important;
+  font-size: 1.2em
 }
 
 .exit-button {
@@ -163,6 +167,12 @@ canvas {
   border: 2px solid black !important;
   background: none;
   border-radius: 5px;
+}
+
+.info-card {
+  padding: 0em !important;
+  margin: 1em !important;
+  box-shadow: none !important;
 }
 
 .equal-space {

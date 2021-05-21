@@ -2,7 +2,7 @@
   <div id="tutorial-wrapper" v-if="showSolution" class="modal-mask"
    @mousedown.stop="showSolution = false; $emit('close-verifier')">
     <div class="modal-wrapper">
-      <div class="modal-container"  @mousedown.stop>
+      <div class="modal-container" @mousedown.stop>
         <div class="modal-header">
           <p class="title" v-if="correctSolution">Das ist richtig!</p>
           <p class="title" v-else>Das ist leider nicht richtig!</p>

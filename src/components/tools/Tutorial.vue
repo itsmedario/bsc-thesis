@@ -67,7 +67,8 @@ export default class Tutorial extends Vue {
 }
 
 .modal-container {
-  width: 60%;
+  width: auto;
+  max-width: 90%;
   margin: 0px auto;
   position: relative;
   padding: 20px 30px;

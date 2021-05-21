@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <Header/>
-  <hr style="height:0.5px; border-width:0; color:black; background-color:black">
+  <hr style="height:1px; border-width:0; color:black; background-color:black">
   <p>[Platzhalter für Aufgabenraster]</p>
   <!--    <div v-for="task in getItems()" :key="task.id"
      class="card clickable">

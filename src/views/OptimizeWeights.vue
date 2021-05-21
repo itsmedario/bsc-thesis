@@ -2,10 +2,11 @@
   <div>
     <Game :type="'Weights'" :level="3">
       <p class="title" slot="title">Boote maximal beladen</p>
-      <p slot="intro">Verteile alle Gewichte auf <ins>möglichst wenig</ins> Boote.
+      <p class="card description" slot="intro">
+      Verteile alle Gewichte auf <ins>möglichst wenig</ins> Boote.
        Jedes Boot soll <ins>genau</ins> so schwer beladen sein,
         wie auf seinem Segel geschrieben steht.
-      <br>-<br>
+      <br><br>
        Tipp: Berechne zuerst die Summe aller Gewichte.</p>
       <p slot="description" style="font-size: 1.7em">Verteile alle Gewichte (<img
       :src="require('@/assets/weights/size6.png')" style="height: 1em"/>)

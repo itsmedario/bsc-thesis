@@ -3,7 +3,7 @@
     <div class="card info-card responsive" style="max-width: 1500px">
         <img :src="require(`@/assets/faces/face${counter + 1}.png`)"
         style="width: 5%" draggable="false">
-        <p  style="font-size: 1.2em">{{ names[(counter)] }} wollte diese Gewichte verteilen:</p>
+        <p>{{ names[(counter)] }} wollte diese Gewichte verteilen:</p>
         <img v-for="i in weights" :key="i" :src="require(`@/assets/weights/size${i}.png`)"
          draggable="false" style="width: 5%; min-width: 80px">
     </div>
@@ -341,12 +341,6 @@ td img {
   align-items: center;
   justify-content: center;
 }
-
-.info-card {
-  padding: 0em !important;
-  margin: 1em !important;
-}
-
 .statement-check {
   position: relative;
   text-align: left !important;
