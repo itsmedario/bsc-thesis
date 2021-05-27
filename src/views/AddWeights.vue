@@ -1,16 +1,16 @@
 <template>
   <div>
-    <Game :type="'Weights'" :level="2">
-      <p class="title" slot="title">Ladungen ergänzen</p>
+    <Game
+     :type="'Weights'"
+     :level="2"
+     :language="language"
+    >
+      <p class="title" slot="title">{{ text.tasks.addWeights.title }}</p>
       <p class="card description" slot="intro">
-      Verteile alle übrigen Gewichte auf die drei Boote so,
-        dass kein Boot zu schwer beladen ist.</p>
-      <p slot="description" style="font-size: 1.7em">Verteile die übrigen Gewichte (<img
-      :src="require('@/assets/weights/size6.png')" style="height: 1em"/>)
-       auf die Boote: Klicke auf ein Gewicht und ziehe es an den gewünschten Platz. Klicke auf
-       ein Gewicht, um es wieder aus dem Boot zu entfernen. Jedes Gewicht soll genau einmal
-       verwendet werden. Pass auf, dass kein Boot zu schwer beladen wird. Jedes Boot darf maximal
-       so viele Kilogramm aufladen, wie auf seinem Segel geschrieben steht. Viel Erfolg!
+        {{ text.tasks.addWeights.intro }}
+      </p>
+      <p slot="description" style="font-size: 1.7em">
+        {{ text.tasks.addWeights.description }}
       </p>
       <video loop controls muted slot="video">
         <source :src="require('@/assets/tutorials/add-weights.mp4')" />
@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
+import { Component, Prop } from 'vue-property-decorator';
 import Game from '../components/Game.vue';
 
 @Component({
@@ -31,7 +31,13 @@ import Game from '../components/Game.vue';
   },
 })
 
-export default class AddWeights extends Vue {}
+export default class AddWeights extends Vue {
+  @Prop({ required: true })
+  language!: string;
+
+  // eslint-disable-next-line global-require, import/no-dynamic-require
+  text = require(`@/text_${this.language}.json`);
+}
 </script>
 
 <style scoped></style>

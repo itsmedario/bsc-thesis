@@ -1,18 +1,16 @@
 <template>
   <div>
-    <Game :type="'Weights'" :level="3">
-      <p class="title" slot="title">Boote maximal beladen</p>
+    <Game
+     :type="'Weights'"
+     :level="3"
+     :language="language"
+    >
+      <p class="title" slot="title">{{ text.tasks.optimizeWeights.title }}</p>
       <p class="card description" slot="intro">
-      Verteile alle Gewichte auf <ins>möglichst wenig</ins> Boote.
-      <br><br>
-       Tipp: Berechne zuerst die Summe aller Gewichte.</p>
-      <p slot="description" style="font-size: 1.7em">Verteile alle Gewichte (<img
-      :src="require('@/assets/weights/size6.png')" style="height: 1em"/>)
-       auf so wenig Boote wie möglich: Klicke auf ein Gewicht und ziehe es an den gewünschten Platz.
-       Klicke auf
-       ein Gewicht, um es wieder aus dem Boot zu entfernen. Jedes Gewicht soll genau einmal
-       verwendet werden. Wenn es
-       mehrere Lösungen gibt, wähle die Boote mit weniger Gewicht auf dem Segel. Viel Erfolg!
+        {{ text.tasks.optimizeWeights.intro }}
+      </p>
+      <p slot="description" style="font-size: 1.7em">
+        {{ text.tasks.optimizeWeights.description }}
       </p>
       <video loop controls muted slot="video">
         <source :src="require('@/assets/tutorials/add-weights.mp4')" />
@@ -24,7 +22,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
+import { Component, Prop } from 'vue-property-decorator';
 import Game from '../components/Game.vue';
 
 @Component({
@@ -33,7 +31,13 @@ import Game from '../components/Game.vue';
   },
 })
 
-export default class OptimizeWeights extends Vue {}
+export default class OptimizeWeights extends Vue {
+  @Prop({ required: true })
+  language!: string;
+
+  // eslint-disable-next-line global-require, import/no-dynamic-require
+  text = require(`@/text_${this.language}.json`);
+}
 </script>
 
 <style scoped></style>

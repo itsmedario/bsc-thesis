@@ -1,15 +1,21 @@
 {
-    "title": "Willkommen in der Lernumgebung",
+    "title": "einfach Informatik 3/4",
     "pages": {
+        "home": {
+            "title": "Willkommen in der Lernumgebung",
+            "bottom": "Zur Aufgaben-Auswahl ↓",
+            "top": "Nach oben ↑"
+        },
         "about": {
             "title": "Impressum",
-            "text": "Diese Lernumgebung wurde im Zusammenhang mit dem Buch 'einfach Informatik 3/4' erstellt.\n Feedback ist sehr erwünscht: dnaepfer@student.ethz.ch",
+            "descrption": "Diese Lernumgebung wurde im Zusammenhang mit dem Buch 'einfach Informatik 3/4' erstellt. Feedback ist sehr erwünscht: dnaepfer@student.ethz.ch",
             "author": "Autor: Dario Naepfer",
-            "version": "Version 2.0 -- Updates: Neues Gesamt-Design, fixiertes Buttonmenü, Tutorial-Layout überarbeitet.\n Version 2.1 -- Neu: Schwierigkeitsstufen für Ladungen überprüfen.\n Version 2.2 -- Texte in JSON File, Sprachenwechsel möglich"
+            "oldVersion": "Version 2.2 -- Neu: Texte in JSON File, Sprachenwechsel möglich (nicht aktiviert)",
+            "version": "Version 2.3 -- Neu: Startseiten-Menü und allgemeines Responsive-Design"
         },
         "notFound": {
             "title": "Seite nicht gefunden! Error 404",
-            "text": "Diese Seite ist zur Zeit nicht verfügbar.\n Feedback hinterlassen: dnaepfer@student.ethz.ch"
+            "text": "Diese Seite ist zur Zeit nicht verfügbar. Feedback hinterlassen: dnaepfer@student.ethz.ch"
         }
     },
     "game": {
@@ -28,34 +34,54 @@
     },
     "tasks": {
         "checkWeights": {
+            "id": 1,
+            "path": "/check-weights",
+            "img": "/transport/wood.png",
             "title": "Gewichte überprüfen",
             "intro": " wollte diese Gewichte verteilen:",
             "description": "Überprüfe, ob alle Gewichte korrekt verteilt wurden. Pass auf, dass kein Boot zu schwer beladen wird. Jedes Boot darf maximal so viele Kilogramm aufladen, wie auf seinem Segel geschrieben steht. Beantworte dann die untenstehenden Fragen, indem du auf Richtig oder Falsch klickst. Viel Erfolg!",
             "statements": {
                 "s1": "Jedes Gewicht ist verwendet worden.",
                 "s2": "Kein Gewicht ist mehrmals verwendet worden.",
-                "s3": "Kein Boot ist zu schwer beladen."
+                "s3": "Kein Boot ist zu schwer beladen.",
+                "true": "Richtig",
+                "false": "Falsch"
             },
-            "true": "Richtig",
-            "false": "Falsch"
+            "tips": {
+                "tip1": "Beantworte alle Fragen, bevor du auf Überprüfen klickst!",
+                "tip2": "Tipp: Zähle die Gewichte für jedes einzelne Boot zusammen!",
+                "tip3": "Tipp: Ist jedes Gewicht genau einmal verwendet worden?",
+                "tip4": "Tipp: Überprüfe für jedes einzelne Gewicht, wo es platziert ist!"
+            }
         },
         "distributeWeights": {
+            "id": 2,
+            "path": "/distribute-weights",
+            "img": "/transport/wood.png",
             "title": "Gewichte verteilen",
             "intro": "Verteile alle Gewichte auf die drei Boote so, dass kein Boot zu schwer beladen ist.",
             "description": "Verteile die Gewichte auf die Boote: Klicke auf ein Gewicht und ziehe es an den gewünschten Platz. Klicke auf ein Gewicht, um es wieder aus dem Boot zu entfernen. Jedes Gewicht soll genau einmal verwendet werden. Pass auf, dass kein Boot zu schwer beladen wird. Jedes Boot darf höchstens so viele Kilogramm aufladen, wie auf seinem Segel geschrieben steht. Viel Erfolg!"
         },
         "addWeights":  {
+            "id": 3,
+            "path": "/add-weights",
+            "img": "/transport/wood.png",
             "title": "Gewichte ergänzen",
             "intro": "Verteile alle übrigen Gewichte auf die drei Boote so, dass kein Boot zu schwer beladen ist.",
             "description": "Verteile die übrigen Gewichte auf die Boote: Klicke auf ein Gewicht und ziehe es an den gewünschten Platz. Klicke auf ein Gewicht, um es wieder aus dem Boot zu entfernen. Jedes Gewicht soll genau einmal verwendet werden. Pass auf, dass kein Boot zu schwer beladen wird. Jedes Boot darf maximal so viele Kilogramm aufladen, wie auf seinem Segel geschrieben steht. Viel Erfolg!"
         },
         "optimizeWeights":  {
+            "id": 4,
+            "path": "/optimize-weights",
+            "img": "/transport/wood.png",
             "title":  "Boote maximal beladen",
-            "intro": "Verteile alle Gewichte auf möglichst wenig Boote.\n Tipp: Berechne zuerst die Summe aller Gewichte.",
-            "description": "Verteile alle Gewichte () auf so wenig Boote wie möglich: Klicke auf ein Gewicht und ziehe es an den gewünschten Platz. Klicke auf ein Gewicht, um es wieder aus dem Boot zu entfernen. Jedes Gewicht soll genau einmal verwendet werden. Wenn es mehrere Lösungen gibt, wähle die Boote mit weniger Gewicht auf dem Segel. Viel Erfolg!"
-        },
-        "distributeTowers": "Türme bauen",
-        "addTowers": "Türme ergänzen",
-        "optimizeTowers": "Türme optimal verteilen"
+            "intro": "Verteile alle Gewichte auf möglichst wenig Boote. | Tipp: Berechne zuerst die Summe aller Gewichte.",
+            "description": "Verteile alle Gewichte auf so wenig Boote wie möglich: Klicke auf ein Gewicht und ziehe es an den gewünschten Platz. Klicke auf ein Gewicht, um es wieder aus dem Boot zu entfernen. Jedes Gewicht soll genau einmal verwendet werden. Wenn es mehrere Lösungen gibt, wähle die Boote mit weniger Gewicht auf dem Segel. Viel Erfolg!",
+            "tips": {
+                "tip1": "Tipp: Du hast noch nicht alle Gewichte verwendet!",
+                "tip2": "Tipp: Pass auf, dass kein Boot zu schwer beladen ist!",
+                "tip3": "Guter Versuch! Schaffst Du es, eine noch bessere Lösung zu finden?"
+            }
+        }
     }
 }

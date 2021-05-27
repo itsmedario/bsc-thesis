@@ -4,7 +4,7 @@
     <div class="modal-wrapper">
       <div class="modal-container" @mousedown.stop >
         <div class="modal-header">
-          <p class="title">Anleitung zum Spiel</p>
+          <p class="title">{{ text.game.tutorial }}</p>
           <button class="exit-button" style="margin:0.5em;" @click="showModal = false;
            $emit('close-tutorial')">
            &times;
@@ -34,6 +34,12 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 export default class Tutorial extends Vue {
   @Prop({ required: true })
   showModal!: boolean;
+
+  @Prop({ required: true })
+  language!: string;
+
+  // eslint-disable-next-line global-require, import/no-dynamic-require
+  text = require(`@/text_${this.language}.json`);
 }
 </script>
 

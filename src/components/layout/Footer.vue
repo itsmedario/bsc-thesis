@@ -1,16 +1,18 @@
 <template>
   <div id="footer" class="responsive cards">
-    <div class="logo-ethz">
-      <a href="https://ethz.ch" target="blank">
-        <img src="@/assets/ethz-logo.svg" style="height:40px; margin-top:10px;"
-         draggable="false"/>
-      </a>
-    </div>
-    <div class="seperator"></div>
-    <div class="logo-abz">
-      <a href="https://abz.inf.ethz.ch/" target="blank">
-        <img src="@/assets/logo_abz_weiss.png" style="height:65px;" draggable="false"/>
-      </a>
+    <hr style="height:0.5px; border-width:0; color:black; background-color:black">
+    <div id="links">
+      <div id="logo-ethz">
+        <a href="https://ethz.ch" target="blank">
+          <img src="@/assets/ethz-logo.svg" style="height:40px; margin-top:10px;"
+          draggable="false"/>
+        </a>
+      </div>
+      <div id="logo-abz">
+        <a href="https://abz.inf.ethz.ch/" target="blank">
+          <img src="@/assets/logo_abz_weiss.png" style="height:65px;" draggable="false"/>
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -28,14 +30,20 @@ export default class Footer extends Vue {
 <style scoped>
 
 #footer {
-  display: flex;
-  padding: 0em 1.5em;
+  padding: 2em 0;
 }
 
-.seperator {
-  width: 3px;
-  height: 50px;
-  margin: 0px 15px;
-  background: #111111;
+#links {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+#logo-ethz {
+  margin: 1em;
+}
+
+#logo-abz {
+  margin: 1em;
 }
 </style>

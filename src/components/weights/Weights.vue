@@ -44,6 +44,12 @@ export default class Weights extends Vue {
   @Prop({ required: true })
   level!: number;
 
+  @Prop({ required: true })
+  language!: string;
+
+  // eslint-disable-next-line global-require, import/no-dynamic-require
+  text = require(`@/text_${this.language}.json`);
+
   numberOfFields = 6;
 
   difficultGames = false;
@@ -316,11 +322,11 @@ export default class Weights extends Vue {
      && isOptimal) {
       this.$emit('correct-solution');
     } else if (!allUsed) {
-      this.$emit('false-solution', 'Tipp: Du hast noch nicht alle Gewichte verwendet!');
+      this.$emit('false-solution', this.text.tasks.optimizeWeights.tips.tip1);
     } else if (this.boatOverload) {
-      this.$emit('false-solution', 'Tipp: Pass auf, dass kein Boot zu schwer beladen ist!');
+      this.$emit('false-solution', this.text.tasks.optimizeWeights.tips.tip2);
     } else if (!isOptimal) {
-      this.$emit('false-solution', 'Guter Versuch! Schaffst Du es, eine noch bessere Lösung zu finden?');
+      this.$emit('false-solution', this.text.tasks.optimizeWeights.tips.tip3);
     }
   }
 

@@ -27,7 +27,9 @@
       </span>
     </div>
     <hr style="height:1px; border-width:0; color:black; background-color:black">
-    <router-view id="container"/>
+    <router-view id="container"
+     :language="language"
+     />
   </div>
 </template>
 
@@ -48,10 +50,25 @@ export default class App extends Vue {
 
   // eslint-disable-next-line global-require
   text = require(`@/text_${this.language}.json`);
+
+  // eslint-disable-next-line class-methods-use-this
+  /* beforeMount():void {
+    const elem = document.documentElement;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) {
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+      elem.msRequestFullscreen();
+    }
+  } */
 }
 </script>
 
 <style>
+html {
+  scroll-behavior: smooth;
+}
 
 body{
   background-color: #17a2b8;
@@ -85,7 +102,7 @@ canvas {
 
 #container {
   width: 80%;
-  margin: 2em 10%;
+  margin: 0 10%;
 }
 
 .card {
@@ -176,6 +193,9 @@ canvas {
   padding: 0em !important;
   margin: 1em !important;
   box-shadow: none !important;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .equal-space {

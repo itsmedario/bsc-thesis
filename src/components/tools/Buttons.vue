@@ -3,37 +3,36 @@
     <div id="button-menu" class="buttons">
       <router-link to="/">
         <button class="flex-item flex-center card clickable responsive">
-          <p>Zur Hauptseite</p>
+          <p>{{ text.game.buttons.back }}</p>
           <img :src="require('/src/assets/icons/back.png')"/>
         </button>
       </router-link>
 
       <button class="flex-item flex-center card clickable responsive" @click="$emit('next-task')">
-        <p>Nächste Aufgabe</p>
+        <p>{{ text.game.buttons.next }}</p>
         <img :src="require('/src/assets/icons/skip.png')"/>
       </button>
 
       <button class="flex-item flex-center card clickable responsive" @click="$emit('restart')">
-        <p>Neu starten</p>
+        <p>{{ text.game.buttons.restart }}</p>
         <img :src="require('/src/assets/icons/restart.png')"/>
       </button>
 
       <button class="flex-item flex-center card clickable responsive"
       @click="$emit('check-solution')">
-        <p>Überprüfen</p>
+        <p>{{ text.game.buttons.check }}</p>
         <img :src="require('/src/assets/icons/check.png')"/>
       </button>
 
       <button class="flex-item flex-center card clickable responsive"
        @click="$emit('show-tutorial')">
-        <p>Anleitung</p>
+        <p>{{ text.game.buttons.help }}</p>
         <img :src="require('/src/assets/icons/help.png')"/>
       </button>
 
       <div v-if="levels" class="switch">
-        <p>Schwierige</p>
-        <div class="toggle-button r" id="button-1" @click="$emit('switch-difficulty')">
-          <input type="checkbox" class="checkbox" checked>
+        <div class="toggle-button r" id="difficulty-switch" @click="$emit('switch-difficulty')">
+          <input type="checkbox" class="checkbox">
           <div class="knobs"></div>
           <div class="layer"></div>
         </div>
@@ -53,6 +52,12 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 export default class Buttons extends Vue {
   @Prop({ required: true })
   levels!: boolean;
+
+  @Prop({ required: true })
+  language!: string;
+
+  // eslint-disable-next-line global-require, import/no-dynamic-require
+  text = require(`@/text_${this.language}.json`);
 
   showAnimation = false;
 }
@@ -138,8 +143,8 @@ export default class Buttons extends Vue {
 }
 
 /* Button 1 */
-#button-1 .knobs:before {
-    content: 'AN';
+#difficulty-switch .knobs:before {
+    content: '1';
     position: absolute;
     top: 4px;
     left: 4px;
@@ -151,22 +156,22 @@ export default class Buttons extends Vue {
     text-align: center;
     line-height: 1;
     padding: 9px 4px;
-    background-color: #03A9F4;
+    background-color: #f44336;
     border-radius: 50%;
     transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
 }
 
-#button-1 .checkbox:checked + .knobs:before {
-    content: 'AUS';
+#difficulty-switch .checkbox:checked + .knobs:before {
+    content: '2';
     left: 42px;
-    background-color: #f44336;
+    background-color: #03A9F4;
 }
 
-#button-1 .checkbox:checked ~ .layer {
+#difficulty-switch .checkbox:checked ~ .layer {
     background-color: #f8f9fa;
 }
 
-#button-1 .knobs, #button-1 .knobs:before, #button-1 .layer
+#difficulty-switch .knobs, #difficulty-switch .knobs:before, #difficulty-switch .layer
 {
     transition: 0.3s ease all;
 }

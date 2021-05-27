@@ -1,6 +1,8 @@
 <template>
   <div>
-    <Game>
+    <Game
+     :language="language"
+    >
       <p class="title" slot="title">Brücken überprüfen</p>
       <p slot="description">Überprüfe, ob man von jedem Landteil
          zu jedem anderen Landteil kommt.</p>

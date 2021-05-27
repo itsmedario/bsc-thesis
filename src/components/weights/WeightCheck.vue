@@ -1,11 +1,13 @@
 <template>
   <div>
-    <div class="card info-card responsive" style="max-width: 1500px">
+    <div class="card info-card" style="max-width: 1500px">
         <img :src="require(`@/assets/faces/face${counter + 1}.png`)"
-        style="width: 5%" draggable="false">
-        <p>{{ names[(counter)] }} wollte diese Gewichte verteilen:</p>
+        style="height: 80px" draggable="false">
+        <div id="intro">
+          <p>{{ names[(counter)] }} {{ text.tasks.checkWeights.intro }}</p>
+        </div>
         <img v-for="i in weights" :key="i" :src="require(`@/assets/weights/size${i}.png`)"
-         draggable="false" style="width: 5%; min-width: 80px">
+         draggable="false" style="width: auto; min-width: 80px; height: 60px">
     </div>
 
     <table>
@@ -20,19 +22,25 @@
         </td>
       </tr>
     </table>
+
     <hr>
-    <div  class="question-box">
+
+    <div  class="task-box">
       <div v-for="[n, s] in statements" :key="n" class="statement-box">
-        <div @click="toggleBox(n)" class="statement"> {{ s }} </div>
-        <div class="check-button clickable false-button"
-          :class=" { activefalse: checkState(n) == 1 }"
-          @click="setFalse(n)">
-          Falsch
+        <div @click="toggleBox(n)" class="statement">
+          {{ s }}
         </div>
-        <div class="check-button clickable true-button"
-          :class=" { activetrue: checkState(n) == 0 }"
-          @click="setTrue(n)">
-          Richtig
+        <div class="buttons">
+          <div class="check-button clickable true-button"
+            :class=" { activetrue: checkState(n) == 0 }"
+            @click="setTrue(n)">
+            {{ text.tasks.checkWeights.statements.true }}
+          </div>
+          <div class="check-button clickable false-button"
+            :class=" { activefalse: checkState(n) == 1 }"
+            @click="setFalse(n)">
+            {{ text.tasks.checkWeights.statements.false }}
+          </div>
         </div>
       </div>
     </div>
@@ -49,6 +57,12 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 export default class WeightCheck extends Vue {
   @Prop({ required: true })
   level!: number;
+
+  @Prop({ required: true })
+  language!: string;
+
+  // eslint-disable-next-line global-require, import/no-dynamic-require
+  text = require(`@/text_${this.language}.json`);
 
   names = ['Mike', 'Jane', 'Kubko', 'Anna', 'Peter', 'Steffi', 'Jan', 'Bea'];
 
@@ -309,17 +323,17 @@ export default class WeightCheck extends Vue {
     const s2sol = this.s2 === 0;
     const s3sol = this.s3 === 0;
     if (this.s1 === -1 || this.s2 === -1 || this.s3 === -1) {
-      this.$emit('false-solution', 'Beantworte alle Fragen, bevor du auf Überprüfen klickst!');
+      this.$emit('false-solution', this.text.tasks.checkWeights.tips.tip1);
     } else if (s1sol === this.eachWeightUsed
      && s2sol === !this.multipleWeightUse
      && s3sol === !this.boatOverload) {
       this.$emit('correct-solution');
     } else if (s3sol === this.boatOverload) {
-      this.$emit('false-solution', 'Tipp: Zähle die Gewichte für jedes einzelne Boot zusammen!');
+      this.$emit('false-solution', this.text.tasks.checkWeights.tips.tip2);
     } else if (s2sol === this.multipleWeightUse) {
-      this.$emit('false-solution', 'Tipp: Ist jedes Gewicht genau einmal verwendet worden?');
+      this.$emit('false-solution', this.text.tasks.checkWeights.tips.tip3);
     } else if (s1sol === !this.eachWeightUsed) {
-      this.$emit('false-solution', 'Tipp: Überprüfe für jedes einzelne Gewicht, wo es platziert ist!');
+      this.$emit('false-solution', this.text.tasks.checkWeights.tips.tip4);
     }
   }
 
@@ -348,15 +362,24 @@ td img {
   width: 100px;
 }
 
-.question-box {
-  position: relative;
-  width: 80%;
+#intro {
+  height: 80px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: nowrap;
+  align-content: flex-end;
 }
+
+.task-box {
+  position:absolute;
+  width: 70%;
+}
+
+.statement-box {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+}
+
 .statement-check {
   position: relative;
   text-align: left !important;
@@ -394,10 +417,6 @@ td img {
   transform: scale(1);
 }
 
-.statement-box {
-  display: inline-block;
-}
-
 .check-button {
   color: white;
   padding: 15px 32px;
@@ -405,6 +424,7 @@ td img {
   text-decoration: none;
   font-size: 16px;
   width: 3em;
+  display: inline-block;
 }
 
 .true-button {

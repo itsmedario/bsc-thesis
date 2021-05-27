@@ -1,6 +1,9 @@
 <template>
   <div>
-    <Game  :type="'Bridges'">
+    <Game
+     :type="'Bridges'"
+     :language="language"
+    >
       <p class="title" slot="title">Brücken bauen</p>
       <p slot="intro">Baue so viele Brücken, dass man von jedem
          Landteil zu jedem anderen Landteil kommt.</p>
@@ -16,7 +19,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
+import { Component, Prop } from 'vue-property-decorator';
 import Game from '../components/Game.vue';
 
 @Component({
@@ -25,7 +28,13 @@ import Game from '../components/Game.vue';
   },
 })
 
-export default class BuildBridges extends Vue {}
+export default class BuildBridges extends Vue {
+  @Prop({ required: true })
+  language!: string;
+
+  // eslint-disable-next-line global-require, import/no-dynamic-require
+  text = require(`@/text_${this.language}.json`);
+}
 </script>
 
 <style scoped></style>

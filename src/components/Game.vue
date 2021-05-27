@@ -1,6 +1,7 @@
 <template>
-  <div id="Game">
+  <div id="game">
     <Tutorial
+     :language="language"
      :show-modal=showTutorial
      @close-tutorial="showTutorial = false">
       <slot name="description" slot="description"/>
@@ -9,6 +10,7 @@
     </Tutorial>
 
     <Verifier
+     :language="language"
      :showSolution=showSolution
      :correctSolution="correctSolution"
      :tip="tip"
@@ -17,6 +19,7 @@
 
     <Buttons
      :levels="type==='WeightCheck'"
+     :language="language"
      @next-task="$refs.gameComp.nextTask()"
      @restart="$refs.gameComp.restart()"
      @check-solution="$refs.gameComp.checkSolution(level); showSolution = true"
@@ -24,16 +27,19 @@
      @switch-difficulty="$refs.gameComp.switchDifficulty()"
      />
 
-    <div class="flex-center flex-row">
-      <slot name="title">Unintentionally empty title!</slot>
-      <slot name="intro">Unintentionally empty description!</slot>
-    </div>
+    <div id="game-page">
+      <div id="task-description">
+        <slot name="title">Unintentionally empty title!</slot>
+        <slot name="intro">Unintentionally empty description!</slot>
+      </div>
 
-    <component
-      :is="this.type" :level="level" ref="gameComp"
-      @correct-solution="correctSolution = true"
-      @false-solution="showTip"
-    />
+      <component
+       :language="language"
+       :is="this.type" :level="level" ref="gameComp"
+       @correct-solution="correctSolution = true"
+       @false-solution="showTip"
+      />
+    </div>
 
   </div>
 </template>
@@ -67,6 +73,12 @@ export default class Game extends Vue {
   @Prop({ required: true })
   level!: number;
 
+  @Prop({ required: true })
+  language!: string;
+
+  // eslint-disable-next-line global-require, import/no-dynamic-require
+  text = require(`@/text_${this.language}.json`);
+
   showTutorial = false;
 
   correctSolution = false;
@@ -87,4 +99,9 @@ export default class Game extends Vue {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+#game {
+  display: flex;
+  flex-wrap: wrap;
+}
+</style>
