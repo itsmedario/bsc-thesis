@@ -21,9 +21,9 @@
       </tr>
     </table>
     <hr>
-    <div  class="checkBox">
-      <div v-for="[n, s] in statements" :key="n">
-        <div class="statements" @click="toggleBox(n)"> {{ s }} </div>
+    <div  class="question-box">
+      <div v-for="[n, s] in statements" :key="n" class="statement-box">
+        <div @click="toggleBox(n)" class="statement"> {{ s }} </div>
         <div class="check-button clickable false-button"
           :class=" { activefalse: checkState(n) == 1 }"
           @click="setFalse(n)">
@@ -53,6 +53,8 @@ export default class WeightCheck extends Vue {
   names = ['Mike', 'Jane', 'Kubko', 'Anna', 'Peter', 'Steffi', 'Jan', 'Bea'];
 
   counter = 0;
+
+  difficultGames = false;
 
   eachWeightUsed = true; // s1
 
@@ -146,19 +148,24 @@ export default class WeightCheck extends Vue {
     let chosenWeightSum = 0;
 
     // choose ship sizes
-    do {
-      ship1 = Math.floor(1 + Math.random() * 3) * 10;
-      ship2 = Math.floor(1 + Math.random() * 3) * 10;
-      ship3 = Math.floor(1 + Math.random() * 3) * 10;
-      newWeightSum = ship1 + ship2 + ship3;
-    } while (newWeightSum > max);
-    this.boatCapacities = [ship1, ship2, ship3];
-
+    if (this.difficultGames) {
+      do {
+        ship1 = Math.floor(1 + Math.random() * 3) * 10;
+        ship2 = Math.floor(1 + Math.random() * 3) * 10;
+        ship3 = Math.floor(1 + Math.random() * 3) * 10;
+        newWeightSum = ship1 + ship2 + ship3;
+      } while (newWeightSum > max);
+      this.boatCapacities = [ship1, ship2, ship3];
+    } else {
+      this.boatCapacities = [20, 20, 20];
+      newWeightSum = 60;
+    }
     // choose weights
     const sentinel = 4;
     let randomWeight = 0;
 
-    while (chosenWeightSum + sentinel <= newWeightSum || this.chosenWeights.size < 4) {
+    while (chosenWeightSum + sentinel <= newWeightSum || this.chosenWeights.size < 5
+    || (!this.difficultGames && this.chosenWeights.size > 7)) {
       chosenWeightSum = 0;
       this.chosenWeights.clear();
       while (chosenWeightSum <= newWeightSum) {
@@ -179,7 +186,7 @@ export default class WeightCheck extends Vue {
       console.log(chosenWeightSum);
     }
 
-    // transform to array and sort weights
+    // transform to array
     this.weights = Array.from(this.chosenWeights);
     this.weights.sort((a, b): number => a - b);
 
@@ -315,7 +322,13 @@ export default class WeightCheck extends Vue {
       this.$emit('false-solution', 'Tipp: Überprüfe für jedes einzelne Gewicht, wo es platziert ist!');
     }
   }
+
+  switchDifficulty():void {
+    this.difficultGames = !this.difficultGames;
+    this.nextTask();
+  }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -335,18 +348,21 @@ td img {
   width: 100px;
 }
 
-.checkBox {
+.question-box {
   position: relative;
   width: 80%;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex-wrap: nowrap;
 }
 .statement-check {
   position: relative;
   text-align: left !important;
 }
 
-.statements {
+.statement {
   display: inline-block;
   font-size: 1.1em;
   margin: 1.1em;
@@ -356,11 +372,11 @@ td img {
   position: relative;
 }
 
-.statements:hover {
+.statement:hover {
   cursor: pointer;
 }
 
-.statements:before {
+.statement:before {
   content: "";
   display: block;
   width: 100%;
@@ -374,8 +390,12 @@ td img {
   transition: 0.25s linear;
 }
 
-.statements:hover:before {
+.statement:hover:before {
   transform: scale(1);
+}
+
+.statement-box {
+  display: inline-block;
 }
 
 .check-button {
@@ -384,31 +404,27 @@ td img {
   text-align: center;
   text-decoration: none;
   font-size: 16px;
-  float: right;
+  width: 3em;
 }
 
 .true-button {
   background: #28a745;
   border-radius: 10px 0px 0px 10px;
   border: 2px solid #28a745;
-  opacity: 50%;
 }
 
 .false-button {
   background: #dc3545;
   border-radius: 0px 10px 10px 0px;
   border: 2px solid #dc3545;
-  opacity: 50%;
 }
 
 .activetrue {
-  border: 2px solid white;
-  opacity: 100%;
+  border: 3px solid white;
 }
 
 .activefalse {
-  border: 2px solid white;
-  opacity: 100%;
+  border: 3px solid white;
 }
 
 </style>

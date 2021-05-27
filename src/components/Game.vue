@@ -1,19 +1,28 @@
 <template>
   <div id="Game">
-    <Tutorial :show-modal=showTutorial @close-tutorial="showTutorial = false">
+    <Tutorial
+     :show-modal=showTutorial
+     @close-tutorial="showTutorial = false">
       <slot name="description" slot="description"/>
-      <slot name="video" slot="video"/>
+      <slot name="video" slot="video"
+      />
     </Tutorial>
 
-    <Verifier :showSolution=showSolution :correctSolution="correctSolution"
+    <Verifier
+     :showSolution=showSolution
+     :correctSolution="correctSolution"
      :tip="tip"
-     @close-verifier="showSolution = false">
-    </Verifier>
+     @close-verifier="showSolution = false"
+     />
 
-    <Buttons @next-task="$refs.gameComp.nextTask()"
+    <Buttons
+     :levels="type==='WeightCheck'"
+     @next-task="$refs.gameComp.nextTask()"
      @restart="$refs.gameComp.restart()"
      @check-solution="$refs.gameComp.checkSolution(level); showSolution = true"
-     @show-tutorial="showTutorial = true"/>
+     @show-tutorial="showTutorial = true"
+     @switch-difficulty="$refs.gameComp.switchDifficulty()"
+     />
 
     <div class="flex-center flex-row">
       <slot name="title">Unintentionally empty title!</slot>
@@ -50,6 +59,7 @@ import WeightCheck from '@/components/weights/WeightCheck.vue';
     WeightCheck,
   },
 })
+
 export default class Game extends Vue {
   @Prop({ required: true })
   type!: string;
@@ -77,9 +87,4 @@ export default class Game extends Vue {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-#Game{
-  margin-left: 0%;
-}
-</style>
+<style scoped></style>

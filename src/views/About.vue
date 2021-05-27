@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <p class="title">Über diese Plattform</p>
-    <p style="font-size: 1.5em">
+    <p style="font-size: 1.3em">
       Diese Lernumgebung wurde im Zusammenhang mit dem Buch "einfach Informatik 3/4" erstellt.
       <br>
       Feedback ist sehr erwünscht:
@@ -15,7 +15,8 @@
       <hr style="height:1px; border-width:0; color:black; background-color:black; width: 10%;
        margin: 0.5em auto">
       Version 2.0 -- Updates: Neues Gesamt-Design, fixiertes Buttonmenü,
-       Tutorial-Layout überarbeitet.
+       Tutorial-Layout überarbeitet.<br>
+       Version 2.1 -- Neu: Schwierigkeitsstufen für Ladungen überprüfen.
     <p>
     <hr style="height:1px; border-width:0; color:black; background-color:black">
     <Footer/>
@@ -25,8 +26,8 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import Header from '@/components/Header.vue';
-import Footer from '@/components/Footer.vue';
+import Header from '@/components/layout/Header.vue';
+import Footer from '@/components/layout/Footer.vue';
 
 @Component({
   components: {

@@ -1,32 +1,30 @@
 <template>
   <div id="app">
+    <!--<Header/>-->
     <div id="nav">
-      <div id="button-menu" class="flex-item flex-row flex-center flex-wrap">
+      <span id="button-menu" class="flex-item flex-row flex-center flex-wrap">
         <router-link to="/check-weights">
-          <button class="card clickable">Ladungen überprüfen</button>
+          <button class="card clickable">{{ text.tasks.checkWeights.title }}</button>
         </router-link>
         <router-link to="/distribute-weights">
-          <button class="card clickable">Boote beladen</button>
+          <button class="card clickable">{{ text.tasks.distributeWeights.title }}</button>
         </router-link>
         <router-link to="/add-weights">
-          <button class="card clickable">Ladungen ergänzen</button>
+          <button class="card clickable">{{ text.tasks.addWeights.title }}</button>
         </router-link>
         <router-link to="/optimize-weights">
-          <button class="card clickable">Boote maximal beladen</button>
+          <button class="card clickable">{{ text.tasks.optimizeWeights.title }}</button>
         </router-link>
         <router-link to="/*"> <!-- Link to come -->
           <button class="card clickable">Türme überprüfen</button>
         </router-link>
         <router-link  to="/about">
-          <button class="card clickable" @click="selectedTab = 'About'">Impressum</button>
+          <button class="card clickable">Impressum</button>
         </router-link>
-        <!--<router-link to="/build-towers">
-          <button class="card clickable">Türme bauen</button>
-        </router-link>
-        <router-link to="/build-bridges">
-          <button class="card clickable">Brücken bauen</button>
-        </router-link>-->
-      </div>
+        <!--<button class="card clickable" onclick="window.print()">
+          Drucken
+        </button>-->
+      </span>
     </div>
     <hr style="height:1px; border-width:0; color:black; background-color:black">
     <router-view id="container"/>
@@ -34,14 +32,22 @@
 </template>
 
 <script lang="ts">
+/* eslint-disable import/no-dynamic-require */
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
+import Header from '@/components/layout/Header.vue';
 
 @Component({
-  components: {},
+  components: {
+    Header,
+  },
 })
+
 export default class App extends Vue {
-  selectedTab = 'Home';
+  language = 'de';
+
+  // eslint-disable-next-line global-require
+  text = require(`@/text_${this.language}.json`);
 }
 </script>
 
@@ -50,6 +56,8 @@ export default class App extends Vue {
 body{
   background-color: #17a2b8;
   font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+  max-width: 1500px;
 }
 
 hr{
@@ -73,11 +81,6 @@ button:focus {
 canvas {
   max-width: 100%;
   max-height: 100%;
-}
-#app {
-  text-align: center;
-  margin: 0 auto;
-  max-width: 1500px;
 }
 
 #container {

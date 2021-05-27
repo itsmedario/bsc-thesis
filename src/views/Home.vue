@@ -1,8 +1,8 @@
 <template>
   <div id="home">
-    <Header/>
-  <hr style="height:1px; border-width:0; color:black; background-color:black">
-  <p>[Platzhalter für Aufgabenraster]</p>
+    <p class="title">Willkommen zur Lernplattform</p>
+    <img :src="require('@/assets/transport/beaver_transport2.png')" draggable="false"/>
+    <hr style="height:1px; border-width:0; color:black; background-color:black">
   <!--    <div v-for="task in getItems()" :key="task.id"
      class="card clickable">
       <router-link :to="task.path">
@@ -20,13 +20,11 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import Footer from '@/components/Footer.vue';
-import Header from '@/components/Header.vue';
+import Footer from '@/components/layout/Footer.vue';
 import views from '@/views/Views';
 
 @Component({
   components: {
-    Header,
     Footer,
   },
 })

@@ -1,8 +1,7 @@
 <template>
   <div class="about responsive">
-    <p class="title">Seite nicht gefunden! Error 404</p>
-    <p  style="font-size: 1.5em">Diese Seite wird bald verfügbar sein. <br>
-      Feedback hinterlassen:
+    <p class="title">{{ text.pages.notFound.title }}</p>
+    <p  style="font-size: 1.5em"> {{ this.$text.pages.notFound.text }}
     <a href="mailto:dnaepfer@student.ethz.ch?subject=Feedback zur Lernumgebung">
       dnaepfer@student.ethz.ch</a>
     </p>
@@ -16,8 +15,8 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import Header from '@/components/Header.vue';
-import Footer from '@/components/Footer.vue';
+import Header from '@/components/layout/Header.vue';
+import Footer from '@/components/layout/Footer.vue';
 
 @Component({
   components: {

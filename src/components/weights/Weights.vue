@@ -10,9 +10,7 @@
         <td>
           <p style="font-size: 1.3em" class="hidden-mobile">Boot {{ i }}</p>
           <img :src="require(`@/assets/transport/boatmax${boatCapacities[i - 1]}.png`)"
-           v-if="level != 3" style="width: 55%; min-width:120px; max-width:150px" draggable="false">
-           <img :src="require(`@/assets/transport/boat${boatCapacities[i - 1]}.png`)"
-           v-if="level == 3" style="width: 55%; min-width:120px; max-width:150px" draggable="false">
+           style="width: 55%; min-width:120px; max-width:150px" draggable="false">
         </td>
         <td v-for="j in numberOfFields" :key="j" class="dropzone"
          :class="{ fixedField: isFixedField(i,j) }"
@@ -47,6 +45,8 @@ export default class Weights extends Vue {
   level!: number;
 
   numberOfFields = 6;
+
+  difficultGames = false;
 
   // given weights to distribute, starts with standard distribution, later random
   weights = [1, 2, 3, 4, 5, 6, 7, 9, 11, 12];
@@ -247,9 +247,7 @@ export default class Weights extends Vue {
       }
     }
 
-    do {
-      this.chooseWeights(newWeightSum, 12, 0);
-    } while (this.weightSum % 10 !== 0 || this.weights.length < 3);
+    this.chooseWeights(newWeightSum, 12, 9);
   }
 
   // chooses random weights according to the inputs
@@ -375,6 +373,11 @@ export default class Weights extends Vue {
     }
 
     return false;
+  }
+
+  switchDifficulty():void {
+    this.difficultGames = !this.difficultGames;
+    this.nextTask();
   }
 }
 </script>

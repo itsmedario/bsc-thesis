@@ -1,5 +1,5 @@
 <template>
-  <footer id="footer" class="responsive cards">
+  <div id="footer" class="responsive cards">
     <div class="logo-ethz">
       <a href="https://ethz.ch" target="blank">
         <img src="@/assets/ethz-logo.svg" style="height:40px; margin-top:10px;"
@@ -9,10 +9,10 @@
     <div class="seperator"></div>
     <div class="logo-abz">
       <a href="https://abz.inf.ethz.ch/" target="blank">
-        <img src="@/assets/logo_abz_weiss.png" style="height:80px;"  draggable="false"/>
+        <img src="@/assets/logo_abz_weiss.png" style="height:65px;" draggable="false"/>
       </a>
     </div>
-  </footer>
+  </div>
 </template>
 
 <script lang="ts">
@@ -27,33 +27,15 @@ export default class Footer extends Vue {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-footer {
+#footer {
   display: flex;
   padding: 0em 1.5em;
 }
 
-footer .seperator{
+.seperator {
   width: 3px;
   height: 50px;
   margin: 0px 15px;
   background: #111111;
-}
-
-h1 {
-  margin: 40px 0 0 0;
-  margin-left: 20px;
-  margin-right: 20px;
-  float: right;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
 }
 </style>
