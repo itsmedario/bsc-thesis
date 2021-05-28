@@ -15,7 +15,7 @@
         <td>
           <p style="font-size: 1.3em" class="hidden-mobile">Boot {{ i }}</p>
           <img :src="require(`@/assets/transport/boatmax${boatCapacities[i - 1]}.png`)"
-           style="width: 40%; min-width: 80px" draggable="false">
+           style="width: 40%; min-width: 120px; max-width:150px" draggable="false">
         </td>
         <td v-for="j in rows[0].length" :key="j" class="fixedField">
           <img :src="require(`@/assets/weights/size${rows[i - 1][j - 1]}.png`)" draggable="false">
@@ -365,7 +365,7 @@ td img {
 #intro {
   height: 80px;
   display: flex;
-  align-content: flex-end;
+  align-items: center;
 }
 
 .task-box {

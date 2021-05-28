@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="button-menu" class="buttons">
-      <router-link to="/">
+      <router-link to="/#start">
         <button class="flex-item flex-center card clickable responsive">
           <p>{{ text.game.buttons.back }}</p>
           <img :src="require('/src/assets/icons/back.png')"/>

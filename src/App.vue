@@ -19,7 +19,7 @@
           <button class="card clickable">Türme überprüfen</button>
         </router-link>
         <router-link  to="/about">
-          <button class="card clickable">Impressum</button>
+          <button class="card clickable">{{ text.pages.about.title }}</button>
         </router-link>
         <!--<button class="card clickable" onclick="window.print()">
           Drucken

@@ -59,13 +59,10 @@ export default class Tutorial extends Vue {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
-  display: table;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: opacity 0.5s ease;
-}
-
-.modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
 }
 
 .tutorial-container {
@@ -74,7 +71,7 @@ export default class Tutorial extends Vue {
 
 .modal-container {
   width: auto;
-  max-width: 90%;
+  max-width: 1000px;
   margin: 0px auto;
   position: relative;
   padding: 20px 30px;

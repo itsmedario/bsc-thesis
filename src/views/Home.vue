@@ -9,6 +9,7 @@
       </a>
       <img :src="require('@/assets/transport/beaver_transport2.png')" draggable="false"/>
     </div>
+
     <div id="task-selector">
       <hr style="height:1px; border-width:0; color:black; background-color:black; margin: 3em">
       <div class="cards">
@@ -81,11 +82,12 @@ export default class Home extends Vue {
   height: 90vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 2fr));
   grid-auto-rows: auto;
   grid-gap: 1em;
 }

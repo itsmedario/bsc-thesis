@@ -68,7 +68,9 @@ img:hover {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
-  display: table;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: opacity 0.3s ease;
 }
 
@@ -85,6 +87,7 @@ img:hover {
   position: relative;
   margin: 0px auto;
   width: 40%;
+  min-width: 500px;;
   padding: 20px 30px 40px 30px;
   background-color: #fff;
   border-radius: 2px;

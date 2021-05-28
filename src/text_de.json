@@ -10,8 +10,8 @@
             "title": "Impressum",
             "descrption": "Diese Lernumgebung wurde im Zusammenhang mit dem Buch 'einfach Informatik 3/4' erstellt. Feedback ist sehr erwünscht: dnaepfer@student.ethz.ch",
             "author": "Autor: Dario Naepfer",
-            "oldVersion": "Version 2.2 -- Neu: Texte in JSON File, Sprachenwechsel möglich (nicht aktiviert)",
-            "version": "Version 2.3 -- Neu: Startseiten-Menü und allgemeines Responsive-Design"
+            "oldVersion": "Version 2.3 -- Neu: Startseiten-Menü, Texte in JSON File und allgemeines Responsive-Design",
+            "version": "Version 2.4 -- Neu: Verbesserte Grafiken, angepasste Texte, überarbeiteter Source-Code"
         },
         "notFound": {
             "title": "Seite nicht gefunden! Error 404",
@@ -39,7 +39,7 @@
             "img": "/transport/wood.png",
             "title": "Gewichte überprüfen",
             "intro": " wollte diese Gewichte verteilen:",
-            "description": "Überprüfe, ob alle Gewichte korrekt verteilt wurden. Pass auf, dass kein Boot zu schwer beladen wird. Jedes Boot darf maximal so viele Kilogramm aufladen, wie auf seinem Segel geschrieben steht. Beantworte dann die untenstehenden Fragen, indem du auf Richtig oder Falsch klickst. Viel Erfolg!",
+            "description": "Überprüfe, ob alle Gewichte korrekt verteilt wurden. Pass auf, dass kein Boot zu schwer beladen wird. Jedes Boot darf maximal so viele Kilogramm aufladen, wie auf seinem Segel geschrieben steht. Beantworte dann die untenstehenden Fragen, indem du auf 'Richtig' oder 'Falsch' klickst. Viel Erfolg!",
             "statements": {
                 "s1": "Jedes Gewicht ist verwendet worden.",
                 "s2": "Kein Gewicht ist mehrmals verwendet worden.",
@@ -68,15 +68,15 @@
             "img": "/transport/wood.png",
             "title": "Gewichte ergänzen",
             "intro": "Verteile alle übrigen Gewichte auf die drei Boote so, dass kein Boot zu schwer beladen ist.",
-            "description": "Verteile die übrigen Gewichte auf die Boote: Klicke auf ein Gewicht und ziehe es an den gewünschten Platz. Klicke auf ein Gewicht, um es wieder aus dem Boot zu entfernen. Jedes Gewicht soll genau einmal verwendet werden. Pass auf, dass kein Boot zu schwer beladen wird. Jedes Boot darf maximal so viele Kilogramm aufladen, wie auf seinem Segel geschrieben steht. Viel Erfolg!"
+            "description": "Verteile alle Gewichte, die noch nicht verteilt worden sind, auf die Boote: Klicke auf ein Gewicht und ziehe es an den gewünschten Platz. Klicke auf ein Gewicht, um es wieder aus dem Boot zu entfernen. Jedes Gewicht soll genau einmal verwendet werden. Pass auf, dass kein Boot zu schwer beladen wird. Jedes Boot darf maximal so viele Kilogramm aufladen, wie auf seinem Segel geschrieben steht. Viel Erfolg!"
         },
         "optimizeWeights":  {
             "id": 4,
             "path": "/optimize-weights",
             "img": "/transport/wood.png",
-            "title":  "Boote maximal beladen",
+            "title":  "Gewichte optimal verteilen",
             "intro": "Verteile alle Gewichte auf möglichst wenig Boote. | Tipp: Berechne zuerst die Summe aller Gewichte.",
-            "description": "Verteile alle Gewichte auf so wenig Boote wie möglich: Klicke auf ein Gewicht und ziehe es an den gewünschten Platz. Klicke auf ein Gewicht, um es wieder aus dem Boot zu entfernen. Jedes Gewicht soll genau einmal verwendet werden. Wenn es mehrere Lösungen gibt, wähle die Boote mit weniger Gewicht auf dem Segel. Viel Erfolg!",
+            "description": "Verteile alle Gewichte auf so wenig Boote wie möglich: Klicke auf ein Gewicht und ziehe es an den gewünschten Platz. Klicke auf ein Gewicht, um es wieder aus dem Boot zu entfernen. Jedes Gewicht soll genau einmal verwendet werden. Wenn es mehrere Lösungen gibt, benutze die Boote mit weniger Gewicht auf dem Segel. Viel Erfolg!",
             "tips": {
                 "tip1": "Tipp: Du hast noch nicht alle Gewichte verwendet!",
                 "tip2": "Tipp: Pass auf, dass kein Boot zu schwer beladen ist!",
