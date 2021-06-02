@@ -1,4 +1,5 @@
 {
+    "info": "WICHTIG: Alle Einträge dieser JSON-Datei müssen in diesem Format vorhanden sein, damit eine vollständige Funktionalität garantiert werden kann.",
     "title": "einfach Informatik 3/4",
     "pages": {
         "home": {
@@ -81,6 +82,28 @@
                 "tip1": "Tipp: Du hast noch nicht alle Gewichte verwendet!",
                 "tip2": "Tipp: Pass auf, dass kein Boot zu schwer beladen ist!",
                 "tip3": "Guter Versuch! Schaffst Du es, eine noch bessere Lösung zu finden?"
+            }
+        },
+        "checkTowers":  {
+            "id": 5,
+            "path": "/*",
+            "img": "/bridges/tower.png",
+            "title":  "Türme überprüfen",
+            "intro": "Überprüfe, ob die Türme so gesetzt sind, dass man mit den Türmen alle Kanäle überwachen kann.",
+            "description": "Überprüfe, ob die Türme so gesetzt sind, dass man mit den Türmen alle Kanäle überwachen kann. Von einem gesetzten Turm kann man alle angrenzenden Kanäle bis zur nächsten Kreuzung überwachen. Viel Erfolg!",
+            "tips": {
+                "tip1": "Sind wirklich alle Kanäle überwacht?"
+            }
+        },
+        "buildTowers":  {
+            "id": 6,
+            "path": "/build-towers",
+            "img": "/bridges/tower.png",
+            "title":  "Türme bauen",
+            "intro": "Setze die Türme so, dass man mit den Türmen alle Kanäle überwachen kann.",
+            "description": "Setze die Türme so, dass man mit den Türmen alle Kanäle überwachen kann: Klicke auf einen Turm und ziehe ihn an den gewünschten Platz. Klicke auf einen Turm, um ihn wieder aus der Landschaft zu entfernen. Viel Erfolg!",
+            "tips": {
+                "tip1": "Tipp: Es werden noch nicht alle Kanäle überwacht!"
             }
         }
     }

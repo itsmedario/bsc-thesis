@@ -42,9 +42,10 @@
         <slot name="intro">Unintentionally empty description!</slot>
       </div>
 
-      <component id="gameComp"
+      <component id="gameComp" ref="gameComp"
+       :is="this.type"
        :language="language"
-       :is="this.type" :level="level" ref="gameComp"
+       :level="level"
        @correct-solution="correctSolution = true"
        @false-solution="showTip"
       />

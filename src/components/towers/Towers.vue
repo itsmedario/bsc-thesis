@@ -1,200 +1,79 @@
 <template>
-  <div class="tower-game">
-    <div class="map-container">
-      <!--:style="{'background-image':'url(https://raw.githubusercontent.com/itsmedario/bsc-thesis/master/src/assets/maps/map3_empty.png)'}"-->
-      <table>
-        <tr id="i" v-for="i in colNr" :key="i">
-          <td id="j" v-for="j in rowNr" :key="j" class="square"
-           @click="fieldClicked(i - 1, j - 1)" @dragover.prevent
-           @drop.stop.prevent="dropTower(i - 1, j - 1)">
-            <img :src="require(`@/assets/bridges/tower_${cells[i - 1][j - 1]}.png`)"
-            style="width:40%" draggable="true"
-            @dragstart="fieldClicked(i - 1, j - 1); towerSelected = true">
-          </td>
-        </tr>
-      </table>
+    <div>
+      <component ref="gameMap" :key="reloadCounter"
+       :is="this.maps[counter]"
+       :language="language"
+       :level="1"
+       @correct-solution="correctSolution = true"
+       @false-solution="correctSolution = false"/>
     </div>
-    <div class="tower-field card clickable" @click="selectTower()"
-      @dragstart="towerSelected = true" draggable="false"
-      :class="{ selected: towerSelected == true }">
-      <img :src="require('/src/assets/bridges/tower.png')" draggable="true">
-    </div>
-  </div>
 </template>
 
 <script lang="ts">
 /* eslint-disable no-restricted-syntax */
 import { Component, Vue, Prop } from 'vue-property-decorator';
-import Graph from '@/components/towers/Graphs';
+import Map1 from '@/components/towers/Map1.vue';
+import Map2 from '@/components/towers/Map2.vue';
+import Map3 from '@/components/towers/Map3.vue';
 
 @Component({
-  components: {},
+  components: {
+    Map1,
+    Map2,
+    Map3,
+  },
 })
 
 export default class Towers extends Vue {
   @Prop({ required: true })
   level!: number;
 
-  counter = 1;
+  @Prop({ required: true })
+  language!: string;
 
-  colNr = 3;
+  // eslint-disable-next-line global-require, import/no-dynamic-require
+  text = require(`@/text_${this.language}.json`);
 
-  rowNr = 3;
+  counter = 0;
 
-  map3 = new Graph(9);
+  reloadCounter = 0; // enables reloading the component to restart by creating a new instance
 
-  map5 = new Graph(11);
+  correctSolution = false;
 
-  usedFields = new Set();
-
-  towerSelected = false;
-
-  cells = [[false, false, false], [false, false, false], [false, false, false]];
-
-  beforeMount():void {
-    this.initGraphs();
-  }
+  maps = ['Map1', 'Map2', 'Map3'];
 
   checkSolution(level:number):void {
-    if (this.isVertexCover()) {
+    if (this.correctSolution) {
       this.$emit('correct-solution');
     } else {
-      this.$emit('false-solution', 'Noch nicht alle Kanäle sind überwacht.');
-    }
-  }
-
-  dropTower(i:number, j:number):void {
-    this.towerSelected = true; // ensure propagation
-    this.cells[i][j] = true;
-    this.usedFields.add(3 * i + j);
-    this.towerSelected = false; // ensure propagation
-  }
-
-  getCell(i:number, j:number):boolean {
-    return this.cells[i][j];
-  }
-
-  initGraphs():void {
-    this.initGraph3();
-    this.initGraph5();
-  }
-
-  initGraph3():void {
-    for (let i = 0; i < 9; i += 1) {
-      this.map3.addVertex(i);
-    }
-    this.map3.addEdge(0, 1);
-    this.map3.addEdge(1, 2);
-    this.map3.addEdge(3, 4);
-    this.map3.addEdge(4, 5);
-    this.map3.addEdge(6, 7);
-    this.map3.addEdge(7, 8);
-    this.map3.addEdge(0, 3);
-    this.map3.addEdge(1, 4);
-    this.map3.addEdge(2, 5);
-    this.map3.addEdge(3, 6);
-    this.map3.addEdge(4, 7);
-    this.map3.addEdge(5, 8);
-    this.map3.addEdge(0, 6);
-    this.map3.addEdge(2, 8);
-  }
-
-  initGraph5():void {
-    for (let i = 0; i < 11; i += 1) {
-      this.map5.addVertex(i);
-    }
-    this.map5.addEdge(0, 1);
-    this.map5.addEdge(1, 2);
-    this.map5.addEdge(3, 4);
-    this.map5.addEdge(4, 5);
-    this.map5.addEdge(5, 6);
-    this.map5.addEdge(6, 7);
-    this.map5.addEdge(8, 9);
-    this.map5.addEdge(9, 10);
-    this.map5.addEdge(0, 4);
-    this.map5.addEdge(1, 5);
-    this.map5.addEdge(2, 6);
-    this.map5.addEdge(4, 8);
-    this.map5.addEdge(5, 9);
-    this.map5.addEdge(6, 10);
-    this.map5.addEdge(0, 3);
-    this.map5.addEdge(3, 8);
-    this.map5.addEdge(2, 7);
-    this.map5.addEdge(7, 10);
-  }
-
-  isVertexCover():boolean { // checks the placed towers actually form a vertex cover
-    const arr = Array.from(this.usedFields);
-    for (let i = 0; i < arr.length; i += 1) {
-      this.map3.removeVertex(Number(arr[i]));
-    }
-    /* for (const v in this.map3) {
-      if (v.length > 0) {
-        this.initGraphs();
-        return false;
-      }
-    } */
-    // this.initGraphs();
-    return true;
-  }
-
-  fieldClicked(i:number, j:number):void {
-    if (this.towerSelected) {
-      this.dropTower(i, j);
-    } else if (this.cells[i][j]) {
-      this.towerSelected = true; // ensure propagation
-      this.cells[i][j] = false;
-      this.usedFields.delete(3 * i + j);
-      this.towerSelected = false; // ensure propagation
+      this.$emit('false-solution', this.text.tasks.buildTowers.tips.tip1);
     }
   }
 
   nextTask():void {
     this.restart();
-    this.counter += 1;
+    this.counter = (this.counter + 1) % 2;
   }
 
   restart():void {
-    this.cells = [[false, false, false], [false, false, false], [false, false, false]];
-    this.towerSelected = false;
-    this.usedFields = new Set();
-  }
-
-  selectTower():void { // select the tower in the inventory
-    if (this.towerSelected) {
-      this.towerSelected = false;
-    } else {
-      this.towerSelected = true;
-    }
+    this.reloadCounter += 1;
+    this.correctSolution = false;
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-.map-container {
-  position: relative;
-  align-content: center;
-  background-image: url('map3_empty.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 541px;
-  height: 286px;
-}
-
 .square {
-  border: 2px dashed #324197;
+  border: 1px dashed #324197;
   background: none;
-  border-radius: 5px;
-  height: 60px !important;
-  width: 60px !important;
-  padding: 0 !important;
-  margin: 0 !important;
+  border-radius: 15px;
+  height: 18%;
+  width: 10%;
 }
 
 .square img {
-  width: 50% !important;
+  width: 60% !important;
   height: auto;
 }
 
@@ -210,18 +89,4 @@ export default class Towers extends Vue {
   width: 40%;
   height: auto;
 }
-
-.tower-game {
-  position: relative;
-  display: flex;
-  justify-content: center;
-}
-
-.tower-game table {
-  position: absolute;
-  top:-15px;
-  left: -20px;
-  border-spacing: 5.7em 2em;
-}
-
 </style>

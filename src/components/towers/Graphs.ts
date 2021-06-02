@@ -1,30 +1,58 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable prefer-template */
+/* eslint-disable guard-for-in */
 class Graph {
-  vertices;
+  numberOfVertices;
 
   adjList;
 
   constructor(vertices:number) {
-    this.vertices = vertices;
+    this.numberOfVertices = vertices;
     this.adjList = new Map();
   }
 
   addVertex(v:number):void {
-    this.adjList.set(v, []);
+    this.adjList.set(v, new Set());
   }
 
   addEdge(v:number, w:number):void {
-    this.adjList.get(v).push(w);
-    this.adjList.get(w).push(v);
+    this.adjList.get(v).add(w);
+    this.adjList.get(w).add(v);
+  }
+
+  isEmptyGraph():boolean {
+    let empty = true;
+    const getKeys = this.adjList.keys();
+
+    this.printGraph();
+
+    for (const i of getKeys) {
+      if (this.adjList.get(i).size > 0) {
+        empty = false;
+      }
+    }
+    return empty;
+  }
+
+  isVertexCover(arr:unknown[]):boolean { // checks the placed towers actually form a vertex cover
+    for (let i = 0; i < arr.length; i += 1) {
+      this.removeVertex(Number(arr[i]));
+    }
+
+    const solution = this.isEmptyGraph();
+
+    console.log(solution);
+    return solution;
   }
 
   removeVertex(v:number):void {
-    for (let i = 0; i < this.adjList.get(v).length; i += 1) {
-      const j = this.adjList.get(v)[i];
-      this.adjList.get(j).pop(v);
+    for (const i of this.adjList.get(v)) {
+      console.log(i);
+      this.adjList.get(i).delete(v);
     }
     this.adjList.delete(v);
+    console.log('removed vertex ' + v);
+    console.log('graph ' + this.adjList);
   }
 
   printGraph():void {

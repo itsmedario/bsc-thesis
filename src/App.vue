@@ -15,6 +15,9 @@
         <router-link to="/optimize-weights">
           <button class="card clickable">{{ text.tasks.optimizeWeights.title }}</button>
         </router-link>
+        <router-link to="/build-towers"> <!-- Link to come -->
+          <button class="card clickable">Türme bauen</button>
+        </router-link>
         <router-link to="/*"> <!-- Link to come -->
           <button class="card clickable">Türme überprüfen</button>
         </router-link>
