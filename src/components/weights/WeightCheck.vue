@@ -7,7 +7,7 @@
           <p>{{ names[(counter)] }} {{ text.tasks.checkWeights.intro }}</p>
         </div>
         <img v-for="i in weights" :key="i" :src="require(`@/assets/weights/size${i}.png`)"
-         draggable="false" style="width: auto; min-width: 80px; height: 60px">
+         draggable="false" style="height: 60px">
     </div>
 
     <table>
@@ -96,7 +96,7 @@ export default class WeightCheck extends Vue {
   actualBoatLoad = [10, 22, 30]; // actual load on each boat
 
   // actual weight distribution
-  rows = [[5, 1, 4, 0, 0, 0], [12, 6, 4, 0, 0, 0], [7, 10, 8, 2, 3, 0]];
+  rows = [[5, 1, 4, 0, 0], [12, 6, 4, 0, 0], [7, 10, 8, 2, 3]];
 
   chosenWeights = new Set(this.weights); // weights that are proposed
 
@@ -277,7 +277,7 @@ export default class WeightCheck extends Vue {
   nextTask():void {
     this.counter = (this.counter + 1) % this.names.length;
     this.restart();
-    this.rows = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
+    this.rows = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
     this.weights = [0];
     this.actualBoatLoad = [0, 0, 0];
     this.generateSolution();
@@ -369,8 +369,7 @@ td img {
 }
 
 .task-box {
-  position:absolute;
-  width: 70%;
+  width: 100%;
 }
 
 .statement-box {

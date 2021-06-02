@@ -48,7 +48,7 @@ export default class Tutorial extends Vue {
 .description > p {
   margin: 0.8em;
   text-align: justify;
-  font-size: 1.5em !important;
+  font-size: 1.3em !important;
 }
 
 .modal-mask {

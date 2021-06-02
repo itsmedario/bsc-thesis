@@ -8,7 +8,6 @@
     <table>
       <tr id="i" v-for="i in boatCapacities.length" :key="i">
         <td>
-          <p style="font-size: 1.3em" class="hidden-mobile">Boot {{ i }}</p>
           <img :src="require(`@/assets/transport/boatmax${boatCapacities[i - 1]}.png`)"
            style="width: 55%; min-width:120px; max-width:150px" draggable="false">
         </td>
@@ -50,7 +49,7 @@ export default class Weights extends Vue {
   // eslint-disable-next-line global-require, import/no-dynamic-require
   text = require(`@/text_${this.language}.json`);
 
-  numberOfFields = 6;
+  numberOfFields = 5;
 
   difficultGames = false;
 
@@ -68,10 +67,10 @@ export default class Weights extends Vue {
   boatOverload = false; // is a boat overloaded?
 
   // how ships are actually loaded
-  rows = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
+  rows = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
 
   // stores fixed rows for l2
-  startRows = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
+  startRows = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
 
   selectedItem = 0; // momentarily chosen weight
 
@@ -142,13 +141,13 @@ export default class Weights extends Vue {
   }
 
   l3init():void {
-    this.startRows = [[5, 4, 0, 0, 0, 0], [2, 0, 0, 0, 0, 0], [11, 0, 0, 0, 0, 0]];
+    this.startRows = [[5, 4, 0, 0, 0], [2, 0, 0, 0, 0], [11, 0, 0, 0, 0]];
     this.fixedWeights = new Set([2, 4, 5, 11]);
   }
 
   restart(): void { // restarts the actual task
     this.selectedItem = 0;
-    this.rows = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
+    this.rows = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
     this.usedWeights.clear();
     this.boatUsed = [false, false, false];
     if (this.level === 2) {
@@ -268,7 +267,7 @@ export default class Weights extends Vue {
       chosenWeightSum = 0;
       remainingBoatCaps = [...this.boatCapacities];
       chosenWeights.clear();
-      this.rows = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
+      this.rows = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
       this.fixedWeights.clear();
       this.usedWeights.clear();
 
@@ -402,7 +401,7 @@ tr p, img {
 }
 
 td img {
-  width: 100px;
+  max-width: 100px;
 }
 
 .weight-depot {

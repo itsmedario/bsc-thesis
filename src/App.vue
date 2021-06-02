@@ -95,10 +95,6 @@ textarea:focus,
 button:focus {
   outline: none;
 }
-canvas {
-  max-width: 100%;
-  max-height: 100%;
-}
 
 #container {
   width: 80%;
@@ -191,7 +187,7 @@ canvas {
 
 .info-card {
   padding: 0em !important;
-  margin: 1em !important;
+  margin: 1em 0 !important;
   box-shadow: none !important;
   display: flex;
   flex-wrap: wrap;
