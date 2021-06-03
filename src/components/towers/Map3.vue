@@ -9,7 +9,6 @@
             @dragstart="fieldClicked(i - 1); towerSelected = true">
       </div>
     </div>
-    {{ availableKiosks }}x
     <div class="tower-field card clickable" @click="selectTower()"
       @dragstart="towerSelected = true" draggable="false"
       :class="{ selected: towerSelected == true }">
@@ -49,6 +48,8 @@ export default class Map3 extends Vue {
 
   fields = [false, false, false, false, false, false, false, false, false, false, false];
 
+  isVC = false;
+
   beforeMount():void {
     this.initGraph();
   }
@@ -68,6 +69,7 @@ export default class Map3 extends Vue {
     this.fields[i] = true;
     this.usedFields.add(i);
     this.towerSelected = false; // ensure propagation
+    this.checkSolution(this.level);
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -108,6 +110,7 @@ export default class Map3 extends Vue {
       this.fields[i] = false;
       this.usedFields.delete(i);
       this.towerSelected = false; // ensure propagation
+      this.checkSolution(this.level);
     }
   }
 
@@ -116,7 +119,7 @@ export default class Map3 extends Vue {
   }
 
   restart():void {
-    this.fields = [false, false, false, false, false, false, false, false, false];
+    this.fields = [false, false, false, false, false, false, false, false, false, false, false];
     this.towerSelected = false;
     this.usedFields = new Set();
   }
@@ -203,7 +206,7 @@ export default class Map3 extends Vue {
 .map-container {
   position: relative;
   align-content: center;
-  background-image: url('map5.png');
+  background-image: url('maps/map5.png');
   background-repeat: no-repeat;
   background-size: cover;
   min-width: 453px;
@@ -213,7 +216,7 @@ export default class Map3 extends Vue {
 }
 
 .square {
-  border: 2px dashed #324197;
+  border: 0px dashed #324197;
   background: none;
   border-radius: 25px;
   min-width: 20px;

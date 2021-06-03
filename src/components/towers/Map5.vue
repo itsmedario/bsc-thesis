@@ -4,7 +4,7 @@
       <div id="i" v-for="i in nrOfFields" :key="i" class="square" :class="getClass(i - 1)"
            @click="fieldClicked(i - 1)" @dragover.prevent
            @drop.stop.prevent="dropTower(i - 1)">
-            <img :src="require(`@/assets/bridges/tower_${fields[i - 1]}.png`)"
+            <img :src="require(`@/assets/bridges/kiosk_${fields[i - 1]}.png`)"
             style="width:40%" draggable="true"
             @dragstart="fieldClicked(i - 1); towerSelected = true">
       </div>
@@ -12,7 +12,7 @@
     <div class="tower-field card clickable" @click="selectTower()"
       @dragstart="towerSelected = true" draggable="false"
       :class="{ selected: towerSelected == true }">
-      <img :src="require('/src/assets/bridges/tower.png')" draggable="true">
+      <img :src="require('/src/assets/bridges/kiosk_true.png')" draggable="true">
     </div>
   </div>
 </template>
@@ -26,7 +26,7 @@ import Graph from '@/components/towers/Graphs';
   components: {},
 })
 
-export default class Map2 extends Vue {
+export default class Map5 extends Vue {
   @Prop({ required: true })
   level!: number;
 
@@ -36,9 +36,9 @@ export default class Map2 extends Vue {
   // eslint-disable-next-line global-require, import/no-dynamic-require
   text = require(`@/text_${this.language}.json`);
 
-  availableTowers = 6;
+  availableKiosks = 5;
 
-  nrOfFields = 9;
+  nrOfFields = 10;
 
   map = new Graph(this.nrOfFields);
 
@@ -46,7 +46,9 @@ export default class Map2 extends Vue {
 
   towerSelected = false;
 
-  fields = [false, false, false, false, false, false, false, false, false];
+  fields = [false, false, false, false, false, false, false, false, false, false];
+
+  isVC = false;
 
   beforeMount():void {
     this.initGraph();
@@ -77,23 +79,23 @@ export default class Map2 extends Vue {
   }
 
   initGraph():void {
-    for (let i = 0; i < 9; i += 1) {
+    for (let i = 0; i < 10; i += 1) {
       this.map.addVertex(i);
     }
-    this.map.addEdge(0, 1);
     this.map.addEdge(1, 2);
     this.map.addEdge(3, 4);
     this.map.addEdge(4, 5);
-    this.map.addEdge(6, 7);
-    this.map.addEdge(7, 8);
+    this.map.addEdge(8, 9);
     this.map.addEdge(0, 3);
+    this.map.addEdge(1, 3);
     this.map.addEdge(1, 4);
     this.map.addEdge(2, 5);
-    this.map.addEdge(3, 6);
-    this.map.addEdge(4, 7);
-    this.map.addEdge(5, 8);
-    this.map.addEdge(0, 6);
-    this.map.addEdge(2, 8);
+    this.map.addEdge(2, 6);
+    this.map.addEdge(3, 7);
+    this.map.addEdge(3, 8);
+    this.map.addEdge(4, 8);
+    this.map.addEdge(5, 9);
+    this.map.addEdge(6, 9);
   }
 
   fieldClicked(i:number):void {
@@ -113,7 +115,7 @@ export default class Map2 extends Vue {
   }
 
   restart():void {
-    this.fields = [false, false, false, false, false, false, false, false, false];
+    this.fields = [false, false, false, false, false, false, false, false, false, false];
     this.towerSelected = false;
     this.usedFields = new Set();
   }
@@ -133,92 +135,101 @@ export default class Map2 extends Vue {
 
 .f0 {
   position: absolute;
-  left: 5%;
-  top: 3%;
+  left: 2%;
+  top: 10%;
 }
 
 .f1 {
   position: absolute;
-  left: 46%;
-  top: 5%;
+  left: 35%;
+  top: 9.5%;
 }
 
 .f2 {
   position: absolute;
-  left: 85%;
-  top: 7%;
+  left: 74%;
+  top: 8.5%;
 }
 
 .f3 {
   position: absolute;
-  left: 22%;
-  top: 40%;
+  left: 18.5%;
+  top: 46%;
 }
 
 .f4 {
   position: absolute;
-  left: 46%;
-  top: 42%;
+  left: 35.5%;
+  top: 46.5%;
 }
 
 .f5 {
   position: absolute;
-  left: 69%;
-  top: 42%;
+  left: 73.5%;
+  top: 47%;
 }
 
 .f6 {
   position: absolute;
-  left: 5%;
-  top: 77%;
+  left: 92%;
+  top: 47%;
 }
 
 .f7 {
   position: absolute;
-  left: 46%;
-  top: 76%;
+  left: 2%;
+  top: 84%;
 }
 
 .f8 {
   position: absolute;
-  left: 85%;
-  top: 75%;
+  left: 35.5%;
+  top: 84%;
+}
+
+.f9 {
+  position: absolute;
+  left: 73.5%;
+  top: 83%;
 }
 
 .map-container {
   position: relative;
   align-content: center;
-  background-image: url('maps/map12.png');
+  background-image: url('maps/map8.png');
   background-repeat: no-repeat;
   background-size: cover;
-  min-width: 539px;
-  min-height: 331px;
-  width: 50vw;
-  height: 30.7vw;
+  min-width: 500px;
+  min-height: 265px;
+  width: 60vw;
+  height: 31.5vw;
 }
 
 .square {
   border: 0px dashed #324197;
   background: none;
-  border-radius: 15px;
-  height: 18%;
-  width: 10%;
+  border-radius: 25px;
+  min-width: 20px;
+  min-height: 20px;
+  height: 14% !important;
+  width: 7% !important;
 }
 
 .square img {
-  width: 60% !important;
+  width: 100% !important;
   height: auto;
 }
 
 .tower-field {
   height: 15% !important;
   width: 10% !important;
+  max-height: 120px;
+  max-width: 90px;
   padding: 1em 0 !important;
-  min-width: 85px !important;
 }
 
 .tower-field img {
-  width: 38%;
+  width: 60%;
   height: auto;
 }
 
@@ -226,7 +237,6 @@ export default class Map2 extends Vue {
   position: relative;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
 }
 
 </style>

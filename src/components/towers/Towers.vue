@@ -15,12 +15,16 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 import Map1 from '@/components/towers/Map1.vue';
 import Map2 from '@/components/towers/Map2.vue';
 import Map3 from '@/components/towers/Map3.vue';
+import Map4 from '@/components/towers/Map4.vue';
+import Map5 from '@/components/towers/Map5.vue';
 
 @Component({
   components: {
     Map1,
     Map2,
     Map3,
+    Map4,
+    Map5,
   },
 })
 
@@ -40,7 +44,7 @@ export default class Towers extends Vue {
 
   correctSolution = false;
 
-  maps = ['Map1', 'Map2', 'Map3'];
+  maps = ['Map1', 'Map5', 'Map2', 'Map3', 'Map4'];
 
   checkSolution(level:number):void {
     if (this.correctSolution) {
@@ -52,7 +56,7 @@ export default class Towers extends Vue {
 
   nextTask():void {
     this.restart();
-    this.counter = (this.counter + 1) % 2;
+    this.counter = (this.counter + 1) % 5;
   }
 
   restart():void {

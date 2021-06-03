@@ -11,8 +11,8 @@
             "title": "Impressum",
             "descrption": "Diese Lernumgebung wurde im Zusammenhang mit dem Buch 'einfach Informatik 3/4' erstellt. Feedback ist sehr erwünscht: dnaepfer@student.ethz.ch",
             "author": "Autor: Dario Naepfer",
-            "oldVersion": "Version 2.3 -- Neu: Startseiten-Menü, Texte in JSON File und allgemeines Responsive-Design",
-            "version": "Version 2.4 -- Neu: Verbesserte Grafiken, angepasste Texte, überarbeiteter Source-Code"
+            "oldVersion": "Version 2.4 -- Neu: Verbesserte Grafiken, angepasste Texte, überarbeiteter Source-Code",
+            "version": "Version 2.5 -- Neu: Erstes Spiel der Türme-Serie in der Testphase"
         },
         "notFound": {
             "title": "Seite nicht gefunden! Error 404",

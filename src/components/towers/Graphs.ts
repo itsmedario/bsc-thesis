@@ -27,6 +27,7 @@ class Graph {
     this.printGraph();
 
     for (const i of getKeys) {
+      console.log(i);
       if (this.adjList.get(i).size > 0) {
         empty = false;
       }

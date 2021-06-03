@@ -188,7 +188,7 @@ export default class Map1 extends Vue {
 .map-container {
   position: relative;
   align-content: center;
-  background-image: url('map3_empty.png');
+  background-image: url('maps/map3_empty.png');
   background-repeat: no-repeat;
   background-size: cover;
   min-width: 541px;

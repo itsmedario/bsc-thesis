@@ -26,7 +26,7 @@ import Graph from '@/components/towers/Graphs';
   components: {},
 })
 
-export default class Map2 extends Vue {
+export default class Map4 extends Vue {
   @Prop({ required: true })
   level!: number;
 
@@ -36,7 +36,7 @@ export default class Map2 extends Vue {
   // eslint-disable-next-line global-require, import/no-dynamic-require
   text = require(`@/text_${this.language}.json`);
 
-  availableTowers = 6;
+  availableTowers = 4;
 
   nrOfFields = 9;
 
@@ -83,17 +83,14 @@ export default class Map2 extends Vue {
     this.map.addEdge(0, 1);
     this.map.addEdge(1, 2);
     this.map.addEdge(3, 4);
-    this.map.addEdge(4, 5);
     this.map.addEdge(6, 7);
     this.map.addEdge(7, 8);
     this.map.addEdge(0, 3);
     this.map.addEdge(1, 4);
-    this.map.addEdge(2, 5);
+    this.map.addEdge(1, 5);
     this.map.addEdge(3, 6);
     this.map.addEdge(4, 7);
-    this.map.addEdge(5, 8);
-    this.map.addEdge(0, 6);
-    this.map.addEdge(2, 8);
+    this.map.addEdge(5, 7);
   }
 
   fieldClicked(i:number):void {
@@ -133,76 +130,76 @@ export default class Map2 extends Vue {
 
 .f0 {
   position: absolute;
-  left: 5%;
-  top: 3%;
+  left: 10%;
+  top: 7%;
 }
 
 .f1 {
   position: absolute;
-  left: 46%;
-  top: 5%;
+  left: 44%;
+  top: 8%;
 }
 
 .f2 {
   position: absolute;
-  left: 85%;
+  left: 79%;
   top: 7%;
 }
 
 .f3 {
   position: absolute;
-  left: 22%;
-  top: 40%;
+  left: 9%;
+  top: 44%;
 }
 
 .f4 {
   position: absolute;
-  left: 46%;
-  top: 42%;
+  left: 44%;
+  top: 43%;
 }
 
 .f5 {
   position: absolute;
-  left: 69%;
-  top: 42%;
+  left: 75%;
+  top: 44%;
 }
 
 .f6 {
   position: absolute;
-  left: 5%;
-  top: 77%;
+  left: 24%;
+  top: 72%;
 }
 
 .f7 {
   position: absolute;
-  left: 46%;
-  top: 76%;
+  left: 44%;
+  top: 72%;
 }
 
 .f8 {
   position: absolute;
-  left: 85%;
-  top: 75%;
+  left: 76%;
+  top: 77%;
 }
 
 .map-container {
   position: relative;
   align-content: center;
-  background-image: url('maps/map12.png');
+  background-image: url('maps/map4_empty.png');
   background-repeat: no-repeat;
   background-size: cover;
-  min-width: 539px;
-  min-height: 331px;
+  min-width: 439px;
+  min-height: 354px;
   width: 50vw;
-  height: 30.7vw;
+  height: 40vw;
 }
 
 .square {
   border: 0px dashed #324197;
   background: none;
   border-radius: 15px;
-  height: 18%;
-  width: 10%;
+  height: 15%;
+  width: 12%;
 }
 
 .square img {
