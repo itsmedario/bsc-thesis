@@ -57,7 +57,7 @@ export default class Map3 extends Vue {
 
   checkSolution(level:number):void {
     const arr = Array.from(this.usedFields);
-    if (this.map.isDominatingSet(arr)) {
+    if (this.map.isVertexCover(arr)) {
       this.$emit('correct-solution');
     } else {
       this.$emit('false-solution', this.text.tasks.buildTowers.tips.tip1);

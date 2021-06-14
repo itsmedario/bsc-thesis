@@ -1,24 +1,16 @@
 <template>
-  <div id="tutorial-wrapper" v-if="showModal" class="modal-mask"
-   @mousedown.stop="showModal = false; $emit('close-tutorial')">
+  <div id="tutorial-wrapper" class="modal-mask"
+   @mousedown.stop="$emit('close-tutorial')">
     <div class="modal-wrapper">
-      <div class="modal-container" @mousedown.stop>
+      <div class="modal-container" @mousedown.stop >
         <div class="modal-header">
-          <p class="title">{{ text.game.tutorial }}</p>
-          <button class="exit-button" style="margin:0.5em;" @click="showModal = false;
-           $emit('close-tutorial')">
+          <p class="title">{{ text.game.warning.title }}</p>
+          <!--<button class="exit-button" style="margin:0.5em;" @click="$emit('close-tutorial')">
            &times;
-           </button>
+           </button>-->
         </div>
-        <div slot="body" class="flex-item flex-center flex-space-between flex-col">
-          <div class="flex-item flex-center flex-space-between flex-row">
-            <div class="description equal-space">
-              <slot name="description">Unintentionally empty!</slot>
-            </div>
-            <div class="responsive equal-space">
-              <slot name="video">Unintentionally empty!</slot>
-            </div>
-          </div>
+        <div class="flex-item flex-center flex-space-between flex-col">
+          {{ text.game.warning.info }}
         </div>
        </div>
     </div>
@@ -31,10 +23,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 @Component({
   components: {},
 })
-export default class Tutorial extends Vue {
-  @Prop({ required: true })
-  showModal!: boolean;
-
+export default class Warning extends Vue {
   @Prop({ required: true })
   language!: string;
 

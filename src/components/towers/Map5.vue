@@ -9,9 +9,10 @@
             @dragstart="fieldClicked(i - 1); towerSelected = true">
       </div>
     </div>
-    <div class="tower-field card clickable" @click="selectTower()"
-      @dragstart="towerSelected = true" draggable="false"
-      :class="{ selected: towerSelected == true }">
+    <div class="tower-field card clickable"
+     @click="selectTower()"
+     @dragstart="towerSelected = true" draggable="false"
+     :class="{ selected: towerSelected == true }">
       <img :src="require('/src/assets/bridges/kiosk_true.png')" draggable="true">
     </div>
   </div>
@@ -56,7 +57,7 @@ export default class Map5 extends Vue {
 
   checkSolution(level:number):void {
     const arr = Array.from(this.usedFields);
-    if (this.map.isVertexCover(arr)) {
+    if (this.map.isDominatingSet(arr)) {
       this.$emit('correct-solution');
     } else {
       this.$emit('false-solution', this.text.tasks.buildTowers.tips.tip1);

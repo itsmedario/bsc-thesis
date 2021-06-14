@@ -1,35 +1,7 @@
 <template>
   <div id="app">
+    <Warning id="mobile-warning" :language="language"/>
     <!--<Header/>-->
-    <div id="nav">
-      <span id="button-menu" class="flex-item flex-row flex-center flex-wrap">
-        <router-link to="/check-weights">
-          <button class="card clickable">{{ text.tasks.checkWeights.title }}</button>
-        </router-link>
-        <router-link to="/distribute-weights">
-          <button class="card clickable">{{ text.tasks.distributeWeights.title }}</button>
-        </router-link>
-        <router-link to="/add-weights">
-          <button class="card clickable">{{ text.tasks.addWeights.title }}</button>
-        </router-link>
-        <router-link to="/optimize-weights">
-          <button class="card clickable">{{ text.tasks.optimizeWeights.title }}</button>
-        </router-link>
-        <router-link to="/build-towers"> <!-- Link to come -->
-          <button class="card clickable">Türme bauen</button>
-        </router-link>
-        <router-link to="/*"> <!-- Link to come -->
-          <button class="card clickable">Türme überprüfen</button>
-        </router-link>
-        <router-link  to="/about">
-          <button class="card clickable">{{ text.pages.about.title }}</button>
-        </router-link>
-        <!--<button class="card clickable" onclick="window.print()">
-          Drucken
-        </button>-->
-      </span>
-    </div>
-    <hr style="height:1px; border-width:0; color:black; background-color:black">
     <router-view id="container"
      :language="language"
      />
@@ -41,10 +13,12 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import Header from '@/components/layout/Header.vue';
+import Warning from '@/components/tools/Warning.vue';
 
 @Component({
   components: {
     Header,
+    Warning,
   },
 })
 
@@ -76,6 +50,7 @@ html {
 body{
   background-color: #17a2b8;
   font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 1em;
   text-align: center;
   max-width: 1500px;
 }
@@ -99,9 +74,17 @@ button:focus {
   outline: none;
 }
 
+#button-menu {
+  justify-content: flex-end;
+}
+
 #container {
   width: 80%;
   margin: 0 10%;
+}
+
+#mobile-warning {
+  display: none;
 }
 
 .card {
@@ -234,6 +217,10 @@ video {
         .hidden-mobile {
           display: none !important;
         }
+}
+
+@media (max-width: 760px) {
+  #mobile-warning { display: block !important; }
 }
 
 @keyframes shake {

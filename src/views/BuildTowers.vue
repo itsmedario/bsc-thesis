@@ -2,11 +2,11 @@
   <div>
     <Game
      :type="'Towers'"
-     :level="1"
+     :level="2"
      :language="language"
     >
       <p class="title" slot="title">{{ text.tasks.buildTowers.title }}</p>
-      <p slot="intro">{{ text.tasks.buildTowers.intro }}</p>
+      <p class="card description" slot="intro">{{ text.tasks.buildTowers.intro }}</p>
       <p slot="description">{{ text.tasks.buildTowers.description }}</p>
       <video loop controls muted slot="video">
         <source :src="require('@/assets/tutorials/add-weights.mp4')" />

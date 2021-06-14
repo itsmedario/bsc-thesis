@@ -1,9 +1,9 @@
 <template>
     <div>
-      <component ref="gameMap" :key="reloadCounter"
+      <component id="gameMap" ref="gameMap" :key="reloadCounter"
        :is="this.maps[counter]"
        :language="language"
-       :level="1"
+       :level="level"
        @correct-solution="correctSolution = true"
        @false-solution="correctSolution = false"/>
     </div>
@@ -56,7 +56,11 @@ export default class Towers extends Vue {
 
   nextTask():void {
     this.restart();
-    this.counter = (this.counter + 1) % 5;
+    if (this.level === 1) {
+      this.reloadCounter += 1;
+    } else {
+      this.counter = (this.counter + 1) % 5;
+    }
   }
 
   restart():void {
@@ -68,6 +72,11 @@ export default class Towers extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+#gameMap {
+  margin: 3em;
+}
+
 .square {
   border: 1px dashed #324197;
   background: none;

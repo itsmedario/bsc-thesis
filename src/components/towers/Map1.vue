@@ -9,9 +9,10 @@
             @dragstart="fieldClicked(i - 1); towerSelected = true">
       </div>
     </div>
-    <div class="tower-field card clickable" @click="selectTower()"
-      @dragstart="towerSelected = true" draggable="false"
-      :class="{ selected: towerSelected == true }">
+    <div class="tower-field card clickable" v-if="level !== 1"
+     @click="selectTower()"
+     @dragstart="towerSelected = true" draggable="false"
+     :class="{ selected: towerSelected == true }">
       <img :src="require('/src/assets/bridges/tower.png')" draggable="true">
     </div>
   </div>
@@ -94,12 +95,17 @@ export default class Map1 extends Vue {
     this.map.addEdge(5, 8);
     this.map.addEdge(0, 6);
     this.map.addEdge(2, 8);
+
+    /* if (this.level === 1) {
+      this.fields = this.map.createProposition(5, 7);
+      console.log(this.fields);
+    } */
   }
 
   fieldClicked(i:number):void {
-    if (this.towerSelected) {
+    if (this.towerSelected && this.level !== 1) {
       this.dropTower(i);
-    } else if (this.fields[i]) {
+    } else if (this.fields[i] && this.level !== 1) {
       this.towerSelected = true; // ensure propagation
       this.fields[i] = false;
       this.usedFields.delete(i);
@@ -188,7 +194,7 @@ export default class Map1 extends Vue {
 .map-container {
   position: relative;
   align-content: center;
-  background-image: url('maps/map3_empty.png');
+  background-image: url('maps/map3.png');
   background-repeat: no-repeat;
   background-size: cover;
   min-width: 541px;

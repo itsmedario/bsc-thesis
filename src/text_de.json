@@ -4,6 +4,7 @@
     "pages": {
         "home": {
             "title": "Willkommen in der Lernumgebung",
+            "introduction": "Hier findest Du viele Rätsel zu bekannten Informatik-Problemen. Klicke Dich durch die verschiedenen Aufgaben und meistere die Herausforderungen. Viel Spass!",
             "bottom": "Zur Aufgaben-Auswahl ↓",
             "top": "Nach oben ↑"
         },
@@ -12,7 +13,7 @@
             "descrption": "Diese Lernumgebung wurde im Zusammenhang mit dem Buch 'einfach Informatik 3/4' erstellt. Feedback ist sehr erwünscht: dnaepfer@student.ethz.ch",
             "author": "Autor: Dario Naepfer",
             "oldVersion": "Version 2.4 -- Neu: Verbesserte Grafiken, angepasste Texte, überarbeiteter Source-Code",
-            "version": "Version 2.5 -- Neu: Erstes Spiel der Türme-Serie in der Testphase"
+            "version": "Version 2.6 -- Neu: Kioske und Türme Test-Aufgaben, erweiterte Graphenklasse mit verschiedenen Algos"
         },
         "notFound": {
             "title": "Seite nicht gefunden! Error 404",
@@ -31,7 +32,12 @@
             "true": "Das ist richtig!",
             "false": "Das ist leider nicht richtig!"
         },
-        "tutorial": "Anleitung zum Spiel"
+        "tutorial": "Anleitung zum Spiel", 
+        "warning": {
+            "title": "Achtung!",
+            "info": "Diese Seite ist nicht für Smartphones optimiert. Versuche es mit einem anderen Gerät",
+            "play": "Trotzdem spielen →"
+        }
     },
     "tasks": {
         "checkWeights": {
@@ -86,7 +92,7 @@
         },
         "checkTowers":  {
             "id": 5,
-            "path": "/*",
+            "path": "/check-towers",
             "img": "/bridges/tower.png",
             "title":  "Türme überprüfen",
             "intro": "Überprüfe, ob die Türme so gesetzt sind, dass man mit den Türmen alle Kanäle überwachen kann.",
@@ -103,7 +109,7 @@
             "intro": "Setze die Türme so, dass man mit den Türmen alle Kanäle überwachen kann.",
             "description": "Setze die Türme so, dass man mit den Türmen alle Kanäle überwachen kann: Klicke auf einen Turm und ziehe ihn an den gewünschten Platz. Klicke auf einen Turm, um ihn wieder aus der Landschaft zu entfernen. Viel Erfolg!",
             "tips": {
-                "tip1": "Tipp: Es werden noch nicht alle Kanäle überwacht!"
+                "tip1": "Hier in der Nähe wird ein Kanal noch nicht überwacht: Feld "
             }
         }
     }

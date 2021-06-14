@@ -1,12 +1,12 @@
 <template>
   <div>
     <Game
-     :type="'TowerCheck'"
+     :type="'Towers'"
      :level="1"
      :language="language"
     >
       <p class="title" slot="title">Türme überprüfen</p>
-      <p slot="intro">Überprüfe, ob man mit den
+      <p class="card description" slot="intro">Überprüfe, ob man mit den
          Türmen alle Kanäle überwachen kann.</p>
       <p slot="description">Überprüfe, ob man mit den
       Türmen alle Kanäle überwachen kann.</p>
@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
+import { Component, Prop } from 'vue-property-decorator';
 import Game from '../components/Game.vue';
 
 @Component({
@@ -29,7 +29,13 @@ import Game from '../components/Game.vue';
   },
 })
 
-export default class CheckBridges extends Vue {}
+export default class CheckBridges extends Vue {
+  @Prop({ required: true })
+  language!: string;
+
+  // eslint-disable-next-line global-require, import/no-dynamic-require
+  text = require(`@/text_${this.language}.json`);
+}
 </script>
 
 <style scoped></style>

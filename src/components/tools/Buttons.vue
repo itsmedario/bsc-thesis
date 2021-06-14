@@ -71,7 +71,9 @@ export default class Buttons extends Vue {
 }
 
 .buttons button img{
-  width: 50px;
+  width: 4vw;
+  min-width: 30px;
+  max-width: 50px;
 }
 
 .buttons p{

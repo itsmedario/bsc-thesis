@@ -27,7 +27,7 @@ import Graph from '@/components/towers/Graphs';
   components: {},
 })
 
-export default class Map3 extends Vue {
+export default class Map5 extends Vue {
   @Prop({ required: true })
   level!: number;
 
@@ -37,9 +37,9 @@ export default class Map3 extends Vue {
   // eslint-disable-next-line global-require, import/no-dynamic-require
   text = require(`@/text_${this.language}.json`);
 
-  availableKiosks = 8;
+  availableKiosks = 5;
 
-  nrOfFields = 11;
+  nrOfFields = 10;
 
   map = new Graph(this.nrOfFields);
 
@@ -47,7 +47,7 @@ export default class Map3 extends Vue {
 
   towerSelected = false;
 
-  fields = [false, false, false, false, false, false, false, false, false, false, false];
+  fields = [false, false, false, false, false, false, false, false, false, false];
 
   isVC = false;
 
@@ -57,7 +57,7 @@ export default class Map3 extends Vue {
 
   checkSolution(level:number):void {
     const arr = Array.from(this.usedFields);
-    if (this.map.isDominatingSet(arr)) {
+    if (this.map.isVertexCover(arr)) {
       this.$emit('correct-solution');
     } else {
       this.$emit('false-solution', this.text.tasks.buildTowers.tips.tip1);
@@ -80,27 +80,23 @@ export default class Map3 extends Vue {
   }
 
   initGraph():void {
-    for (let i = 0; i < 11; i += 1) {
+    for (let i = 0; i < 10; i += 1) {
       this.map.addVertex(i);
     }
-    this.map.addEdge(0, 1);
     this.map.addEdge(1, 2);
     this.map.addEdge(3, 4);
     this.map.addEdge(4, 5);
-    this.map.addEdge(5, 6);
-    this.map.addEdge(6, 7);
     this.map.addEdge(8, 9);
-    this.map.addEdge(9, 10);
-    this.map.addEdge(0, 4);
-    this.map.addEdge(1, 5);
+    this.map.addEdge(0, 3);
+    this.map.addEdge(1, 3);
+    this.map.addEdge(1, 4);
+    this.map.addEdge(2, 5);
     this.map.addEdge(2, 6);
+    this.map.addEdge(3, 7);
+    this.map.addEdge(3, 8);
     this.map.addEdge(4, 8);
     this.map.addEdge(5, 9);
-    this.map.addEdge(6, 10);
-    this.map.addEdge(0, 3);
-    this.map.addEdge(3, 8);
-    this.map.addEdge(2, 7);
-    this.map.addEdge(7, 10);
+    this.map.addEdge(6, 9);
   }
 
   fieldClicked(i:number):void {
@@ -120,7 +116,7 @@ export default class Map3 extends Vue {
   }
 
   restart():void {
-    this.fields = [false, false, false, false, false, false, false, false, false, false, false];
+    this.fields = [false, false, false, false, false, false, false, false, false, false];
     this.towerSelected = false;
     this.usedFields = new Set();
   }
@@ -140,80 +136,74 @@ export default class Map3 extends Vue {
 
 .f0 {
   position: absolute;
-  left: 26%;
-  top: 6%;
+  left: 2%;
+  top: 10%;
 }
 
 .f1 {
   position: absolute;
-  left: 47%;
-  top: 7%;
+  left: 35%;
+  top: 9.5%;
 }
 
 .f2 {
   position: absolute;
-  left: 67%;
-  top: 6%;
+  left: 74%;
+  top: 8.5%;
 }
 
 .f3 {
   position: absolute;
-  left: 5%;
-  top: 43%;
+  left: 18.5%;
+  top: 46%;
 }
 
 .f4 {
   position: absolute;
-  left: 26%;
-  top: 43%;
+  left: 35.5%;
+  top: 46.5%;
 }
 
 .f5 {
   position: absolute;
-  left: 47%;
-  top: 43%;
+  left: 73.5%;
+  top: 47%;
 }
 
 .f6 {
   position: absolute;
-  left: 68%;
-  top: 43%;
+  left: 92%;
+  top: 47%;
 }
 
 .f7 {
   position: absolute;
-  left: 88%;
-  top: 43%;
+  left: 2%;
+  top: 84%;
 }
 
 .f8 {
   position: absolute;
-  left: 26%;
-  top: 80%;
+  left: 35.5%;
+  top: 84%;
 }
 
 .f9 {
   position: absolute;
-  left: 46%;
-  top: 80%;
-}
-
-.f10 {
-  position: absolute;
-  left: 67%;
-  top: 80%;
+  left: 73.5%;
+  top: 83%;
 }
 
 .map-container {
   position: relative;
   align-content: center;
-  background-image: url('maps/map5.png');
+  background-image: url('maps/map8.png');
   background-repeat: no-repeat;
   background-size: cover;
-  min-width: 453px;
-  min-height: 228px;
+  min-width: 500px;
+  min-height: 265px;
   width: 60vw;
-  height: 30vw;
+  height: 31.5vw;
 }
 
 .square {

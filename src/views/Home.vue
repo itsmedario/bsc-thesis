@@ -1,7 +1,21 @@
 <template>
   <div id="home">
+    <div id="nav">
+      <span id="button-menu" class="flex-item flex-row flex-wrap">
+        <router-link  to="/about">
+          <img :src="require('/src/assets/icons/info.png')" style="width:3vw"/>
+        </router-link>
+        <!--<button class="card clickable" onclick="window.print()">
+          Drucken
+        </button>--><!--<button class="card clickable">
+          Vollbildschirm
+        </button>-->
+      </span>
+    </div>
+    <hr style="height:1px; border-width:0; color:black; background-color:black">
     <div id="start">
       <p id="top" class="title">{{ text.pages.home.title }} <br> "{{ text.title }}"</p>
+      <p id="introduction">{{ text.pages.home.introduction }}</p>
       <a href="#task-selector">
         <button class="card clickable">
           {{ text.pages.home.bottom }}
@@ -63,6 +77,11 @@ export default class Home extends Vue {
 <style scoped>
 #home {
   height: 100%;
+}
+
+#introduction {
+  width: 60%;
+  max-width: 500px;
 }
 
 #start {
