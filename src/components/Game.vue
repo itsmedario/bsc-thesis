@@ -60,6 +60,7 @@ import Tutorial from '@/components/tools/Tutorial.vue';
 import Verifier from '@/components/tools/Verifier.vue';
 import Buttons from '@/components/tools/Buttons.vue';
 import Towers from '@/components/towers/Towers.vue';
+import Kiosks from '@/components/kiosks/Kiosks.vue';
 import Bridges from '@/components/bridges/Bridges.vue';
 import Weights from '@/components/weights/Weights.vue';
 import WeightCheck from '@/components/weights/WeightCheck.vue';
@@ -70,6 +71,7 @@ import WeightCheck from '@/components/weights/WeightCheck.vue';
     Verifier,
     Buttons,
     Towers,
+    Kiosks,
     Bridges,
     Weights,
     WeightCheck,

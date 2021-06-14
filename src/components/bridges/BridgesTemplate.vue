@@ -1,19 +1,19 @@
 <template>
-  <div class="tower-game">
+  <div class="bridge-game">
     <div class="map-container">
       <div id="i" v-for="i in nrOfFields" :key="i" class="square" :class="getClass(i - 1)"
            @click="fieldClicked(i - 1)" @dragover.prevent
-           @drop.stop.prevent="dropTower(i - 1)">
-            <img :src="require(`@/assets/bridges/tower_${fields[i - 1]}.png`)"
+           @drop.stop.prevent="dropBridge(i - 1)">
+            <img :src="require(`@/assets/bridges/bridge_${fields[i - 1]}.png`)"
             draggable="true"
-            @dragstart="fieldClicked(i - 1); towerSelected = true">
+            @dragstart="fieldClicked(i - 1); bridgeSelected = true">
       </div>
     </div>
-    <div class="tower-field card clickable" v-if="level !== 1"
-     @click="selectTower()"
-     @dragstart="towerSelected = true" draggable="false"
-     :class="{ selected: towerSelected == true }">
-      <img :src="require('/src/assets/bridges/tower.png')" draggable="true">
+    <div class="bridge-field card clickable" v-if="level !== 1"
+     @click="selectBridge()"
+     @dragstart="bridgeSelected = true" draggable="false"
+     :class="{ selected: bridgeSelected == true }">
+      <img :src="require('/src/assets/bridges/bridge.png')" draggable="true">
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@ import Graph from '@/components/Graphs';
   components: {},
 })
 
-export default class TowersTemplate extends Vue {
+export default class BridgesTemplate extends Vue {
   @Prop({ required: true })
   level!: number;
 
@@ -37,7 +37,7 @@ export default class TowersTemplate extends Vue {
   // eslint-disable-next-line global-require, import/no-dynamic-require
   text = require(`@/text_${this.language}.json`);
 
-  availableTowers = 0;
+  availableBridges = 0;
 
   nrOfFields = 0;
 
@@ -45,7 +45,7 @@ export default class TowersTemplate extends Vue {
 
   usedFields = new Set();
 
-  towerSelected = false;
+  bridgeSelected = false;
 
   fields = [false];
 
@@ -58,16 +58,16 @@ export default class TowersTemplate extends Vue {
     if (this.map.isVertexCover(arr)) {
       this.$emit('correct-solution');
     } else {
-      this.$emit('false-solution', this.text.tasks.buildTowers.tips.tip1);
+      this.$emit('false-solution', this.text.tasks.buildBridges.tips.tip1);
     }
     this.initGraph();
   }
 
-  dropTower(i:number):void {
-    this.towerSelected = true; // ensure propagation
+  dropBridge(i:number):void {
+    this.bridgeSelected = true; // ensure propagation
     this.fields[i] = true;
     this.usedFields.add(i);
-    this.towerSelected = false; // ensure propagation
+    this.bridgeSelected = false; // ensure propagation
     this.checkSolution(this.level);
   }
 
@@ -89,13 +89,13 @@ export default class TowersTemplate extends Vue {
   }
 
   fieldClicked(i:number):void {
-    if (this.towerSelected && this.level !== 1) {
-      this.dropTower(i);
+    if (this.bridgeSelected && this.level !== 1) {
+      this.dropBridge(i);
     } else if (this.fields[i] && this.level !== 1) {
-      this.towerSelected = true; // ensure propagation
+      this.bridgeSelected = true; // ensure propagation
       this.fields[i] = false;
       this.usedFields.delete(i);
-      this.towerSelected = false; // ensure propagation
+      this.bridgeSelected = false; // ensure propagation
       this.checkSolution(this.level);
     }
   }
@@ -104,16 +104,23 @@ export default class TowersTemplate extends Vue {
     for (let i = 0; i < this.fields.length; i += 1) {
       this.fields[i] = false;
     }
-    this.towerSelected = false;
+    this.bridgeSelected = false;
     this.usedFields = new Set();
   }
 
-  selectTower():void { // select the tower in the inventory
-    if (this.towerSelected) {
-      this.towerSelected = false;
+  selectBridge():void { // select the bridge in the inventory
+    if (this.bridgeSelected) {
+      this.bridgeSelected = false;
     } else {
-      this.towerSelected = true;
+      this.bridgeSelected = true;
     }
   }
 }
 </script>
+<style scoped>
+.square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>

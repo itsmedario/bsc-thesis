@@ -1,13 +1,13 @@
 <template>
   <div>
     <Game
-     :type="'Towers'"
-     :level="1"
+     :type="'Kiosks'"
+     :level="2"
      :language="language"
     >
-      <p class="title" slot="title">{{ text.tasks.checkTowers.title }}</p>
-      <p class="card description" slot="intro">{{ text.tasks.checkTowers.intro }}</p>
-      <p slot="description">{{ text.tasks.checkTowers.description }}</p>
+      <p class="title" slot="title">{{ text.tasks.buildKiosks.title }}</p>
+      <p class="card description" slot="intro">{{ text.tasks.buildKiosks.intro }}</p>
+      <p slot="description">{{ text.tasks.buildKiosks.description }}</p>
       <video loop controls muted slot="video">
         <source :src="require('@/assets/tutorials/add-weights.mp4')" />
         Your browser does not support the video tag.
@@ -27,7 +27,7 @@ import Game from '../components/Game.vue';
   },
 })
 
-export default class CheckBridges extends Vue {
+export default class BuildKiosks extends Vue {
   @Prop({ required: true })
   language!: string;
 

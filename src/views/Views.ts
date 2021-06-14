@@ -70,6 +70,14 @@ const views: Array<{
     view: 'OptimizeWeights',
     component: 'OptimizeWeights',
   },
+  {
+    id: 9,
+    path: '/build-kiosks',
+    title: 'Kioske bauen',
+    img: 'bridges/kiosk_true.png',
+    view: 'BuildKiosks',
+    component: 'BuildKiosks',
+  },
 ];
 
 export default views;

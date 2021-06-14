@@ -40,6 +40,7 @@
           </router-link>
         </div>
       </div>
+      <hr style="height:1px; border-width:0x; color:black; background-color:black">
       <a href="#start" id="top-button">
         <button class="card clickable">
           {{ text.pages.home.top }}

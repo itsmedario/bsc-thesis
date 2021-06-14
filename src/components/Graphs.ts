@@ -79,6 +79,7 @@ class Graph {
     // if every vertex has a marked neighbor, the set is empty
     const solution = coveredVertices.size === this.numberOfVertices;
     console.log(coveredVertices.size);
+    console.log(this.numberOfVertices);
 
     return solution;
   }

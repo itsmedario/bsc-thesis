@@ -1,86 +1,26 @@
-<template>
-  <div class="tower-game">
-    <div class="map-container">
-      <div id="i" v-for="i in nrOfFields" :key="i" class="square" :class="getClass(i - 1)"
-           @click="fieldClicked(i - 1)" @dragover.prevent
-           @drop.stop.prevent="dropTower(i - 1)">
-            <img :src="require(`@/assets/bridges/kiosk_${fields[i - 1]}.png`)"
-            style="width:40%" draggable="true"
-            @dragstart="fieldClicked(i - 1); towerSelected = true">
-      </div>
-    </div>
-    <div class="tower-field card clickable"
-     @click="selectTower()"
-     @dragstart="towerSelected = true" draggable="false"
-     :class="{ selected: towerSelected == true }">
-      <img :src="require('/src/assets/bridges/kiosk_true.png')" draggable="true">
-    </div>
-  </div>
-</template>
-
 <script lang="ts">
 /* eslint-disable no-restricted-syntax */
-import { Component, Vue, Prop } from 'vue-property-decorator';
-import Graph from '@/components/towers/Graphs';
+import { Component } from 'vue-property-decorator';
+import KiosksTemplate from '@/components/kiosks/KiosksTemplate.vue';
+import Graph from '@/components/Graphs';
 
 @Component({
-  components: {},
+  components: {
+    KiosksTemplate,
+  },
 })
 
-export default class Map5 extends Vue {
-  @Prop({ required: true })
-  level!: number;
-
-  @Prop({ required: true })
-  language!: string;
-
-  // eslint-disable-next-line global-require, import/no-dynamic-require
-  text = require(`@/text_${this.language}.json`);
-
+export default class Map5 extends KiosksTemplate {
   availableKiosks = 5;
 
   nrOfFields = 10;
 
   map = new Graph(this.nrOfFields);
 
-  usedFields = new Set();
-
-  towerSelected = false;
-
   fields = [false, false, false, false, false, false, false, false, false, false];
 
-  isVC = false;
-
-  beforeMount():void {
-    this.initGraph();
-  }
-
-  checkSolution(level:number):void {
-    const arr = Array.from(this.usedFields);
-    if (this.map.isVertexCover(arr)) {
-      this.$emit('correct-solution');
-    } else {
-      this.$emit('false-solution', this.text.tasks.buildTowers.tips.tip1);
-    }
-    this.initGraph();
-  }
-
-  dropTower(i:number):void {
-    this.towerSelected = true; // ensure propagation
-    this.fields[i] = true;
-    this.usedFields.add(i);
-    this.towerSelected = false; // ensure propagation
-    this.checkSolution(this.level);
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  getClass(i:number):string {
-    // eslint-disable-next-line prefer-template
-    return 'f' + i;
-  }
-
   initGraph():void {
-    for (let i = 0; i < 10; i += 1) {
+    for (let i = 0; i < this.nrOfFields; i += 1) {
       this.map.addVertex(i);
     }
     this.map.addEdge(1, 2);
@@ -97,36 +37,6 @@ export default class Map5 extends Vue {
     this.map.addEdge(4, 8);
     this.map.addEdge(5, 9);
     this.map.addEdge(6, 9);
-  }
-
-  fieldClicked(i:number):void {
-    if (this.towerSelected) {
-      this.dropTower(i);
-    } else if (this.fields[i]) {
-      this.towerSelected = true; // ensure propagation
-      this.fields[i] = false;
-      this.usedFields.delete(i);
-      this.towerSelected = false; // ensure propagation
-      this.checkSolution(this.level);
-    }
-  }
-
-  nextTask():void {
-    this.restart();
-  }
-
-  restart():void {
-    this.fields = [false, false, false, false, false, false, false, false, false, false];
-    this.towerSelected = false;
-    this.usedFields = new Set();
-  }
-
-  selectTower():void { // select the tower in the inventory
-    if (this.towerSelected) {
-      this.towerSelected = false;
-    } else {
-      this.towerSelected = true;
-    }
   }
 }
 </script>
@@ -200,8 +110,8 @@ export default class Map5 extends Vue {
   background-image: url('maps/map8.png');
   background-repeat: no-repeat;
   background-size: cover;
-  min-width: 500px;
-  min-height: 265px;
+  min-width: 250;
+  min-height: 132.5px;
   width: 60vw;
   height: 31.5vw;
 }
@@ -221,7 +131,7 @@ export default class Map5 extends Vue {
   height: auto;
 }
 
-.tower-field {
+.kiosk-field {
   height: 15% !important;
   width: 10% !important;
   max-height: 120px;
@@ -229,12 +139,12 @@ export default class Map5 extends Vue {
   padding: 1em 0 !important;
 }
 
-.tower-field img {
+.kiosk-field img {
   width: 60%;
   height: auto;
 }
 
-.tower-game {
+.kiosk-game {
   position: relative;
   display: flex;
   justify-content: center;

@@ -13,7 +13,7 @@
             "descrption": "Diese Lernumgebung wurde im Zusammenhang mit dem Buch 'einfach Informatik 3/4' erstellt. Feedback ist sehr erwünscht: dnaepfer@student.ethz.ch",
             "author": "Autor: Dario Naepfer",
             "oldVersion": "Version 2.6 -- Neu: Überarbeitete Navigationsbar und erweiterte Graphenklasse mit verschiedenen Algos",
-            "version": "Version 2.7 -- Neu: Das erste Spiel der Türme-Serie ist fertig!"
+            "version": "Version 2.7 -- Neu: Das erste Spiel der Türme-Serie ist fertig! Die erste Aufgabe zu den Kiosken ist in der Testphase"
         },
         "notFound": {
             "title": "Seite nicht gefunden! Error 404",
@@ -92,7 +92,7 @@
         },
         "checkTowers":  {
             "id": 5,
-            "path": "/check-towers",
+            "path": "/*check-towers",
             "img": "/bridges/tower.png",
             "title":  "Türme überprüfen",
             "intro": "Überprüfe, ob die Türme so gesetzt sind, dass man mit den Türmen alle Kanäle überwachen kann.",
@@ -109,7 +109,29 @@
             "intro": "Setze die Türme so, dass man mit den Türmen alle Kanäle überwachen kann.",
             "description": "Setze die Türme so, dass man mit den Türmen alle Kanäle überwachen kann: Klicke auf einen Turm und ziehe ihn an den gewünschten Platz. Klicke auf einen Turm, um ihn wieder aus der Landschaft zu entfernen. Viel Erfolg!",
             "tips": {
-                "tip1": "Hier in der Nähe wird ein Kanal noch nicht überwacht: Feld "
+                "tip1": "Sind wirklich alle Kanäle überwacht?"
+            }
+        },
+        "buildKiosks":  {
+            "id": 7,
+            "path": "/build-kiosks",
+            "img": "/bridges/kiosk_true.png",
+            "title":  "Kioske bauen",
+            "intro": "Setze die Kioske so, dass jedes Dorf selbst oder in der Nähe einen Kiosk hat.",
+            "description": "Setze die Kioske so, dass in jedem Dorf entweder selbst ein Kiosk steht oder in einem Nachbardorf: Klicke auf einen Kiosk und ziehe ihn an den gewünschten Platz. Klicke auf einen Kiosk, um ihn wieder aus der Landschaft zu entfernen. Viel Erfolg!",
+            "tips": {
+                "tip1": "Noch nicht alle Dörfer haben einen Kiosk in der Nähe!"
+            }
+        },
+        "buildBridges":  {
+            "id": 8,
+            "path": "/*build-bridges",
+            "img": "/bridges/bridge.png",
+            "title":  "Brücken bauen",
+            "intro": "Baue die Brücken so, dass man alle Inseln verbunden sind.",
+            "description": "Baue die Brücken so, dass von jeder Insel zu allen anderen Inseln gehen kann: Klicke auf die Brücke und ziehe sie an den gewünschten Platz. Klicke auf eine Brücke, um sie wieder aus der Landschaft zu entfernen. Viel Erfolg!",
+            "tips": {
+                "tip1": "Noch nicht alle Inseln sind verbunden!"
             }
         }
     }

@@ -12,7 +12,9 @@
 <script lang="ts">
 /* eslint-disable no-restricted-syntax */
 import { Component, Vue, Prop } from 'vue-property-decorator';
-import Map20 from '@/components/towers/Map20.vue';
+import Map3 from '@/components/kiosks/Map3.vue';
+import Map5 from '@/components/kiosks/Map5.vue';
+/* import Map20 from '@/components/towers/Map20.vue';
 import Map21 from '@/components/towers/Map21.vue';
 import Map22 from '@/components/towers/Map22.vue';
 import Map23 from '@/components/towers/Map23.vue';
@@ -21,12 +23,13 @@ import Map25 from '@/components/towers/Map25.vue';
 import Map26 from '@/components/towers/Map26.vue';
 import Map27 from '@/components/towers/Map27.vue';
 import Map28 from '@/components/towers/Map28.vue';
-import Map29 from '@/components/towers/Map29.vue';
-import Map30 from '@/components/towers/Map30.vue';
+import Map29 from '@/components/towers/Map29.vue'; */
 
 @Component({
   components: {
-    Map20,
+    Map3,
+    Map5,
+    /* Map20,
     Map21,
     Map22,
     Map23,
@@ -35,12 +38,11 @@ import Map30 from '@/components/towers/Map30.vue';
     Map26,
     Map27,
     Map28,
-    Map29,
-    Map30,
+    Map29, */
   },
 })
 
-export default class Towers extends Vue {
+export default class Kiosks extends Vue {
   @Prop({ required: true })
   level!: number;
 
@@ -56,13 +58,17 @@ export default class Towers extends Vue {
 
   correctSolution = false;
 
-  maps = ['Map20', 'Map21', 'Map22', 'Map23', 'Map24', 'Map25', 'Map26', 'Map27', 'Map28', 'Map29', 'Map30'];
+  maps = ['Map5', 'Map3'];
+
+  // maps = ['Map1', 'Map5', 'Map2', 'Map3', 'Map4'];
+
+  maps2 = ['Map20', 'Map21', 'Map22', 'Map23', 'Map24', 'Map25', 'Map26', 'Map27', 'Map28', 'Map29'];
 
   checkSolution(level:number):void {
     if (this.correctSolution) {
       this.$emit('correct-solution');
     } else {
-      this.$emit('false-solution', this.text.tasks.buildTowers.tips.tip1);
+      this.$emit('false-solution', this.text.tasks.buildKiosks.tips.tip1);
     }
   }
 
@@ -102,7 +108,7 @@ export default class Towers extends Vue {
   height: auto;
 }
 
-.tower-field {
+.kiosk-field {
   height: 15% !important;
   width: 10% !important;
   max-height: 120px;
@@ -110,7 +116,7 @@ export default class Towers extends Vue {
   padding: 1em 0 !important;
 }
 
-.tower-field img {
+.kiosk-field img {
   width: 40%;
   height: auto;
 }

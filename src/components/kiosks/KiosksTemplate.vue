@@ -1,19 +1,19 @@
 <template>
-  <div class="tower-game">
+  <div class="kiosk-game">
     <div class="map-container">
       <div id="i" v-for="i in nrOfFields" :key="i" class="square" :class="getClass(i - 1)"
            @click="fieldClicked(i - 1)" @dragover.prevent
-           @drop.stop.prevent="dropTower(i - 1)">
-            <img :src="require(`@/assets/bridges/tower_${fields[i - 1]}.png`)"
+           @drop.stop.prevent="dropKiosk(i - 1)">
+            <img :src="require(`@/assets/bridges/kiosk_${fields[i - 1]}.png`)"
             draggable="true"
-            @dragstart="fieldClicked(i - 1); towerSelected = true">
+            @dragstart="fieldClicked(i - 1); kioskSelected = true">
       </div>
     </div>
-    <div class="tower-field card clickable" v-if="level !== 1"
-     @click="selectTower()"
-     @dragstart="towerSelected = true" draggable="false"
-     :class="{ selected: towerSelected == true }">
-      <img :src="require('/src/assets/bridges/tower.png')" draggable="true">
+    <div class="kiosk-field card clickable" v-if="level !== 1"
+     @click="selectKiosk()"
+     @dragstart="kioskSelected = true" draggable="false"
+     :class="{ selected: kioskSelected == true }">
+      <img :src="require('/src/assets/bridges/kiosk_true.png')" draggable="true">
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@ import Graph from '@/components/Graphs';
   components: {},
 })
 
-export default class TowersTemplate extends Vue {
+export default class KiosksTemplate extends Vue {
   @Prop({ required: true })
   level!: number;
 
@@ -37,7 +37,7 @@ export default class TowersTemplate extends Vue {
   // eslint-disable-next-line global-require, import/no-dynamic-require
   text = require(`@/text_${this.language}.json`);
 
-  availableTowers = 0;
+  availableKiosks = 0;
 
   nrOfFields = 0;
 
@@ -45,7 +45,7 @@ export default class TowersTemplate extends Vue {
 
   usedFields = new Set();
 
-  towerSelected = false;
+  kioskSelected = false;
 
   fields = [false];
 
@@ -55,19 +55,19 @@ export default class TowersTemplate extends Vue {
 
   checkSolution(level:number):void {
     const arr = Array.from(this.usedFields);
-    if (this.map.isVertexCover(arr)) {
+    if (this.map.isDominatingSet(arr)) {
       this.$emit('correct-solution');
     } else {
-      this.$emit('false-solution', this.text.tasks.buildTowers.tips.tip1);
+      this.$emit('false-solution', this.text.tasks.buildKiosks.tips.tip1);
     }
     this.initGraph();
   }
 
-  dropTower(i:number):void {
-    this.towerSelected = true; // ensure propagation
+  dropKiosk(i:number):void {
+    this.kioskSelected = true; // ensure propagation
     this.fields[i] = true;
     this.usedFields.add(i);
-    this.towerSelected = false; // ensure propagation
+    this.kioskSelected = false; // ensure propagation
     this.checkSolution(this.level);
   }
 
@@ -89,13 +89,13 @@ export default class TowersTemplate extends Vue {
   }
 
   fieldClicked(i:number):void {
-    if (this.towerSelected && this.level !== 1) {
-      this.dropTower(i);
+    if (this.kioskSelected && this.level !== 1) {
+      this.dropKiosk(i);
     } else if (this.fields[i] && this.level !== 1) {
-      this.towerSelected = true; // ensure propagation
+      this.kioskSelected = true; // ensure propagation
       this.fields[i] = false;
       this.usedFields.delete(i);
-      this.towerSelected = false; // ensure propagation
+      this.kioskSelected = false; // ensure propagation
       this.checkSolution(this.level);
     }
   }
@@ -104,15 +104,15 @@ export default class TowersTemplate extends Vue {
     for (let i = 0; i < this.fields.length; i += 1) {
       this.fields[i] = false;
     }
-    this.towerSelected = false;
+    this.kioskSelected = false;
     this.usedFields = new Set();
   }
 
-  selectTower():void { // select the tower in the inventory
-    if (this.towerSelected) {
-      this.towerSelected = false;
+  selectKiosk():void { // select the kiosk in the inventory
+    if (this.kioskSelected) {
+      this.kioskSelected = false;
     } else {
-      this.towerSelected = true;
+      this.kioskSelected = true;
     }
   }
 }

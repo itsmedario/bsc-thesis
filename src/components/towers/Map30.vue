@@ -19,62 +19,21 @@
 
 <script lang="ts">
 /* eslint-disable no-restricted-syntax */
-import { Component, Vue, Prop } from 'vue-property-decorator';
-import Graph from '@/components/towers/Graphs';
+import { Component } from 'vue-property-decorator';
+import TowersTemplate from '@/components/towers/TowersTemplate.vue';
 
 @Component({
-  components: {},
+  components: {
+    TowersTemplate,
+  },
 })
 
-export default class Map4 extends Vue {
-  @Prop({ required: true })
-  level!: number;
-
-  @Prop({ required: true })
-  language!: string;
-
-  // eslint-disable-next-line global-require, import/no-dynamic-require
-  text = require(`@/text_${this.language}.json`);
-
+export default class Map4 extends TowersTemplate {
   availableTowers = 4;
 
   nrOfFields = 9;
 
-  map = new Graph(this.nrOfFields);
-
-  usedFields = new Set();
-
-  towerSelected = false;
-
   fields = [false, false, false, false, false, false, false, false, false];
-
-  beforeMount():void {
-    this.initGraph();
-  }
-
-  checkSolution(level:number):void {
-    const arr = Array.from(this.usedFields);
-    if (this.map.isVertexCover(arr)) {
-      this.$emit('correct-solution');
-    } else {
-      this.$emit('false-solution', this.text.tasks.buildTowers.tips.tip1);
-    }
-    this.initGraph();
-  }
-
-  dropTower(i:number):void {
-    this.towerSelected = true; // ensure propagation
-    this.fields[i] = true;
-    this.usedFields.add(i);
-    this.towerSelected = false; // ensure propagation
-    this.checkSolution(this.level);
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  getClass(i:number):string {
-    // eslint-disable-next-line prefer-template
-    return 'f' + i;
-  }
 
   initGraph():void {
     for (let i = 0; i < 9; i += 1) {
@@ -91,36 +50,6 @@ export default class Map4 extends Vue {
     this.map.addEdge(3, 6);
     this.map.addEdge(4, 7);
     this.map.addEdge(5, 7);
-  }
-
-  fieldClicked(i:number):void {
-    if (this.towerSelected) {
-      this.dropTower(i);
-    } else if (this.fields[i]) {
-      this.towerSelected = true; // ensure propagation
-      this.fields[i] = false;
-      this.usedFields.delete(i);
-      this.towerSelected = false; // ensure propagation
-      this.checkSolution(this.level);
-    }
-  }
-
-  nextTask():void {
-    this.restart();
-  }
-
-  restart():void {
-    this.fields = [false, false, false, false, false, false, false, false, false];
-    this.towerSelected = false;
-    this.usedFields = new Set();
-  }
-
-  selectTower():void { // select the tower in the inventory
-    if (this.towerSelected) {
-      this.towerSelected = false;
-    } else {
-      this.towerSelected = true;
-    }
   }
 }
 </script>

@@ -1,46 +1,30 @@
 <script lang="ts">
 /* eslint-disable no-restricted-syntax */
 import { Component } from 'vue-property-decorator';
-import KiosksTemplate from '@/components/kiosks/KiosksTemplate.vue';
+import BridgesTemplate from '@/components/bridges/BridgesTemplate.vue';
 import Graph from '@/components/Graphs';
 
 @Component({
   components: {
-    KiosksTemplate,
+    BridgesTemplate,
   },
 })
 
-export default class Map3 extends KiosksTemplate {
-  availableKiosks = 8;
+export default class Map1 extends BridgesTemplate {
+  availableBridges = 8;
 
-  nrOfFields = 11;
+  nrOfFields = 15;
 
   map = new Graph(this.nrOfFields);
 
-  fields = [false, false, false, false, false, false, false, false, false, false, false];
+  // eslint-disable-next-line max-len
+  fields = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
 
   initGraph():void {
     for (let i = 0; i < this.nrOfFields; i += 1) {
       this.map.addVertex(i);
     }
     this.map.addEdge(0, 1);
-    this.map.addEdge(1, 2);
-    this.map.addEdge(3, 4);
-    this.map.addEdge(4, 5);
-    this.map.addEdge(5, 6);
-    this.map.addEdge(6, 7);
-    this.map.addEdge(8, 9);
-    this.map.addEdge(9, 10);
-    this.map.addEdge(0, 4);
-    this.map.addEdge(1, 5);
-    this.map.addEdge(2, 6);
-    this.map.addEdge(4, 8);
-    this.map.addEdge(5, 9);
-    this.map.addEdge(6, 10);
-    this.map.addEdge(0, 3);
-    this.map.addEdge(3, 8);
-    this.map.addEdge(2, 7);
-    this.map.addEdge(7, 10);
   }
 }
 </script>
@@ -50,84 +34,108 @@ export default class Map3 extends KiosksTemplate {
 
 .f0 {
   position: absolute;
-  left: 26%;
-  top: 6%;
+  left: 27%;
+  top: 5%;
 }
 
 .f1 {
   position: absolute;
-  left: 47%;
-  top: 7%;
+  left: 44%;
+  top: 19%;
 }
 
 .f2 {
   position: absolute;
-  left: 67%;
-  top: 6%;
+  left: 58%;
+  top: 13%;
 }
 
 .f3 {
   position: absolute;
-  left: 5%;
-  top: 43%;
+  left: 34%;
+  top: 28%;
 }
 
 .f4 {
   position: absolute;
-  left: 26%;
-  top: 43%;
+  left: 56%;
+  top: 31%;
 }
 
 .f5 {
   position: absolute;
-  left: 47%;
-  top: 43%;
+  left: 20%;
+  top: 34%;
 }
 
 .f6 {
   position: absolute;
   left: 68%;
-  top: 43%;
+  top: 36%;
 }
 
 .f7 {
   position: absolute;
-  left: 88%;
-  top: 43%;
+  left: 31%;
+  top: 50%;
 }
 
 .f8 {
   position: absolute;
-  left: 26%;
-  top: 80%;
+  left: 40%;
+  top: 60%;
 }
 
 .f9 {
   position: absolute;
-  left: 46%;
-  top: 80%;
+  left: 57%;
+  top: 47%;
 }
 
 .f10 {
   position: absolute;
-  left: 67%;
-  top: 80%;
+  left: 24%;
+  top: 60%;
+}
+
+.f11 {
+  position: absolute;
+  left: 6%;
+  top: 47%;
+}
+
+.f12 {
+  position: absolute;
+  left: 34%;
+  top: 83%;
+}
+
+.f13 {
+  position: absolute;
+  left: 52%;
+  top: 58%;
+}
+
+.f14 {
+  position: absolute;
+  left: 77%;
+  top: 55%;
 }
 
 .map-container {
   position: relative;
   align-content: center;
-  background-image: url('maps/map5.png');
+  background-image: url('maps/map1.png');
   background-repeat: no-repeat;
   background-size: cover;
-  min-width: 453px;
-  min-height: 228px;
-  width: 60vw;
-  height: 30vw;
+  min-width: 200px;
+  min-height: 128px;
+  width: 50vw;
+  height: 32vw;
 }
 
 .square {
-  border: 0px dashed #324197;
+  border: 2px dashed #324197;
   background: none;
   border-radius: 25px;
   min-width: 20px;
@@ -141,7 +149,7 @@ export default class Map3 extends KiosksTemplate {
   height: auto;
 }
 
-.kiosk-field {
+.bridge-field {
   height: 15% !important;
   width: 10% !important;
   max-height: 120px;
@@ -149,12 +157,12 @@ export default class Map3 extends KiosksTemplate {
   padding: 1em 0 !important;
 }
 
-.kiosk-field img {
+.bridge-field img {
   width: 60%;
   height: auto;
 }
 
-.kiosk-game {
+.bridge-game {
   position: relative;
   display: flex;
   justify-content: center;
