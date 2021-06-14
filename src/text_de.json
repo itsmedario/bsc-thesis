@@ -12,8 +12,8 @@
             "title": "Impressum",
             "descrption": "Diese Lernumgebung wurde im Zusammenhang mit dem Buch 'einfach Informatik 3/4' erstellt. Feedback ist sehr erwünscht: dnaepfer@student.ethz.ch",
             "author": "Autor: Dario Naepfer",
-            "oldVersion": "Version 2.4 -- Neu: Verbesserte Grafiken, angepasste Texte, überarbeiteter Source-Code",
-            "version": "Version 2.6 -- Neu: Kioske und Türme Test-Aufgaben, erweiterte Graphenklasse mit verschiedenen Algos"
+            "oldVersion": "Version 2.6 -- Neu: Überarbeitete Navigationsbar und erweiterte Graphenklasse mit verschiedenen Algos",
+            "version": "Version 2.7 -- Neu: Das erste Spiel der Türme-Serie ist fertig!"
         },
         "notFound": {
             "title": "Seite nicht gefunden! Error 404",

@@ -10,36 +10,27 @@ import TowersTemplate from '@/components/towers/TowersTemplate.vue';
 })
 
 // TowersTemplate contains all important functions for the Tower game
-export default class Map1 extends TowersTemplate {
+export default class Map28 extends TowersTemplate {
   availableTowers = 6;
 
-  nrOfFields = 9;
+  nrOfFields = 7;
 
-  fields = [false, false, false, false, false, false, false, false, false];
+  fields = [false, false, false, false, false, false, false];
 
   initGraph():void {
     for (let i = 0; i < this.nrOfFields; i += 1) {
       this.map.addVertex(i);
     }
+    // Skizze 8: 7 Knoten, Start oben links nach unten rechts
     this.map.addEdge(0, 1);
-    this.map.addEdge(1, 2);
-    this.map.addEdge(3, 4);
-    this.map.addEdge(4, 5);
-    this.map.addEdge(6, 7);
-    this.map.addEdge(7, 8);
     this.map.addEdge(0, 3);
-    this.map.addEdge(1, 4);
+    this.map.addEdge(1, 3);
+    this.map.addEdge(2, 3);
+    this.map.addEdge(3, 4);
     this.map.addEdge(2, 5);
+    this.map.addEdge(3, 5);
     this.map.addEdge(3, 6);
-    this.map.addEdge(4, 7);
-    this.map.addEdge(5, 8);
-    this.map.addEdge(0, 6);
-    this.map.addEdge(2, 8);
-
-    /* if (this.level === 1) {
-      this.fields = this.map.createProposition(5, 7);
-      console.log(this.fields);
-    } */
+    this.map.addEdge(4, 6);
   }
 }
 </script>
@@ -49,76 +40,64 @@ export default class Map1 extends TowersTemplate {
 
 .f0 {
   position: absolute;
-  left: 14%;
-  top: 4%;
+  left: 28.9%;
+  top: 8%;
 }
 
 .f1 {
   position: absolute;
-  left: 47%;
-  top: 5%;
+  left: 63.9%;
+  top: 8%;
 }
 
 .f2 {
   position: absolute;
-  left: 78%;
-  top: 7%;
+  left: 6.7%;
+  top: 48%;
 }
 
 .f3 {
   position: absolute;
-  left: 16%;
-  top: 40%;
+  left: 46%;
+  top: 45.8%;
 }
 
 .f4 {
   position: absolute;
-  left: 47%;
-  top: 40%;
+  left: 85%;
+  top: 48%;
 }
 
 .f5 {
   position: absolute;
-  left: 76%;
-  top: 40%;
+  left: 25%;
+  top: 77%;
 }
 
 .f6 {
   position: absolute;
-  left: 15%;
-  top: 73%;
-}
-
-.f7 {
-  position: absolute;
-  left: 47%;
-  top: 74%;
-}
-
-.f8 {
-  position: absolute;
-  left: 78%;
-  top: 72%;
+  left: 69.3%;
+  top: 79%;
 }
 
 .map-container {
   position: relative;
   align-content: center;
-  background-image: url('maps/map3.png');
+  background-image: url('maps/map28.png');
   background-repeat: no-repeat;
   background-size: cover;
-  min-width: 541px;
-  min-height: 286px;
+  min-width: 200px;
+  min-height: 190.6px;
   width: 50vw;
-  height: 26vw;
+  height: 47.6vw;
 }
 
 .square {
-  border: 0px dashed #324197;
+  border: 2px dashed transparent;
   background: none;
   border-radius: 15px;
-  height: 18%;
-  width: 10%;
+  height: 10%;
+  width: 9%;
 }
 
 .square img {

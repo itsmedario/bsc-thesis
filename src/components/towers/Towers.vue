@@ -17,6 +17,16 @@ import Map2 from '@/components/towers/Map2.vue';
 import Map3 from '@/components/towers/Map3.vue';
 import Map4 from '@/components/towers/Map4.vue';
 import Map5 from '@/components/towers/Map5.vue';
+import Map20 from '@/components/towers/Map20.vue';
+import Map21 from '@/components/towers/Map21.vue';
+import Map22 from '@/components/towers/Map22.vue';
+import Map23 from '@/components/towers/Map23.vue';
+import Map24 from '@/components/towers/Map24.vue';
+import Map25 from '@/components/towers/Map25.vue';
+import Map26 from '@/components/towers/Map26.vue';
+import Map27 from '@/components/towers/Map27.vue';
+import Map28 from '@/components/towers/Map28.vue';
+import Map29 from '@/components/towers/Map29.vue';
 
 @Component({
   components: {
@@ -25,6 +35,16 @@ import Map5 from '@/components/towers/Map5.vue';
     Map3,
     Map4,
     Map5,
+    Map20,
+    Map21,
+    Map22,
+    Map23,
+    Map24,
+    Map25,
+    Map26,
+    Map27,
+    Map28,
+    Map29,
   },
 })
 
@@ -44,7 +64,8 @@ export default class Towers extends Vue {
 
   correctSolution = false;
 
-  maps = ['Map1', 'Map5', 'Map2', 'Map3', 'Map4'];
+  // maps = ['Map1', 'Map5', 'Map2', 'Map3', 'Map4'];
+  maps = ['Map20', 'Map21', 'Map22', 'Map23', 'Map24', 'Map25', 'Map26', 'Map27', 'Map28', 'Map29'];
 
   checkSolution(level:number):void {
     if (this.correctSolution) {
@@ -59,7 +80,7 @@ export default class Towers extends Vue {
     if (this.level === 1) {
       this.reloadCounter += 1;
     } else {
-      this.counter = (this.counter + 1) % 5;
+      this.counter = (this.counter + 1) % this.maps.length;
     }
   }
 

@@ -10,7 +10,7 @@ import TowersTemplate from '@/components/towers/TowersTemplate.vue';
 })
 
 // TowersTemplate contains all important functions for the Tower game
-export default class Map1 extends TowersTemplate {
+export default class Map20 extends TowersTemplate {
   availableTowers = 6;
 
   nrOfFields = 9;
@@ -35,11 +35,6 @@ export default class Map1 extends TowersTemplate {
     this.map.addEdge(5, 8);
     this.map.addEdge(0, 6);
     this.map.addEdge(2, 8);
-
-    /* if (this.level === 1) {
-      this.fields = this.map.createProposition(5, 7);
-      console.log(this.fields);
-    } */
   }
 }
 </script>
@@ -104,7 +99,7 @@ export default class Map1 extends TowersTemplate {
 .map-container {
   position: relative;
   align-content: center;
-  background-image: url('maps/map3.png');
+  background-image: url('maps/map20.png');
   background-repeat: no-repeat;
   background-size: cover;
   min-width: 541px;

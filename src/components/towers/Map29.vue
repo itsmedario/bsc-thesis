@@ -10,7 +10,7 @@ import TowersTemplate from '@/components/towers/TowersTemplate.vue';
 })
 
 // TowersTemplate contains all important functions for the Tower game
-export default class Map1 extends TowersTemplate {
+export default class Map29 extends TowersTemplate {
   availableTowers = 6;
 
   nrOfFields = 9;
@@ -35,11 +35,6 @@ export default class Map1 extends TowersTemplate {
     this.map.addEdge(5, 8);
     this.map.addEdge(0, 6);
     this.map.addEdge(2, 8);
-
-    /* if (this.level === 1) {
-      this.fields = this.map.createProposition(5, 7);
-      console.log(this.fields);
-    } */
   }
 }
 </script>
@@ -49,68 +44,68 @@ export default class Map1 extends TowersTemplate {
 
 .f0 {
   position: absolute;
-  left: 14%;
-  top: 4%;
+  left: 5%;
+  top: 3%;
 }
 
 .f1 {
   position: absolute;
-  left: 47%;
+  left: 46%;
   top: 5%;
 }
 
 .f2 {
   position: absolute;
-  left: 78%;
+  left: 85%;
   top: 7%;
 }
 
 .f3 {
   position: absolute;
-  left: 16%;
+  left: 22%;
   top: 40%;
 }
 
 .f4 {
   position: absolute;
-  left: 47%;
-  top: 40%;
+  left: 46%;
+  top: 42%;
 }
 
 .f5 {
   position: absolute;
-  left: 76%;
-  top: 40%;
+  left: 69%;
+  top: 42%;
 }
 
 .f6 {
   position: absolute;
-  left: 15%;
-  top: 73%;
+  left: 5%;
+  top: 77%;
 }
 
 .f7 {
   position: absolute;
-  left: 47%;
-  top: 74%;
+  left: 46%;
+  top: 76%;
 }
 
 .f8 {
   position: absolute;
-  left: 78%;
-  top: 72%;
+  left: 85%;
+  top: 75%;
 }
 
 .map-container {
   position: relative;
   align-content: center;
-  background-image: url('maps/map3.png');
+  background-image: url('maps/map29.png');
   background-repeat: no-repeat;
   background-size: cover;
-  min-width: 541px;
-  min-height: 286px;
+  min-width: 539px;
+  min-height: 331px;
   width: 50vw;
-  height: 26vw;
+  height: 30.7vw;
 }
 
 .square {
