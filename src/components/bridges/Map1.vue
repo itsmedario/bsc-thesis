@@ -34,92 +34,116 @@ export default class Map1 extends BridgesTemplate {
 
 .f0 {
   position: absolute;
-  left: 27%;
-  top: 5%;
+  left: 26%;
+  top: 8.5%;
+  transform: rotate(295deg);
+  width: 14% !important;
 }
 
 .f1 {
   position: absolute;
   left: 44%;
-  top: 19%;
+  top: 24%;
+  transform: rotate(300deg);
 }
 
 .f2 {
   position: absolute;
-  left: 58%;
-  top: 13%;
+  left: 55%;
+  top: 20%;
+  transform: rotate(50deg);
 }
 
 .f3 {
   position: absolute;
-  left: 34%;
+  left: 32%;
   top: 28%;
+  transform: rotate(20deg);
 }
 
 .f4 {
   position: absolute;
-  left: 56%;
-  top: 31%;
+  left: 54%;
+  top: 37%;
+  transform: rotate(310deg);
+  width: 13% !important;
 }
 
 .f5 {
   position: absolute;
-  left: 20%;
-  top: 34%;
+  left: 18%;
+  top: 38%;
+  transform: rotate(290deg);
 }
 
 .f6 {
   position: absolute;
-  left: 68%;
-  top: 36%;
+  left: 65%;
+  top: 38.5%;
+  transform: rotate(70deg);
+  width: 13% !important;
 }
 
 .f7 {
   position: absolute;
-  left: 31%;
-  top: 50%;
+  left: 29%;
+  top: 52%;
+  transform: rotate(10deg);
 }
 
 .f8 {
   position: absolute;
-  left: 40%;
-  top: 60%;
+  left: 39%;
+  top: 64%;
+  transform: rotate(80deg);
+  width: 8% !important;
 }
 
 .f9 {
   position: absolute;
-  left: 57%;
-  top: 47%;
+  left: 54%;
+  top: 52%;
+  transform: rotate(25deg);
+  width: 12% !important;
 }
 
 .f10 {
   position: absolute;
-  left: 24%;
-  top: 60%;
+  left: 20.5%;
+  top: 66%;
+  transform: rotate(60deg);
 }
 
 .f11 {
   position: absolute;
   left: 6%;
-  top: 47%;
+  top: 53%;
+  transform: rotate(350deg);
+  width: 9% !important;
 }
 
 .f12 {
   position: absolute;
-  left: 34%;
-  top: 83%;
+  left: 44%;
+  top: 80%;
+  transform: rotate(40deg);
+  width: 9% !important;
 }
 
 .f13 {
   position: absolute;
-  left: 52%;
-  top: 58%;
+  left: 47%;
+  top: 64.5%;
+  transform: rotate(60deg);
+  width: 13% !important;
 }
 
 .f14 {
   position: absolute;
   left: 77%;
   top: 55%;
+  transform: rotate(25deg);
+  width: 9% !important;
 }
 
 .map-container {
@@ -140,13 +164,13 @@ export default class Map1 extends BridgesTemplate {
   border-radius: 25px;
   min-width: 20px;
   min-height: 20px;
-  height: 14% !important;
-  width: 7% !important;
+  height: 8%;
+  width: 11%;
 }
 
 .square img {
   width: 100% !important;
-  height: auto;
+  height: 60%;
 }
 
 .bridge-field {

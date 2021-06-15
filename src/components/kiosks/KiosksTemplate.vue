@@ -39,6 +39,8 @@ export default class KiosksTemplate extends Vue {
 
   availableKiosks = 0;
 
+  optimalNrOfKiosks = 0;
+
   nrOfFields = 0;
 
   map = new Graph(this.nrOfFields);
@@ -55,10 +57,21 @@ export default class KiosksTemplate extends Vue {
 
   checkSolution(level:number):void {
     const arr = Array.from(this.usedFields);
-    if (this.map.isDominatingSet(arr)) {
-      this.$emit('correct-solution');
-    } else {
-      this.$emit('false-solution', this.text.tasks.buildKiosks.tips.tip1);
+    const isDS = this.map.isDominatingSet(arr);
+    if (level === 2) {
+      if (isDS) {
+        this.$emit('correct-solution');
+      } else {
+        this.$emit('false-solution', this.text.tasks.buildKiosks.tips.tip1);
+      }
+    } else if (level === 4) {
+      if (isDS && this.optimalNrOfKiosks === this.usedFields.size) {
+        this.$emit('correct-solution');
+      } else if (isDS) {
+        this.$emit('false-solution', this.text.tasks.optimizeKiosks.tips.tip2);
+      } else {
+        this.$emit('false-solution', this.text.tasks.optimizeKiosks.tips.tip1);
+      }
     }
     this.initGraph();
   }

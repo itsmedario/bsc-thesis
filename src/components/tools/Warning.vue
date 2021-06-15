@@ -5,9 +5,11 @@
       <div class="modal-container" @mousedown.stop >
         <div class="modal-header">
           <p class="title">{{ text.game.warning.title }}</p>
-          <!--<button class="exit-button" style="margin:0.5em;" @click="$emit('close-tutorial')">
-           &times;
-           </button>-->
+          <a href="/home">
+            <button class="exit-button" style="margin:0.5em;" @click="$emit('close-tutorial')">
+            &times;
+            </button>
+          </a>
         </div>
         <div class="flex-item flex-center flex-space-between flex-col">
           {{ text.game.warning.info }}
@@ -47,7 +49,7 @@ export default class Warning extends Vue {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <Warning id="mobile-warning" :language="language"/>
     <!--<Header/>-->
     <router-view id="container"
      :language="language"
@@ -13,12 +12,10 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import Header from '@/components/layout/Header.vue';
-import Warning from '@/components/tools/Warning.vue';
 
 @Component({
   components: {
     Header,
-    Warning,
   },
 })
 
@@ -219,7 +216,7 @@ video {
         }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 700px) {
   #mobile-warning { display: block !important; }
 }
 

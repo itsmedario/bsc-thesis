@@ -1,5 +1,6 @@
 <template>
   <div id="game">
+    <Warning id="mobile-warning" :language="language"/>
     <Tutorial
      :language="language"
      :show-modal=showTutorial
@@ -64,6 +65,7 @@ import Kiosks from '@/components/kiosks/Kiosks.vue';
 import Bridges from '@/components/bridges/Bridges.vue';
 import Weights from '@/components/weights/Weights.vue';
 import WeightCheck from '@/components/weights/WeightCheck.vue';
+import Warning from '@/components/tools/Warning.vue';
 
 @Component({
   components: {
@@ -75,6 +77,7 @@ import WeightCheck from '@/components/weights/WeightCheck.vue';
     Bridges,
     Weights,
     WeightCheck,
+    Warning,
   },
 })
 

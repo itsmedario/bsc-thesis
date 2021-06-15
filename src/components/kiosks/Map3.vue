@@ -13,6 +13,8 @@ import Graph from '@/components/Graphs';
 export default class Map3 extends KiosksTemplate {
   availableKiosks = 8;
 
+  optimalNrOfKiosks = 3;
+
   nrOfFields = 11;
 
   map = new Graph(this.nrOfFields);

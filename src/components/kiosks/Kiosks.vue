@@ -5,7 +5,7 @@
        :language="language"
        :level="level"
        @correct-solution="correctSolution = true"
-       @false-solution="correctSolution = false"/>
+       @false-solution="correctSolution = false; tip = $event"/>
     </div>
 </template>
 
@@ -58,6 +58,8 @@ export default class Kiosks extends Vue {
 
   correctSolution = false;
 
+  tip = '';
+
   maps = ['Map5', 'Map3'];
 
   // maps = ['Map1', 'Map5', 'Map2', 'Map3', 'Map4'];
@@ -68,7 +70,7 @@ export default class Kiosks extends Vue {
     if (this.correctSolution) {
       this.$emit('correct-solution');
     } else {
-      this.$emit('false-solution', this.text.tasks.buildKiosks.tips.tip1);
+      this.$emit('false-solution', this.tip);
     }
   }
 

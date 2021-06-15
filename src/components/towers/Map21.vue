@@ -13,6 +13,8 @@ import TowersTemplate from '@/components/towers/TowersTemplate.vue';
 export default class Map21 extends TowersTemplate {
   availableTowers = 5;
 
+  optimalNrOfTowers = 4;
+
   nrOfFields = 7;
 
   fields = [false, false, false, false, false, false, false];

@@ -5,7 +5,7 @@
        :language="language"
        :level="level"
        @correct-solution="correctSolution = true"
-       @false-solution="correctSolution = false"/>
+       @false-solution="correctSolution = false; tip = $event"/>
     </div>
 </template>
 
@@ -56,13 +56,15 @@ export default class Towers extends Vue {
 
   correctSolution = false;
 
+  tip = '';
+
   maps = ['Map20', 'Map21', 'Map22', 'Map23', 'Map24', 'Map25', 'Map26', 'Map27', 'Map28', 'Map29', 'Map30'];
 
   checkSolution(level:number):void {
     if (this.correctSolution) {
       this.$emit('correct-solution');
     } else {
-      this.$emit('false-solution', this.text.tasks.buildTowers.tips.tip1);
+      this.$emit('false-solution', this.tip);
     }
   }
 

@@ -78,6 +78,22 @@ const views: Array<{
     view: 'BuildKiosks',
     component: 'BuildKiosks',
   },
+  {
+    id: 9,
+    path: '/optimize-towers',
+    title: 'Türme optimal verteilen',
+    img: 'bridges/tower.png',
+    view: 'OptimizeTowers',
+    component: 'OptimizeTowers',
+  },
+  {
+    id: 10,
+    path: '/optimize-kiosks',
+    title: 'Kioske optimal verteilen',
+    img: 'bridges/kiosk_true.png',
+    view: 'OptimizeKiosks',
+    component: 'OptimizeKiosks',
+  },
 ];
 
 export default views;

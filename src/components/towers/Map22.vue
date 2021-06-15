@@ -13,9 +13,11 @@ import TowersTemplate from '@/components/towers/TowersTemplate.vue';
 export default class Map22 extends TowersTemplate {
   availableTowers = 5;
 
+  optimalNrOfTowers = 3;
+
   nrOfFields = 6;
 
-  fields = [false, false, false, false, false, false, false, false];
+  fields = [false, false, false, false, false, false];
 
   initGraph():void {
     for (let i = 0; i < this.nrOfFields; i += 1) {

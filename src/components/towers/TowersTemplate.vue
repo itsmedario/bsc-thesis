@@ -39,6 +39,8 @@ export default class TowersTemplate extends Vue {
 
   availableTowers = 0;
 
+  optimalNrOfTowers = 0;
+
   nrOfFields = 0;
 
   map = new Graph(this.nrOfFields);
@@ -55,10 +57,21 @@ export default class TowersTemplate extends Vue {
 
   checkSolution(level:number):void {
     const arr = Array.from(this.usedFields);
-    if (this.map.isVertexCover(arr)) {
-      this.$emit('correct-solution');
-    } else {
-      this.$emit('false-solution', this.text.tasks.buildTowers.tips.tip1);
+    const isVC = this.map.isVertexCover(arr);
+    if (level === 2) {
+      if (isVC) {
+        this.$emit('correct-solution');
+      } else {
+        this.$emit('false-solution', this.text.tasks.buildTowers.tips.tip1);
+      }
+    } else if (level === 4) {
+      if (isVC && this.optimalNrOfTowers === this.usedFields.size) {
+        this.$emit('correct-solution');
+      } else if (isVC) {
+        this.$emit('false-solution', this.text.tasks.optimizeTowers.tips.tip2);
+      } else {
+        this.$emit('false-solution', this.text.tasks.optimizeTowers.tips.tip1);
+      }
     }
     this.initGraph();
   }
