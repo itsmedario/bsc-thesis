@@ -9,11 +9,18 @@
             @dragstart="fieldClicked(i - 1); towerSelected = true">
       </div>
     </div>
-    <div class="tower-field card clickable" v-if="level !== 1"
-     @click="selectTower()"
-     @dragstart="towerSelected = true" draggable="false"
-     :class="{ selected: towerSelected == true }">
-      <img :src="require('/src/assets/bridges/tower.png')" draggable="true">
+    <div class="item-stock">
+      <div class="tower-field card clickable" v-if="level !== 1"
+      @click="selectTower()"
+      @dragstart="towerSelected = true" draggable="false"
+      :class="{ locked: availableTowers < 1 && level != 4,
+       selected: towerSelected == true && (level == 4 || availableTowers >= 1)}">
+        <img :src="require('/src/assets/bridges/tower.png')"
+         :draggable="availableTowers >= 1 || level == 4">
+      </div>
+      <div class="card item-display" v-if="level !== 4">
+        <div>{{ availableTowers }}&#215;</div>
+      </div>
     </div>
   </div>
 </template>
@@ -77,11 +84,14 @@ export default class TowersTemplate extends Vue {
   }
 
   dropTower(i:number):void {
-    this.towerSelected = true; // ensure propagation
-    this.fields[i] = true;
-    this.usedFields.add(i);
-    this.towerSelected = false; // ensure propagation
-    this.checkSolution(this.level);
+    if (this.level === 4 || this.availableTowers > 0) {
+      this.towerSelected = true; // ensure propagation
+      this.fields[i] = true;
+      this.usedFields.add(i);
+      this.towerSelected = false; // ensure propagation
+      this.checkSolution(this.level);
+      this.availableTowers -= 1;
+    }
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -108,6 +118,7 @@ export default class TowersTemplate extends Vue {
       this.towerSelected = true; // ensure propagation
       this.fields[i] = false;
       this.usedFields.delete(i);
+      this.availableTowers += 1;
       this.towerSelected = false; // ensure propagation
       this.checkSolution(this.level);
     }

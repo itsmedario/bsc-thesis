@@ -58,7 +58,7 @@ export default class Towers extends Vue {
 
   tip = '';
 
-  maps = ['Map20', 'Map21', 'Map22', 'Map23', 'Map24', 'Map25', 'Map26', 'Map27', 'Map28', 'Map29', 'Map30'];
+  maps = ['Map20', 'Map21', 'Map22', 'Map23', 'Map24', 'Map25', 'Map26', 'Map27', 'Map28', 'Map29'/* , 'Map30' */];
 
   checkSolution(level:number):void {
     if (this.correctSolution) {

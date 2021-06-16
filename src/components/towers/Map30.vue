@@ -148,6 +148,7 @@ export default class Map4 extends TowersTemplate {
 .tower-field img {
   width: 38%;
   height: auto;
+  padding: 0.5em;
 }
 
 .tower-game {

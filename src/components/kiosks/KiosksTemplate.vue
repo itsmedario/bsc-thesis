@@ -1,5 +1,5 @@
 <template>
-  <div class="kiosk-game">
+  <div class="tower-game">
     <div class="map-container">
       <div id="i" v-for="i in nrOfFields" :key="i" class="square" :class="getClass(i - 1)"
            @click="fieldClicked(i - 1)" @dragover.prevent
@@ -9,11 +9,18 @@
             @dragstart="fieldClicked(i - 1); kioskSelected = true">
       </div>
     </div>
-    <div class="kiosk-field card clickable" v-if="level !== 1"
-     @click="selectKiosk()"
-     @dragstart="kioskSelected = true" draggable="false"
-     :class="{ selected: kioskSelected == true }">
-      <img :src="require('/src/assets/bridges/kiosk_true.png')" draggable="true">
+    <div class="item-stock">
+      <div class="kiosk-field card clickable" v-if="level !== 1"
+      @click="selectKiosk()"
+      @dragstart="kioskSelected = true" draggable="false"
+      :class="{ locked: availableKiosks < 1 && level != 4,
+        selected: kioskSelected == true }">
+        <img :src="require('/src/assets/bridges/kiosk_true.png')"
+         :draggable="availableKiosks >= 1  || level == 4">
+      </div>
+      <div class="card item-display" v-if="level !== 4">
+        <div>{{ availableKiosks }}&#215;</div>
+      </div>
     </div>
   </div>
 </template>
@@ -77,11 +84,14 @@ export default class KiosksTemplate extends Vue {
   }
 
   dropKiosk(i:number):void {
-    this.kioskSelected = true; // ensure propagation
-    this.fields[i] = true;
-    this.usedFields.add(i);
-    this.kioskSelected = false; // ensure propagation
-    this.checkSolution(this.level);
+    if (this.level === 4 || this.availableKiosks > 0) {
+      this.kioskSelected = true; // ensure propagation
+      this.fields[i] = true;
+      this.usedFields.add(i);
+      this.kioskSelected = false; // ensure propagation
+      this.checkSolution(this.level);
+      this.availableKiosks -= 1;
+    }
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -108,6 +118,7 @@ export default class KiosksTemplate extends Vue {
       this.kioskSelected = true; // ensure propagation
       this.fields[i] = false;
       this.usedFields.delete(i);
+      this.availableKiosks += 1;
       this.kioskSelected = false; // ensure propagation
       this.checkSolution(this.level);
     }

@@ -194,6 +194,24 @@ video {
 .selected {
   background: #4ea1ee !important;
 }
+
+.item-display {
+  height: 2em !important;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-stock {
+  position: relative;
+  height: 15% !important;
+  width: 10% !important;
+  max-height: 120px;
+  max-width: 90px;
+  padding: 1em 0 !important;
+}
+
 .locked {
   background: rgb(184, 183, 183) !important;
 }

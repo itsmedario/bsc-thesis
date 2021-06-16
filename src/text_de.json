@@ -1,5 +1,5 @@
 {
-    "info": "WICHTIG: Alle Einträge dieser JSON-Datei müssen in diesem Format vorhanden sein, damit eine vollständige Funktionalität garantiert werden kann.",
+    "info": "WICHTIG: Alle Einträge dieser JSON-Datei müssen in diesem Format vorhanden sein, damit eine vollständige Funktionalität gewährleistet werden kann.",
     "title": "einfach Informatik 3/4",
     "pages": {
         "home": {
@@ -12,8 +12,8 @@
             "title": "Impressum",
             "descrption": "Diese Lernumgebung wurde im Zusammenhang mit dem Buch 'einfach Informatik 3/4' erstellt. Feedback ist sehr erwünscht: dnaepfer@student.ethz.ch",
             "author": "Autor: Dario Naepfer",
-            "oldVersion": "Version 2.6 -- Neu: Überarbeitete Navigationsbar und erweiterte Graphenklasse mit verschiedenen Algos",
-            "version": "Version 2.7 -- Neu: Das erste Spiel der Türme-Serie ist fertig! Die erste Aufgabe zu den Kiosken ist in der Testphase"
+            "oldVersion": "",
+            "version": "Version 3.0 - Neu: Jeweils 2 Spiele der zweiten und der dritten Spiele-Serie sind fertig!"
         },
         "notFound": {
             "title": "Seite nicht gefunden! Error 404",
@@ -122,6 +122,18 @@
             "tips": {
                 "tip1": "Sind wirklich alle Kanäle überwacht?",
                 "tip2": "Findest du eine Lösung, bei der du weniger Türme verwendest?"
+            }
+        },
+        "optimizeKiosks":  {
+            "id": 10,
+            "path": "/optimize-kiosks",
+            "img": "/bridges/kiosk_true.png",
+            "title":  "Kioske optimal verteilen",
+            "intro": "Benutze so wenig Kioske wie möglich, dass jedes Dorf selbst oder in der Nähe einen Kiosk hat.",
+            "description": "Setze die Kioske so, dass in jedem Dorf entweder selbst ein Kiosk steht oder in einem Nachbardorf: Klicke auf einen Kiosk und ziehe ihn an den gewünschten Platz. Klicke auf einen Kiosk, um ihn wieder aus der Landschaft zu entfernen. Versuche dabei, so wenig Kioske wie möglich zu verwenden. Viel Erfolg!",
+            "tips": {
+                "tip1": "Noch nicht alle Dörfer haben einen Kiosk in der Nähe!",
+                "tip2": "Findest du eine Lösung, bei der du weniger Kioske verwendest?"
             }
         }
     }

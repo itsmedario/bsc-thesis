@@ -10,35 +10,36 @@ import Graph from '@/components/Graphs';
   },
 })
 
-export default class Map5 extends KiosksTemplate {
-  availableKiosks = 5;
+export default class Map18 extends KiosksTemplate {
+  availableKiosks = 8;
 
-  optimalNrOfKiosks = 3;
+  optimalNrOfKiosks = 4;
 
-  nrOfFields = 10;
+  nrOfFields = 12;
 
   map = new Graph(this.nrOfFields);
 
-  fields = [false, false, false, false, false, false, false, false, false, false];
+  fields = [false, false, false, false, false, false, false, false, false, false, false, false];
 
   initGraph():void {
     for (let i = 0; i < this.nrOfFields; i += 1) {
       this.map.addVertex(i);
     }
+    // Map 8 - 12 vertices, v.o.l.n.u.r., min = 4
+    this.map.addEdge(0, 1);
     this.map.addEdge(1, 2);
-    this.map.addEdge(3, 4);
-    this.map.addEdge(4, 5);
-    this.map.addEdge(8, 9);
-    this.map.addEdge(0, 3);
-    this.map.addEdge(1, 3);
-    this.map.addEdge(1, 4);
-    this.map.addEdge(2, 5);
+    this.map.addEdge(2, 3);
+    this.map.addEdge(0, 4);
+    this.map.addEdge(1, 5);
     this.map.addEdge(2, 6);
     this.map.addEdge(3, 7);
-    this.map.addEdge(3, 8);
     this.map.addEdge(4, 8);
-    this.map.addEdge(5, 9);
-    this.map.addEdge(6, 9);
+    this.map.addEdge(5, 8);
+    this.map.addEdge(6, 10);
+    this.map.addEdge(6, 11);
+    this.map.addEdge(7, 11);
+    this.map.addEdge(8, 9);
+    this.map.addEdge(10, 11);
   }
 }
 </script>
@@ -48,84 +49,92 @@ export default class Map5 extends KiosksTemplate {
 
 .f0 {
   position: absolute;
-  left: 2%;
-  top: 10%;
+  left: 0%;
+  top: -6%;
 }
 
 .f1 {
   position: absolute;
-  left: 35%;
-  top: 9.5%;
+  left: 30.4%;
+  top: -6%;
 }
 
 .f2 {
   position: absolute;
-  left: 74%;
-  top: 8.5%;
+  left: 61%;
+  top: -6%;
 }
 
 .f3 {
   position: absolute;
-  left: 18.5%;
-  top: 46%;
+  left: 90.4%;
+  top: -6%;
 }
 
 .f4 {
   position: absolute;
-  left: 35.5%;
-  top: 46.5%;
+  left: 0%;
+  top: 36%;
 }
 
 .f5 {
   position: absolute;
-  left: 73.5%;
-  top: 47%;
+  left: 30.4%;
+  top: 36%;
 }
 
 .f6 {
   position: absolute;
-  left: 92%;
-  top: 47%;
+  left: 61%;
+  top: 36%;
 }
 
 .f7 {
   position: absolute;
-  left: 2%;
-  top: 84%;
+  left: 90.4%;
+  top: 35.5%;
 }
 
 .f8 {
   position: absolute;
-  left: 35.5%;
-  top: 84%;
+  left: 0%;
+  top: 77.6%;
 }
 
 .f9 {
   position: absolute;
-  left: 73.5%;
-  top: 83%;
+  left: 30.4%;
+  top: 77.6%;
+}
+
+.f10 {
+  position: absolute;
+  left: 61%;
+  top: 77.6%;
+}
+
+.f11 {
+  position: absolute;
+  left: 90.3%;
+  top: 77.2%;
 }
 
 .map-container {
   position: relative;
   align-content: center;
-  background-image: url('maps/map8.png');
+  background-image: url('maps/map18.png');
   background-repeat: no-repeat;
   background-size: cover;
-  min-width: 250;
-  min-height: 132.5px;
-  width: 60vw;
-  height: 31.5vw;
+  width: 50vw;
+  height: 27.5vw;
 }
 
 .square {
-  border: 0px dashed #324197;
+  border: 2px dashed transparent;
   background: none;
   border-radius: 25px;
-  min-width: 20px;
-  min-height: 20px;
-  height: 14% !important;
-  width: 7% !important;
+  height: 20% !important;
+  width: 11% !important;
 }
 
 .square img {

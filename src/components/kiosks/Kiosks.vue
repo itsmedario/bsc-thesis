@@ -14,31 +14,27 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import Map3 from '@/components/kiosks/Map3.vue';
 import Map5 from '@/components/kiosks/Map5.vue';
-/* import Map20 from '@/components/towers/Map20.vue';
-import Map21 from '@/components/towers/Map21.vue';
-import Map22 from '@/components/towers/Map22.vue';
-import Map23 from '@/components/towers/Map23.vue';
-import Map24 from '@/components/towers/Map24.vue';
-import Map25 from '@/components/towers/Map25.vue';
-import Map26 from '@/components/towers/Map26.vue';
-import Map27 from '@/components/towers/Map27.vue';
-import Map28 from '@/components/towers/Map28.vue';
-import Map29 from '@/components/towers/Map29.vue'; */
+import Map11 from '@/components/kiosks/Map11.vue';
+import Map12 from '@/components/kiosks/Map12.vue';
+import Map13 from '@/components/kiosks/Map13.vue';
+import Map14 from '@/components/kiosks/Map14.vue';
+import Map15 from '@/components/kiosks/Map15.vue';
+import Map16 from '@/components/kiosks/Map16.vue';
+import Map17 from '@/components/kiosks/Map17.vue';
+import Map18 from '@/components/kiosks/Map18.vue';
 
 @Component({
   components: {
     Map3,
     Map5,
-    /* Map20,
-    Map21,
-    Map22,
-    Map23,
-    Map24,
-    Map25,
-    Map26,
-    Map27,
-    Map28,
-    Map29, */
+    Map11,
+    Map12,
+    Map13,
+    Map14,
+    Map15,
+    Map16,
+    Map17,
+    Map18,
   },
 })
 
@@ -60,11 +56,7 @@ export default class Kiosks extends Vue {
 
   tip = '';
 
-  maps = ['Map5', 'Map3'];
-
-  // maps = ['Map1', 'Map5', 'Map2', 'Map3', 'Map4'];
-
-  maps2 = ['Map20', 'Map21', 'Map22', 'Map23', 'Map24', 'Map25', 'Map26', 'Map27', 'Map28', 'Map29'];
+  maps = ['Map5', 'Map3', 'Map11', 'Map12', 'Map13', 'Map14', 'Map15', 'Map16', 'Map17', 'Map18'];
 
   checkSolution(level:number):void {
     if (this.correctSolution) {
