@@ -9,11 +9,18 @@
             @dragstart="fieldClicked(i - 1); bridgeSelected = true">
       </div>
     </div>
-    <div class="bridge-field card clickable" v-if="level !== 1"
-     @click="selectBridge()"
-     @dragstart="bridgeSelected = true" draggable="false"
-     :class="{ selected: bridgeSelected == true }">
-      <img :src="require('/src/assets/bridges/bridge.png')" draggable="true">
+    <div class="item-stock">
+      <div class="bridge-field card clickable" v-if="level !== 1"
+      @click="selectBridge()"
+      @dragstart="bridgeSelected = true" draggable="false"
+      :class="{ locked: availableBridges < 1 && level != 4,
+        selected: bridgeSelected == true && (level == 4 || availableBridges >= 1) }">
+        <img :src="require('/src/assets/bridges/bridge.png')"
+        :draggable="availableBridges >= 1  || level == 4">
+      </div>
+      <div class="card item-display" v-if="level !== 4 && level !== 1">
+        <div>{{ availableBridges }}&#215;</div>
+      </div>
     </div>
   </div>
 </template>
@@ -39,6 +46,8 @@ export default class BridgesTemplate extends Vue {
 
   availableBridges = 0;
 
+  optimalNrOfBridges = 0;
+
   nrOfFields = 0;
 
   map = new Graph(this.nrOfFields);
@@ -55,20 +64,34 @@ export default class BridgesTemplate extends Vue {
 
   checkSolution(level:number):void {
     const arr = Array.from(this.usedFields);
-    if (this.map.isVertexCover(arr)) {
-      this.$emit('correct-solution');
-    } else {
-      this.$emit('false-solution', this.text.tasks.buildBridges.tips.tip1);
+    const isMST = this.map.isVertexCover(arr);
+    if (level === 2) {
+      if (isMST) {
+        this.$emit('correct-solution');
+      } else {
+        this.$emit('false-solution', this.text.tasks.buildBridges.tips.tip1);
+      }
+    } else if (level === 4) {
+      if (isMST && this.optimalNrOfBridges === this.usedFields.size) {
+        this.$emit('correct-solution');
+      } else if (isMST) {
+        // this.$emit('false-solution', this.text.tasks.optimizeBridges.tips.tip2);
+      } else {
+        // this.$emit('false-solution', this.text.tasks.optimizeBridges.tips.tip1);
+      }
     }
     this.initGraph();
   }
 
   dropBridge(i:number):void {
-    this.bridgeSelected = true; // ensure propagation
-    this.fields[i] = true;
-    this.usedFields.add(i);
-    this.bridgeSelected = false; // ensure propagation
-    this.checkSolution(this.level);
+    if (this.level === 4 || this.availableBridges > 0) {
+      this.bridgeSelected = true; // ensure propagation
+      this.fields[i] = true;
+      this.usedFields.add(i);
+      this.bridgeSelected = false; // ensure propagation
+      this.checkSolution(this.level);
+      this.availableBridges -= 1;
+    }
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -95,6 +118,7 @@ export default class BridgesTemplate extends Vue {
       this.bridgeSelected = true; // ensure propagation
       this.fields[i] = false;
       this.usedFields.delete(i);
+      this.availableBridges += 1;
       this.bridgeSelected = false; // ensure propagation
       this.checkSolution(this.level);
     }
@@ -109,10 +133,12 @@ export default class BridgesTemplate extends Vue {
   }
 
   selectBridge():void { // select the bridge in the inventory
-    if (this.bridgeSelected) {
-      this.bridgeSelected = false;
-    } else {
-      this.bridgeSelected = true;
+    if (this.availableBridges > 0) {
+      if (this.bridgeSelected) {
+        this.bridgeSelected = false;
+      } else {
+        this.bridgeSelected = true;
+      }
     }
   }
 }

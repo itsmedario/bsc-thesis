@@ -11,7 +11,9 @@ import Graph from '@/components/Graphs';
 })
 
 export default class Map1 extends BridgesTemplate {
-  availableBridges = 8;
+  availableBridges = 10;
+
+  optimalNrOfBridges = 7;
 
   nrOfFields = 15;
 
@@ -175,7 +177,7 @@ export default class Map1 extends BridgesTemplate {
 
 .bridge-field {
   height: 15% !important;
-  width: 10% !important;
+  width: 100% !important;
   max-height: 120px;
   max-width: 90px;
   padding: 1em 0 !important;

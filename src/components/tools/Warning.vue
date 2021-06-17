@@ -5,7 +5,7 @@
       <div class="modal-container" @mousedown.stop >
         <div class="modal-header">
           <p class="title">{{ text.game.warning.title }}</p>
-          <a href="/home">
+          <a href="/">
             <button class="exit-button" style="margin:0.5em;" @click="$emit('close-tutorial')">
             &times;
             </button>

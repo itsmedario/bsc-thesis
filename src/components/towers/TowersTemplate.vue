@@ -18,7 +18,7 @@
         <img :src="require('/src/assets/bridges/tower.png')"
          :draggable="availableTowers >= 1 || level == 4">
       </div>
-      <div class="card item-display" v-if="level !== 4">
+      <div class="card item-display" v-if="level !== 4 && level !== 1">
         <div>{{ availableTowers }}&#215;</div>
       </div>
     </div>
@@ -29,6 +29,7 @@
 /* eslint-disable no-restricted-syntax */
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import Graph from '@/components/Graphs';
+import RandomGenerator from '@/components/RandomGenerator';
 
 @Component({
   components: {},
@@ -54,12 +55,21 @@ export default class TowersTemplate extends Vue {
 
   usedFields = new Set();
 
+  correctProposition = false;
+
   towerSelected = false;
 
   fields = [false];
 
   beforeMount():void {
     this.initGraph();
+    if (this.level === 1) {
+      const r = new RandomGenerator();
+      // eslint-disable-next-line max-len
+      this.fields = r.generateSolution(this.fields, this.optimalNrOfTowers - 2, this.availableTowers);
+      const arr = Array.from(this.usedFields);
+      this.correctProposition = this.map.isVertexCover(arr);
+    }
   }
 
   checkSolution(level:number):void {
@@ -133,10 +143,12 @@ export default class TowersTemplate extends Vue {
   }
 
   selectTower():void { // select the tower in the inventory
-    if (this.towerSelected) {
-      this.towerSelected = false;
-    } else {
-      this.towerSelected = true;
+    if (this.availableTowers > 0) {
+      if (this.towerSelected) {
+        this.towerSelected = false;
+      } else {
+        this.towerSelected = true;
+      }
     }
   }
 }

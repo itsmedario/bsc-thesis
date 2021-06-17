@@ -1,5 +1,5 @@
 <template>
-  <div class="tower-game">
+  <div class="kiosk-game">
     <div class="map-container">
       <div id="i" v-for="i in nrOfFields" :key="i" class="square" :class="getClass(i - 1)"
            @click="fieldClicked(i - 1)" @dragover.prevent
@@ -18,7 +18,7 @@
         <img :src="require('/src/assets/bridges/kiosk_true.png')"
          :draggable="availableKiosks >= 1  || level == 4">
       </div>
-      <div class="card item-display" v-if="level !== 4">
+      <div class="card item-display" v-if="level !== 4 && level !== 1">
         <div>{{ availableKiosks }}&#215;</div>
       </div>
     </div>
@@ -133,10 +133,12 @@ export default class KiosksTemplate extends Vue {
   }
 
   selectKiosk():void { // select the kiosk in the inventory
-    if (this.kioskSelected) {
-      this.kioskSelected = false;
-    } else {
-      this.kioskSelected = true;
+    if (this.availableKiosks > 0) {
+      if (this.kioskSelected) {
+        this.kioskSelected = false;
+      } else {
+        this.kioskSelected = true;
+      }
     }
   }
 }

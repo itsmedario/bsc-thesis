@@ -135,6 +135,39 @@
                 "tip1": "Noch nicht alle Dörfer haben einen Kiosk in der Nähe!",
                 "tip2": "Findest du eine Lösung, bei der du weniger Kioske verwendest?"
             }
+        },
+        "checkTowers":  {
+            "id": 5,
+            "path": "/check-towers",
+            "img": "/bridges/tower.png",
+            "title":  "Türme überprüfen",
+            "intro": "Überprüfe, ob die Türme so gesetzt sind, dass man mit den Türmen alle Kanäle überwachen kann.",
+            "description": "Überprüfe, ob die Türme so gesetzt sind, dass man mit den Türmen alle Kanäle überwachen kann. Von einem gesetzten Turm kann man alle angrenzenden Kanäle bis zur nächsten Kreuzung überwachen. Viel Erfolg!",
+            "tips": {
+                "tip1": "Sind wirklich alle Kanäle überwacht?"
+            }
+        },
+        "checkKiosks":  {
+            "id": 11,
+            "path": "/*check-kiosks",
+            "img": "/bridges/kiosk_true.png",
+            "title":  "Kioske überprüfen",
+            "intro": "Überprüfe, ob die Kioske so gesetzt sind, dass damit jedes Dorf einen Kiosk in der Nähe hat.",
+            "description": "Überprüfe, ob die Kioske so gesetzt sind, dass in jedem Dorf entweder selbst ein Kiosk steht oder in einem Nachbardorf. Viel Erfolg!",
+            "tips": {
+                "tip1": "Sind wirklich alle Kanäle überwacht?"
+            }
+        },
+        "buildBridges":  {
+            "id": 8,
+            "path": "/build-bridges",
+            "img": "/bridges/bridge.png",
+            "title":  "Brücken bauen",
+            "intro": "Baue die Brücken so, dass man alle Inseln verbunden sind.",
+            "description": "Baue die Brücken so, dass von jeder Insel zu allen anderen Inseln gehen kann: Klicke auf die Brücke und ziehe sie an den gewünschten Platz. Klicke auf eine Brücke, um sie wieder aus der Landschaft zu entfernen. Viel Erfolg!",
+            "tips": {
+                "tip1": "Noch nicht alle Inseln sind verbunden!"
+            }
         }
     }
 }

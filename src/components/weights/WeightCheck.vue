@@ -49,6 +49,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
+import RandomGenerator from '@/components/RandomGenerator';
 
 @Component({
   components: {},
@@ -252,6 +253,12 @@ export default class WeightCheck extends Vue {
       this.rows[i].sort((a, b): number => a - b);
     }
     */
+
+    if (!this.difficultGames) {
+      const r = new RandomGenerator();
+      this.rows = r.shuffle(this.rows);
+    }
+
     // check if statements are actually true
     this.weightCheck();
     this.boatOverloadCheck();

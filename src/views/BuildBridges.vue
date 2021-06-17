@@ -5,7 +5,7 @@
      :language="language"
     >
       <p class="title" slot="title">{{ text.tasks.buildBridges.title }}</p>
-      <p slot="intro">{{ text.tasks.buildBridges.intro }}</p>
+      <p class="card description" slot="intro">{{ text.tasks.buildBridges.intro }}</p>
       <p slot="description">{{ text.tasks.buildBridges.description }}</p>
       <video loop controls muted slot="video">
         <source :src="require('@/assets/tutorials/add-weights.mp4')" />
