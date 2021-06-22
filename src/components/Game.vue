@@ -65,7 +65,7 @@ import Kiosks from '@/components/kiosks/Kiosks.vue';
 import Bridges from '@/components/bridges/Bridges.vue';
 import Weights from '@/components/weights/Weights.vue';
 import WeightCheck from '@/components/weights/WeightCheck.vue';
-import Warning from '@/components/tools/Warning.vue';
+import Warning from '@/components/layout/Warning.vue';
 
 @Component({
   components: {

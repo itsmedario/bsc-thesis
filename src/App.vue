@@ -236,6 +236,7 @@ video {
 
 @media (max-width: 700px) {
   #mobile-warning { display: block !important; }
+  body { width: 100vw !important; height: 100vh !important; }
 }
 
 @keyframes shake {

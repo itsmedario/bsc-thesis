@@ -2,12 +2,20 @@
   <div id="home">
     <div id="nav">
       <span id="button-menu" class="flex-item flex-row flex-wrap">
+        <router-link  to="/feedback">
+          <button class="card clickable">
+            Feedback
+          </button>
+        </router-link>
         <router-link  to="/about">
-          <img :src="require('/src/assets/icons/info.png')" style="width:3vw"/>
+          <button class="card clickable">
+            <img :src="require('/src/assets/icons/info.png')" style="width:1em"/>
+          </button>
         </router-link>
         <!--<button class="card clickable" onclick="window.print()">
           Drucken
-        </button>--><!--<button class="card clickable">
+        </button>-->
+        <!--<button class="card clickable">
           Vollbildschirm
         </button>-->
       </span>
@@ -126,5 +134,10 @@ export default class Home extends Vue {
 a {
   text-decoration: none;
   color: black;
+}
+
+hr {
+  margin-top: 0;
+  margin-bottom: 1em;
 }
 </style>

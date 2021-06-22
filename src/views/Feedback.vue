@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="responsive">
     <div id="nav">
       <span id="button-menu" class="flex-item flex-row flex-wrap">
         <router-link  to="/">
@@ -15,19 +15,14 @@
       </span>
     </div>
     <hr style="height:1px; border-width:0; color:black; background-color:black">
-    <p class="title">{{ text.pages.about.title }}</p>
-    <p style="font-size: 1.3em">
-      {{ text.pages.about.descrption }}
+    <p class="title">
+      {{ text.pages.feedback.title }}
     </p>
-    <br>
-    <img :src="require('@/assets/transport/beaver_transport.png')" style="width: 40%"
-     draggable="false"/>
-    <p>{{ text.pages.about.author }}
-      <hr style="height:1px; border-width:0; color:black; background-color:black; width: 10%;
-       margin: 0.5em auto">
-      {{ text.pages.about.version }}
-      <br>
-      {{ text.pages.about.oldVersion }}
+    <p style="font-size: 1.3em">
+      {{ text.pages.feedback.text }}
+    <a href="https://forms.gle/pg2zMFHspbVQMrr9A">{{ text.pages.feedback.click }}</a>
+    </p>
+    <img :src="require('@/assets/transport/load_boat.png')" draggable="false"/>
     <Footer/>
   </div>
 </template>
@@ -44,7 +39,7 @@ import Footer from '@/components/layout/Footer.vue';
     Footer,
   },
 })
-export default class About extends Vue {
+export default class Feedback extends Vue {
   @Prop({ required: true })
   language!: string;
 
@@ -54,7 +49,6 @@ export default class About extends Vue {
 </script>
 
 <style scoped>
-
 #button-menu {
   justify-content: flex-start;
 }
@@ -63,5 +57,4 @@ hr {
   margin-top: 0;
   margin-bottom: 2em;
 }
-
 </style>

@@ -66,7 +66,7 @@ export default class TowersTemplate extends Vue {
     if (this.level === 1) {
       const r = new RandomGenerator();
       // eslint-disable-next-line max-len
-      this.fields = r.generateSolution(this.fields, this.optimalNrOfTowers - 2, this.availableTowers);
+      this.fields = r.generateSolution(this.fields, this.optimalNrOfTowers - 1, this.availableTowers);
       const arr = Array.from(this.usedFields);
       this.correctProposition = this.map.isVertexCover(arr);
     }

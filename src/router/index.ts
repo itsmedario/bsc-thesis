@@ -21,6 +21,11 @@ let routes: Array<RouteConfig> = [
     name: 'About',
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
+  {
+    path: '/feedback',
+    name: 'Feedback',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Feedback.vue'),
+  },
 ];
 
 routes = routes.concat(

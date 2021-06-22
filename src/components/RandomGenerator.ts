@@ -1,30 +1,34 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable prefer-template */
 /* eslint-disable guard-for-in */
-class RandomGenerator {
+/* eslint-disable guard-for-in */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-param-reassign */
 
+class RandomGenerator {
   shuffle(a:any):any {
-    var j, x, i;
-    for (i = a.length - 1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i + 1));
-        x = a[i];
-        a[i] = a[j];
-        a[j] = x;
+    let i;
+    let j;
+    let x;
+
+    for (i = a.length - 1; i > 0; i -= 1) {
+      j = Math.floor(Math.random() * (i + 1));
+      x = a[i];
+      a[i] = a[j];
+      a[j] = x;
     }
 
     return a;
   }
 
   generateSolution(fields:boolean[], min:number, max:number):any {
-    let s = new Set();
-
-    for(let i = 1; i < fields.length; i += 1) {
-      s.add(i);
-    } 
-
+    const s = new Set();
     const nrOfFields = min + Math.floor(Math.random() * (max - min + 1));
     console.log(min + 'min, ' + max + 'max, ' + nrOfFields);
 
+    for (let i = 1; i < fields.length; i += 1) {
+      s.add(i);
+    }
 
     for (let i = 0; i < nrOfFields; i += 1) {
       const r = Math.floor(Math.random() * s.size);
@@ -43,7 +47,6 @@ class RandomGenerator {
 
     return fields;
   }
-
 }
 
 export default RandomGenerator;
