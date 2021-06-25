@@ -1,27 +1,12 @@
 <template>
-  <div class="responsive">
-    <div id="nav">
-      <span id="button-menu" class="flex-item flex-row flex-wrap">
-        <router-link  to="/">
-          <button class="card clickable">
-            <img :src="require('/src/assets/icons/home.png')" style="width:1em"/>
-          </button>
-        </router-link>
-        <!--<button class="card clickable" onclick="window.print()">
-          Drucken
-        </button>--><!--<button class="card clickable">
-          Vollbildschirm
-        </button>-->
-      </span>
-    </div>
-    <hr style="height:1px; border-width:0; color:black; background-color:black">
+  <div id="feedback" class="responsive">
     <p class="title">
       {{ text.pages.feedback.title }}
     </p>
-    <p style="font-size: 1.3em">
+    <div id="text-field">
       {{ text.pages.feedback.text }}
-    <a href="https://forms.gle/pg2zMFHspbVQMrr9A">{{ text.pages.feedback.click }}</a>
-    </p>
+      <a href="https://forms.gle/pg2zMFHspbVQMrr9A" target="_blank">{{ text.pages.feedback.click }}</a>
+    </div>
     <img :src="require('@/assets/transport/load_boat.png')" draggable="false"/>
     <Footer/>
   </div>
@@ -51,6 +36,12 @@ export default class Feedback extends Vue {
 <style scoped>
 #button-menu {
   justify-content: flex-start;
+}
+
+#text-field {
+  font-size: 1.3em;
+  margin: 2em;
+  text-align: center;
 }
 
 hr {

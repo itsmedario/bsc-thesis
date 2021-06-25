@@ -11,7 +11,7 @@ import Graph from '@/components/Graphs';
 })
 
 export default class Map15 extends KiosksTemplate {
-  availableKiosks = 7;
+  availableKiosks = 5;
 
   optimalNrOfKiosks = 4;
 

@@ -1,29 +1,14 @@
 <template>
   <div id="home">
-    <div id="nav">
-      <span id="button-menu" class="flex-item flex-row flex-wrap">
-        <router-link  to="/feedback">
-          <button class="card clickable">
-            Feedback
-          </button>
-        </router-link>
-        <router-link  to="/about">
-          <button class="card clickable">
-            <img :src="require('/src/assets/icons/info.png')" style="width:1em"/>
-          </button>
-        </router-link>
-        <!--<button class="card clickable" onclick="window.print()">
-          Drucken
-        </button>-->
-        <!--<button class="card clickable">
-          Vollbildschirm
-        </button>-->
-      </span>
-    </div>
-    <hr style="height:1px; border-width:0; color:black; background-color:black">
     <div id="start">
-      <p id="top" class="title">{{ text.pages.home.title }} <br> "{{ text.title }}"</p>
-      <p id="introduction">{{ text.pages.home.introduction }}</p>
+      <p id="top" class="title">
+        {{ text.pages.home.title }}
+        <br>
+        "{{ text.title }}"
+      </p>
+      <p class="introduction">
+        {{ text.pages.home.introduction }}
+      </p>
       <a href="#task-selector">
         <button class="card clickable">
           {{ text.pages.home.bottom }}
@@ -32,8 +17,8 @@
       <img :src="require('@/assets/transport/beaver_transport2.png')" draggable="false"/>
     </div>
 
+    <hr style="height:1px; border-width:0; color:black; background-color:black; margin: 3em">
     <div id="task-selector">
-      <hr style="height:1px; border-width:0; color:black; background-color:black; margin: 3em">
       <div class="cards">
         <div v-for="task in text.tasks" :key="task.id"
         class="card clickable">
@@ -48,8 +33,8 @@
           </router-link>
         </div>
       </div>
-      <hr style="height:1px; border-width:0x; color:black; background-color:black">
-      <a href="#start" id="top-button">
+      <hr style="height:1px; border-width:0; color:black; background-color:black; margin-bottom: 0">
+      <a href="#nav" id="top-button">
         <button class="card clickable">
           {{ text.pages.home.top }}
         </button>
@@ -88,16 +73,11 @@ export default class Home extends Vue {
   height: 100%;
 }
 
-#introduction {
-  width: 60%;
-  max-width: 500px;
-}
-
 #start {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 90vh;
+  min-height: 80vh;
 }
 
 #start img {
@@ -130,6 +110,7 @@ export default class Home extends Vue {
   margin-top: 6px;
   padding: 2px 16px;
 }
+
 /* router-link */
 a {
   text-decoration: none;

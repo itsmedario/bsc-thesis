@@ -56,7 +56,7 @@ export default class Kiosks extends Vue {
 
   tip = '';
 
-  maps = ['Map5', 'Map3', 'Map11', 'Map12', 'Map13', 'Map14', 'Map15', 'Map16', 'Map17', 'Map18'];
+  maps = ['Map5', 'Map3', 'Map11', 'Map12', 'Map13', 'Map14', 'Map16', 'Map15', 'Map17', 'Map18'];
 
   checkSolution(level:number):void {
     if (this.correctSolution) {

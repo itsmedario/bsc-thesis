@@ -85,10 +85,10 @@ export default class Map26 extends TowersTemplate {
   background-image: url('maps/map26.png');
   background-repeat: no-repeat;
   background-size: cover;
-  min-width: 191.4px;
-  min-height: 200px;
-  width: 48vw;
-  height: 50vw;
+  min-width: 39px;
+  min-height: 40px;
+  width: 38.3vw;
+  height: 40vw;
 }
 
 .square {

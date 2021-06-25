@@ -90,8 +90,8 @@ export default class Map28 extends TowersTemplate {
   background-size: cover;
   min-width: 200px;
   min-height: 190.6px;
-  width: 50vw;
-  height: 47.6vw;
+  width: 40vw;
+  height: 38.6vw;
 }
 
 .square {

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <!--<Header/>-->
+    <Header/>
     <router-view id="container"
      :language="language"
      />
@@ -26,16 +26,9 @@ export default class App extends Vue {
   text = require(`@/text_${this.language}.json`);
 
   // eslint-disable-next-line class-methods-use-this
-  /* beforeMount():void {
-    const elem = document.documentElement;
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.webkitRequestFullscreen) {
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) {
-      elem.msRequestFullscreen();
-    }
-  } */
+  beforeMount():void {
+    console.log(this.$route.name);
+  }
 }
 </script>
 
@@ -193,6 +186,11 @@ video {
 }
 .selected {
   background: #4ea1ee !important;
+}
+
+.introduction {
+  width: 70%;
+  max-width: 800px;
 }
 
 .item-display {

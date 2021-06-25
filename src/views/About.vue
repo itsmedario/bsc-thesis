@@ -1,20 +1,5 @@
 <template>
   <div class="about">
-    <div id="nav">
-      <span id="button-menu" class="flex-item flex-row flex-wrap">
-        <router-link  to="/">
-          <button class="card clickable">
-            <img :src="require('/src/assets/icons/home.png')" style="width:1em"/>
-          </button>
-        </router-link>
-        <!--<button class="card clickable" onclick="window.print()">
-          Drucken
-        </button>--><!--<button class="card clickable">
-          Vollbildschirm
-        </button>-->
-      </span>
-    </div>
-    <hr style="height:1px; border-width:0; color:black; background-color:black">
     <p class="title">{{ text.pages.about.title }}</p>
     <p style="font-size: 1.3em">
       {{ text.pages.about.descrption }}
@@ -54,11 +39,6 @@ export default class About extends Vue {
 </script>
 
 <style scoped>
-
-#button-menu {
-  justify-content: flex-start;
-}
-
 hr {
   margin-top: 0;
   margin-bottom: 2em;

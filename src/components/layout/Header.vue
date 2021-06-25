@@ -1,6 +1,33 @@
 <template>
   <div id="header">
-    <body>
+    <div id="nav"  :key="reloadCounter">
+      <span id="button-menu" class="flex-item flex-row flex-wrap">
+        <router-link to="/feedback" v-if="this.$route.name === 'Home'">
+          <button class="card clickable" style="font-size:1.125em">
+            Feedback
+          </button>
+        </router-link>
+        <router-link to="/" v-if="this.$route.name !== 'Home'">
+          <button class="card clickable home">
+            <img :src="require('/src/assets/icons/home.png')" style="width:1.5em"/>
+          </button>
+        </router-link>
+        <button class="card clickable" onclick="window.print()">
+          <img :src="require('/src/assets/icons/print.png')" style="width:1.5em"/>
+        </button>
+        <router-link to="/about">
+          <button class="card clickable">
+            <img :src="require('/src/assets/icons/info.png')" style="width:1.5em"/>
+          </button>
+        </router-link>
+        <button v-if="fullScreenSupport()"
+         class="card clickable"
+         @click="toggleFullscreen()">
+          <img :src="require('/src/assets/icons/full-screen.png')" style="width:1.5em"/>
+        </button>
+      </span>
+    </div>
+    <!--<body>
       <div class="main">
         <input type="checkbox">
           <span></span>
@@ -13,7 +40,7 @@
             <li><a href="/about">Über</a></li>
           </div>
       </div>
-    </body>
+    </body>-->
   </div>
 </template>
 
@@ -21,7 +48,42 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
-export default class Header extends Vue {}
+export default class Header extends Vue {
+  reloadCounter = 0;
+
+  elem = document.documentElement;
+
+  beforeMount():void {
+    console.log(this.$route.name);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  fullScreenSupport():boolean {
+    return document.fullscreenEnabled;
+  }
+
+  toggleFullscreen():void {
+    if (!document.fullscreenElement) {
+      this.openFullscreen();
+    } else {
+      this.closeFullscreen();
+    }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  openFullscreen():void {
+    if (this.elem.requestFullscreen) {
+      this.elem.requestFullscreen();
+    }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  closeFullscreen():void {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -35,6 +97,20 @@ body, .main, .menu {
     justify-content: center;
     align-items: center;
 }
+
+hr {
+    height:1px;
+    border-width:0;
+    color:black;
+    background-color:black;
+    margin-top: 0.2em;
+    margin-bottom: 0em;
+}
+
+.home {
+  float: left;
+}
+
 .main {
     position: relative;
     background-color: #f8f9fa;

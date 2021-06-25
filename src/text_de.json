@@ -13,11 +13,11 @@
             "descrption": "Diese Lernumgebung wurde im Zusammenhang mit dem Buch 'einfach Informatik 3/4' erstellt. Feedback ist sehr erwünscht: dnaepfer@student.ethz.ch",
             "author": "Autor: Dario Naepfer",
             "oldVersion": "Version 3.0 - Neu: Jeweils 2 Spiele der zweiten und der dritten Spiele-Serie sind fertig!",
-            "version": "Version 3.1 - Neue Gewicht-Grafiken und Seite für Feedback beim Testen"
+            "version": "Version 3.2 - Neue Navigationsleiste und verbessertes In-Game Erlebnis"
         },
         "feedback": {
             "title": "Feedback zur Lernumgebung",
-            "text": "Unter diesem Link ist ein Fragebogen zu finden, mit dem du helfen kannst, die Lernumgebung zu verbessern:",
+            "text": "Hilf mit, die Lernumgebung zu verbessern:",
             "click": "Klicke hier",
             "link": "https://forms.gle/pg2zMFHspbVQMrr9A"
         },
@@ -102,7 +102,7 @@
             "img": "/bridges/tower.png",
             "title":  "Türme bauen",
             "intro": "Setze die Türme so, dass man mit den Türmen alle Kanäle überwachen kann.",
-            "description": "Setze die Türme so, dass man mit den Türmen alle Kanäle überwachen kann: Klicke auf einen Turm und ziehe ihn an den gewünschten Platz. Klicke auf einen Turm, um ihn wieder aus der Landschaft zu entfernen. Viel Erfolg!",
+            "description": "Setze die Türme so, dass man mit den Türmen alle Kanäle überwachen kann. Mit einem Turm kann man alle angrenzenden Kanäle bis zur nächsten Insel überwachen. Klicke auf einen Turm und ziehe ihn an den gewünschten Platz. Klicke auf einen Turm, um ihn wieder aus der Landschaft zu entfernen. Viel Erfolg!",
             "tips": {
                 "tip1": "Sind wirklich alle Kanäle überwacht?"
             }
@@ -113,7 +113,7 @@
             "img": "/bridges/kiosk_true.png",
             "title":  "Kioske bauen",
             "intro": "Setze die Kioske so, dass jeder Punkt selbst oder in der Nähe einen Kiosk hat.",
-            "description": "Setze die Kioske so, dass auf jedem Punkt entweder selbst ein Kiosk steht oder in einem Nachbardorf: Klicke auf einen Kiosk und ziehe ihn an den gewünschten Platz. Klicke auf einen Kiosk, um ihn wieder aus der Landschaft zu entfernen. Viel Erfolg!",
+            "description": "Setze die Kioske so, dass auf jedem Punkt entweder selbst ein Kiosk steht oder auf einem angrenzenden Punkt. Klicke auf einen Kiosk und ziehe ihn an den gewünschten Platz. Klicke auf einen Kiosk, um ihn wieder aus der Landschaft zu entfernen. Viel Erfolg!",
             "tips": {
                 "tip1": "Noch nicht alle Punkte haben einen Kiosk in der Nähe!"
             }
@@ -124,7 +124,7 @@
             "img": "/bridges/tower.png",
             "title":  "Türme optimal verteilen",
             "intro": "Setze möglichst wenig Türme so, dass man mit den Türmen alle Kanäle überwachen kann.",
-            "description": "Setze die Türme so, dass man mit den Türmen alle Kanäle überwachen kann: Klicke auf einen Turm und ziehe ihn an den gewünschten Platz. Klicke auf einen Turm, um ihn wieder aus der Landschaft zu entfernen. Versuche dabei, so wenig Türme wie möglich zu verwenden. Viel Erfolg!",
+            "description": "Setze die Türme so, dass man mit den Türmen alle Kanäle überwachen kann. Mit einem Turm kann man alle angrenzenden Kanäle bis zur nächsten Insel überwachen. Klicke auf einen Turm und ziehe ihn an den gewünschten Platz. Klicke auf einen Turm, um ihn wieder aus der Landschaft zu entfernen. Versuche dabei, so wenig Türme wie möglich zu verwenden. Viel Erfolg!",
             "tips": {
                 "tip1": "Sind wirklich alle Kanäle überwacht?",
                 "tip2": "Findest du eine Lösung, bei der du weniger Türme verwendest?"
@@ -136,10 +136,48 @@
             "img": "/bridges/kiosk_true.png",
             "title":  "Kioske optimal verteilen",
             "intro": "Benutze so wenig Kioske wie möglich, dass jeder Punkt selbst oder in der Nähe einen Kiosk hat.",
-            "description": "Setze die Kioske so, dass auf jedem Punkt entweder selbst ein Kiosk steht oder in einem Nachbardorf: Klicke auf einen Kiosk und ziehe ihn an den gewünschten Platz. Klicke auf einen Kiosk, um ihn wieder aus der Landschaft zu entfernen. Versuche dabei, so wenig Kioske wie möglich zu verwenden. Viel Erfolg!",
+            "description": "Setze die Kioske so, dass auf jedem Punkt entweder selbst ein Kiosk steht oder auf einem angrenzenden Punkt. Klicke auf einen Kiosk und ziehe ihn an den gewünschten Platz. Klicke auf einen Kiosk, um ihn wieder aus der Landschaft zu entfernen. Versuche dabei, so wenig Kioske wie möglich zu verwenden. Viel Erfolg!",
             "tips": {
                 "tip1": "Noch nicht alle Punkte haben einen Kiosk in der Nähe!",
                 "tip2": "Findest du eine Lösung, bei der du weniger Kioske verwendest?"
+            }
+        },
+        "checkTowers":  {
+            "id": 5,
+            "path": "/check-towers",
+            "img": "/bridges/tower.png",
+            "title":  "Türme überprüfen",
+            "intro": "Überprüfe, ob die Türme so gesetzt sind, dass man mit den Türmen alle Kanäle überwachen kann.",
+            "description": "Überprüfe, ob die Türme so gesetzt sind, dass man mit den Türmen alle Kanäle überwachen kann. Von einem gesetzten Turm kann man alle angrenzenden Kanäle bis zur nächsten Kreuzung überwachen. Viel Erfolg!",
+            "statements": {
+                "s1": "Mit den Türmen kann man alle Kanäle überwachen.",
+                "s2": "Es gibt noch eine bessere Lösung mit weniger Türmen.",
+                "true": "Richtig",
+                "false": "Falsch"
+            },
+            "tips": {
+                "tip1": "Beantworte alle Fragen, bevor du auf Überprüfen klickst!",
+                "tip2": "Sind wirklich alle Kanäle überwacht?",
+                "tip3": "Tipp: Überlege, ob es noch eine andere Lösung für dieses Rätsel gibt?"                
+            }
+        },
+        "checkKiosks":  {
+            "id": 11,
+            "path": "/check-kiosks",
+            "img": "/bridges/kiosk_true.png",
+            "title":  "Kioske überprüfen",
+            "intro": "Überprüfe, ob die Kioske so gesetzt sind, dass damit jeder Punkt einen Kiosk in der Nähe hat.",
+            "description": "Überprüfe, ob die Kioske so gesetzt sind, dass auf jedem Punkt entweder selbst ein Kiosk steht oder in einem Nachbardorf. Viel Erfolg!",
+            "statements": {
+                "s1": "Jedes Dorf hat einen Kiosk in der Nähe.",
+                "s2": "Es gibt noch eine bessere Lösung, bei der man weniger Kioske verwendet.",
+                "true": "Richtig",
+                "false": "Falsch"
+            },
+            "tips": {
+                "tip1": "Beantworte alle Fragen, bevor du auf Überprüfen klickst!",
+                "tip2": "Haben wirklich alle Punkte einen Kiosk in der Nähe?",
+                "tip3": "Tipp: Überlege, ob es noch eine andere Lösung für dieses Rätsel gibt?" 
             }
         }
     }

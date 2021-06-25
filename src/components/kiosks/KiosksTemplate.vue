@@ -84,7 +84,7 @@ export default class KiosksTemplate extends Vue {
   }
 
   dropKiosk(i:number):void {
-    if (this.level === 4 || this.availableKiosks > 0) {
+    if ((this.level === 4 || this.availableKiosks > 0) && this.fields[i] === false) {
       this.kioskSelected = true; // ensure propagation
       this.fields[i] = true;
       this.usedFields.add(i);

@@ -4,14 +4,26 @@
        :is="this.maps[counter]"
        :language="language"
        :level="level"
+       :s1="s1"
+       :s2="s2"
        @correct-solution="correctSolution = true"
        @false-solution="correctSolution = false; tip = $event"/>
+
+      <StatementCheck v-if="level == 1"
+      :key="restartCounter"
+      :language="language"
+      :statements="statements"
+      @toggle="$refs.gameMap.toggleBox($event)"
+      @set-false="$refs.gameMap.setFalse($event)"
+      @set-true="$refs.gameMap.setTrue($event)"
+      />
     </div>
 </template>
 
 <script lang="ts">
 /* eslint-disable no-restricted-syntax */
 import { Component, Vue, Prop } from 'vue-property-decorator';
+import StatementCheck from '@/components/tools/StatementCheck.vue';
 import Map20 from '@/components/towers/Map20.vue';
 import Map21 from '@/components/towers/Map21.vue';
 import Map22 from '@/components/towers/Map22.vue';
@@ -26,6 +38,7 @@ import Map30 from '@/components/towers/Map30.vue';
 
 @Component({
   components: {
+    StatementCheck,
     Map20,
     Map21,
     Map22,
@@ -52,13 +65,22 @@ export default class Towers extends Vue {
 
   counter = 0;
 
-  reloadCounter = 0; // enables reloading the component to restart by creating a new instance
+  reloadCounter = 0; // enables reloading the map component to restart by creating a new instance
+
+  restartCounter = 0; // enables reloading the check component to restart by creating a new instance
+
+  s1 = -1; // user's answer to statement 1
+
+  s2 = -1;
+
+  // eslint-disable-next-line max-len
+  statements = [[1, this.text.tasks.checkTowers.statements.s1], [2, this.text.tasks.checkTowers.statements.s2]];
 
   correctSolution = false;
 
   tip = '';
 
-  maps = ['Map20', 'Map21', 'Map22', 'Map23', 'Map24', 'Map25', 'Map26', 'Map27', 'Map28', 'Map29'/* , 'Map30' */];
+  maps = ['Map27', 'Map21', 'Map25', 'Map22', 'Map23', 'Map24', 'Map26', 'Map28', 'Map29'/* , 'Map30' */];
 
   checkSolution(level:number):void {
     if (this.correctSolution) {
@@ -70,15 +92,15 @@ export default class Towers extends Vue {
 
   nextTask():void {
     this.restart();
-    if (this.level === 1) {
-      this.reloadCounter += 1;
-    } else {
-      this.counter = (this.counter + 1) % this.maps.length;
-    }
+    this.counter = (this.counter + 1) % this.maps.length;
   }
 
   restart():void {
-    this.reloadCounter += 1;
+    if (this.level === 1) {
+      this.restartCounter += 1;
+    } else {
+      this.reloadCounter += 1;
+    }
     this.correctSolution = false;
   }
 }

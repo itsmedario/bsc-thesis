@@ -85,8 +85,8 @@ export default class Map21 extends TowersTemplate {
   background-size: cover;
   min-width: 200px;
   min-height: 196px;
-  width: 50vw;
-  height: 49vw;
+  width: 40vw;
+  height: 39.2vw;
 }
 
 .square {

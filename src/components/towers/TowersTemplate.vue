@@ -9,6 +9,7 @@
             @dragstart="fieldClicked(i - 1); towerSelected = true">
       </div>
     </div>
+
     <div class="item-stock">
       <div class="tower-field card clickable" v-if="level !== 1"
       @click="selectTower()"
@@ -42,6 +43,12 @@ export default class TowersTemplate extends Vue {
   @Prop({ required: true })
   language!: string;
 
+  @Prop({ required: true })
+  s1!: number;
+
+  @Prop({ required: true })
+  s2!: number;
+
   // eslint-disable-next-line global-require, import/no-dynamic-require
   text = require(`@/text_${this.language}.json`);
 
@@ -57,6 +64,13 @@ export default class TowersTemplate extends Vue {
 
   correctProposition = false;
 
+  correctUserSolution = false;
+
+  // eslint-disable-next-line max-len
+  statements = [[1, this.text.tasks.checkTowers.statements.s1], [2, this.text.tasks.checkTowers.statements.s2]];
+
+  statementCorrectness = [false];
+
   towerSelected = false;
 
   fields = [false];
@@ -66,20 +80,40 @@ export default class TowersTemplate extends Vue {
     if (this.level === 1) {
       const r = new RandomGenerator();
       // eslint-disable-next-line max-len
-      this.fields = r.generateSolution(this.fields, this.optimalNrOfTowers - 1, this.availableTowers);
+      this.fields = r.generateSolution(this.fields, (this.optimalNrOfTowers > 1 ? this.optimalNrOfTowers - 1 : 1), this.availableTowers);
+      for (let i = 0; i < this.fields.length; i += 1) {
+        if (this.fields[i] === true) {
+          this.usedFields.add(i);
+        }
+      }
       const arr = Array.from(this.usedFields);
       this.correctProposition = this.map.isVertexCover(arr);
+      this.statementCorrectness[0] = this.correctProposition;
     }
   }
 
   checkSolution(level:number):void {
     const arr = Array.from(this.usedFields);
     const isVC = this.map.isVertexCover(arr);
-    if (level === 2) {
+    if (level === 1) {
+      const s1sol = this.s1 === 0;
+      const s2sol = this.s2 === 0;
+      const optSol = this.usedFields.size === this.optimalNrOfTowers;
+      console.log('Check sol');
+      if (this.s1 === -1 || this.s2 === -1) {
+        this.$emit('false-solution', this.text.tasks.checkTowers.tips.tip1);
+      } else if (s1sol !== isVC && s2sol === optSol) {
+        this.$emit('false-solution', this.text.tasks.checkTowers.tips.tip2);
+      } else if (s1sol === isVC && s2sol !== optSol) {
+        this.$emit('false-solution', this.text.tasks.checkTowers.tips.tip3);
+      } else if (s1sol === isVC && s2sol === optSol) {
+        this.$emit('correct-solution');
+      }
+    } else if (level === 2) {
       if (isVC) {
         this.$emit('correct-solution');
       } else {
-        this.$emit('false-solution', this.text.tasks.buildTowers.tips.tip1);
+        this.$emit('false-solution', this.text.tasks.buildTowers.tips.tip2);
       }
     } else if (level === 4) {
       if (isVC && this.optimalNrOfTowers === this.usedFields.size) {
@@ -94,7 +128,7 @@ export default class TowersTemplate extends Vue {
   }
 
   dropTower(i:number):void {
-    if (this.level === 4 || this.availableTowers > 0) {
+    if ((this.level === 4 || this.availableTowers > 0) && this.fields[i] === false) {
       this.towerSelected = true; // ensure propagation
       this.fields[i] = true;
       this.usedFields.add(i);
@@ -151,5 +185,125 @@ export default class TowersTemplate extends Vue {
       }
     }
   }
+
+  // switch answer n to true if false and vice versa
+  toggleBox(n:number):void {
+    if (n === 1) {
+      this.s1 = (this.s1 + 1) % 2;
+    } else if (n === 2) {
+      this.s2 = (this.s2 + 1) % 2;
+    }
+    this.checkSolution(this.level);
+  }
+
+  // set answer n to true
+  setTrue(n:number):void {
+    if (n === 1) {
+      this.s1 = 0;
+    } else if (n === 2) {
+      this.s2 = 0;
+    }
+    this.checkSolution(this.level);
+  }
+
+  // set answer n to false
+  setFalse(n:number):void {
+    if (n === 1) {
+      this.s1 = 1;
+    } else if (n === 2) {
+      this.s2 = 1;
+    }
+    this.checkSolution(this.level);
+  }
+
+  // check state of statement n
+  checkState(n:number):number {
+    if (n === 1) {
+      return this.s1;
+    }
+    return this.s2;
+  }
 }
 </script>
+
+<style scoped>
+
+.task-box {
+  width: 100%;
+}
+
+.statement-box {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+}
+
+.statement-check {
+  position: relative;
+  text-align: left !important;
+}
+
+.statement {
+  display: inline-block;
+  font-size: 1.1em;
+  margin: 1.1em;
+  padding: 0.1em;
+  border-bottom: 3px solid transparent;
+  transition: all 0.25s linear;
+  position: relative;
+}
+
+.statement:hover {
+  cursor: pointer;
+}
+
+.statement:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: black;
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  transform-origin: left;
+  transform: scale(0);
+  transition: 0.25s linear;
+}
+
+.statement:hover:before {
+  transform: scale(1);
+}
+
+.check-button {
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  width: 3em;
+  display: inline-block;
+}
+
+.true-button {
+  background: #28a745;
+  border-radius: 10px 0px 0px 10px;
+  border: 2px solid #28a745;
+}
+
+.false-button {
+  background: #dc3545;
+  border-radius: 0px 10px 10px 0px;
+  border: 2px solid #dc3545;
+}
+
+.activetrue {
+  border: 3px solid white;
+}
+
+.activefalse {
+  border: 3px solid white;
+}
+
+</style>

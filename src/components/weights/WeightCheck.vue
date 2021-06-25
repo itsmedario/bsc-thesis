@@ -23,36 +23,25 @@
       </tr>
     </table>
 
-    <hr>
-
-    <div  class="task-box">
-      <div v-for="[n, s] in statements" :key="n" class="statement-box">
-        <div @click="toggleBox(n)" class="statement">
-          {{ s }}
-        </div>
-        <div class="buttons">
-          <div class="check-button clickable true-button"
-            :class=" { activetrue: checkState(n) == 0 }"
-            @click="setTrue(n)">
-            {{ text.tasks.checkWeights.statements.true }}
-          </div>
-          <div class="check-button clickable false-button"
-            :class=" { activefalse: checkState(n) == 1 }"
-            @click="setFalse(n)">
-            {{ text.tasks.checkWeights.statements.false }}
-          </div>
-        </div>
-      </div>
-    </div>
+    <StatementCheck :key="reloadCounter"
+     :language="language"
+     :statements="statements"
+     @toggle="toggleBox($event)"
+     @set-false="setFalse($event)"
+     @set-true="setTrue($event)"
+    />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import RandomGenerator from '@/components/RandomGenerator';
+import StatementCheck from '@/components/tools/StatementCheck.vue';
 
 @Component({
-  components: {},
+  components: {
+    StatementCheck,
+  },
 })
 
 export default class WeightCheck extends Vue {
@@ -77,10 +66,11 @@ export default class WeightCheck extends Vue {
 
   boatOverload = true; // s3
 
-  statements = [[1, 'Jedes Gewicht ist verwendet worden.'],
-    [2, 'Kein Gewicht ist mehrmals verwendet worden.'],
-    [3, 'Kein Boot ist zu schwer beladen.'],
-    /* [4, 'Es wurde ein Gewicht verwendet, das nicht zum Vorschlag gehört'] */];
+  reloadCounter = 0;
+
+  statements = [[1, this.text.tasks.checkWeights.statements.s1],
+    [2, this.text.tasks.checkWeights.statements.s2],
+    [3, this.text.tasks.checkWeights.statements.s3]];
 
   s1 = -1; // user's answer to statement 1
 
@@ -276,9 +266,7 @@ export default class WeightCheck extends Vue {
   }
 
   restart(): void {
-    this.s1 = -1;
-    this.s2 = -1;
-    this.s3 = -1;
+    this.reloadCounter += 1;
   }
 
   nextTask():void {

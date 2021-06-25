@@ -238,7 +238,7 @@ export default class Weights extends Vue {
     console.log(newWeightSum); */
 
     // delete when randomizing weights
-    const newWeightSum = Math.floor(1 + Math.random() * 6) * 10;
+    const newWeightSum = 30; // Math.floor(1 + Math.random() * 6) * 10;
     console.log(newWeightSum);
 
     // choose boats that are used in the optimal case
@@ -253,6 +253,13 @@ export default class Weights extends Vue {
     }
 
     this.chooseWeights(newWeightSum, 12, 9);
+
+    if (this.boatUsedOpt[2] === true && this.weightSum === 30) {
+      if (this.weights.length >= 6) {
+        console.log('special case');
+        this.boatUsedOpt = [true, true, false];
+      }
+    }
   }
 
   // chooses random weights according to the inputs

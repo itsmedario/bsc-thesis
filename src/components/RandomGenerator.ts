@@ -26,14 +26,13 @@ class RandomGenerator {
     const nrOfFields = min + Math.floor(Math.random() * (max - min + 1));
     console.log(min + 'min, ' + max + 'max, ' + nrOfFields);
 
-    for (let i = 1; i < fields.length; i += 1) {
+    for (let i = 0; i < fields.length; i += 1) {
       s.add(i);
     }
 
     for (let i = 0; i < nrOfFields; i += 1) {
       const r = Math.floor(Math.random() * s.size);
       const el = Array.from(s);
-      console.log(s.size);
       s.delete(el[r]);
       console.log(el[r] + ' deleted');
     }

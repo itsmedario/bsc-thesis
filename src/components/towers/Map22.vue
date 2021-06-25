@@ -11,7 +11,7 @@ import TowersTemplate from '@/components/towers/TowersTemplate.vue';
 
 // TowersTemplate contains all important functions for the Tower game
 export default class Map22 extends TowersTemplate {
-  availableTowers = 5;
+  availableTowers = 4;
 
   optimalNrOfTowers = 3;
 
@@ -81,10 +81,10 @@ export default class Map22 extends TowersTemplate {
   background-image: url('maps/map22.png');
   background-repeat: no-repeat;
   background-size: cover;
-  min-width: 200px;
-  min-height: 157.8px;
-  width: 50vw;
-  height: 38.2vw;
+  min-width: 40px;
+  min-height: 30px;
+  width: 40vw;
+  height: 30.7vw;
 }
 
 .square {

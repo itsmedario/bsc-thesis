@@ -11,7 +11,7 @@ import TowersTemplate from '@/components/towers/TowersTemplate.vue';
 
 // TowersTemplate contains all important functions for the Tower game
 export default class Map23 extends TowersTemplate {
-  availableTowers = 6;
+  availableTowers = 5;
 
   optimalNrOfTowers = 3;
 
