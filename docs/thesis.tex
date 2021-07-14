@@ -1,0 +1,76 @@
+\documentclass[a4paper, oneside]{thesis}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{float}
+
+%for including full pdf pages
+\usepackage[]{pdfpages} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT METADATA
+
+\title{Development of an Interactive Online Learning Environment for Elementary School Students with Focus on Algorithmic Tasks, Based on the Textbook "einfach Informatik 3/4"}
+\thesistype{Bachelor's Thesis}
+
+\author{Dario Naepfer}
+\email{dnaepfer@student.ethz.ch}
+
+\supervisors{Prof.\ Dr.\ Juraj\ Hromkovič\\Regula\ Lacher\\Dr.\ Elizabeta\ Cavar}
+
+\institute{Chair of Information Technology and Education \\[2pt]
+ETH Zürich}
+
+\date{\today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\frontmatter % do not remove this line
+\maketitle
+
+\cleardoublepage
+
+\begin{abstract}
+	\input{sections/abstract}
+\end{abstract}
+
+\begin{acknowledgements}
+	\input{sections/acknowledgements}
+\end{acknowledgements}
+
+{
+  \hypersetup{linkcolor=black}
+  \tableofcontents
+}
+
+\mainmatter % do not remove this line
+
+% Start writing here
+\input{sections/introduction}
+\input{sections/design}
+\input{sections/architecture}
+\input{sections/concept}
+\input{sections/weights}
+\input{sections/towers}
+\input{sections/kiosks}
+\input{sections/testing}
+%\input{sections/keepingSecret}
+%\input{sections/learningFromData}
+%\input{sections/representingInformation}
+%\input{sections/testingAndCI}
+\input{sections/conclusion}
+
+% This displays the bibliography for all cited external documents. 
+% All references have to be defined in the file references.bib and can then be cited from within this document.
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\includepdf[pages={1-},scale=1]{pdf/originality.pdf}
+
+% This creates an appendix chapter, comment if not needed.
+% \appendix
+% \input{appendix/example}
+
+\end{document}

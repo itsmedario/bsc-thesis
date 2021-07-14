@@ -4,8 +4,12 @@
     <div class="modal-wrapper">
       <div class="modal-container" @mousedown.stop>
         <div class="modal-header">
-          <p class="title">{{ text.game.tutorial }}</p>
-          <button class="exit-button" style="margin:0.5em;" @click="showModal = false;
+          <p class="title">
+            {{ text.game.tutorial }}
+          </p>
+          <button class="exit-button"
+           style="margin:0.5em;"
+           @click="showModal = false;
            $emit('close-tutorial')">
            &times;
            </button>

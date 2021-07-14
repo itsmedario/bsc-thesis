@@ -5,7 +5,9 @@
      :level="1"
      :language="language"
     >
-      <p class="title" slot="title">{{ text.tasks.checkWeights.title }}</p>
+      <p class="title" slot="title">
+        {{ text.tasks.checkWeights.title }}
+      </p>
       <p slot="intro"></p>
       <p slot="description">
         {{ text.tasks.checkWeights.description }}

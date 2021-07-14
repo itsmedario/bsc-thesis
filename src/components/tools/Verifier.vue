@@ -19,7 +19,9 @@
              style="animation: shake 0.5s" draggable="false"/>
           </div>
           <hr>
-          <div v-if="!correctSolution">{{ tip }}</div>
+          <div v-if="!correctSolution">
+            {{ tip }}
+          </div>
         </div>
        </div>
     </div>

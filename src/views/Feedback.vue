@@ -5,7 +5,9 @@
     </p>
     <div id="text-field">
       {{ text.pages.feedback.text }}
-      <a href="https://forms.gle/pg2zMFHspbVQMrr9A" target="_blank">{{ text.pages.feedback.click }}</a>
+      <a href="https://forms.gle/pg2zMFHspbVQMrr9A" target="_blank">
+        {{ text.pages.feedback.click }}
+      </a>
     </div>
     <img :src="require('@/assets/transport/load_boat.png')" draggable="false"/>
     <Footer/>

@@ -16,7 +16,6 @@
       </a>
       <img :src="require('@/assets/transport/beaver_transport2.png')" draggable="false"/>
     </div>
-
     <hr style="height:1px; border-width:0; color:black; background-color:black; margin: 3em">
     <div id="task-selector">
       <div class="cards">
@@ -24,10 +23,14 @@
         class="card clickable">
           <router-link :to="task.path">
             <div class="card-container">
-              <div>{{ task.title }}</div>
+              <div>
+                {{ task.title }}
+              </div>
               <div class="card-image">
                 <img :src="require(`@/assets${task.img}`)" style="max-width: 150px;
                 max-height: 70px; padding:15px"/>
+                <img :src="require(`@/assets/beavers/beaver${task.level}.png`)"
+                style="height: 30px; padding-bottom:30px"/>
               </div>
             </div>
           </router-link>
@@ -109,6 +112,12 @@ export default class Home extends Vue {
 .card-container {
   margin-top: 6px;
   padding: 2px 16px;
+}
+
+.line {
+  background-color: black;
+  height: 30px;
+  width: 2px;
 }
 
 /* router-link */

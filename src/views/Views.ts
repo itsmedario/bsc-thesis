@@ -79,7 +79,7 @@ const views: Array<{
     component: 'BuildKiosks',
   },
   {
-    id: 9,
+    id: 14,
     path: '/optimize-towers',
     title: 'Türme optimal verteilen',
     img: 'bridges/tower.png',
@@ -93,6 +93,22 @@ const views: Array<{
     img: 'bridges/kiosk_true.png',
     view: 'OptimizeKiosks',
     component: 'OptimizeKiosks',
+  },
+  {
+    id: 11,
+    path: '/check-kiosks',
+    title: 'Kioske überprüfen',
+    img: 'bridges/kiosks_true.png',
+    view: 'CheckKiosks',
+    component: 'CheckKiosks',
+  },
+  {
+    id: 12,
+    path: '/optimize-bridges',
+    title: 'Brücken optimal verteilen',
+    img: 'bridges/bridge_long.png',
+    view: 'OptimizeBridges',
+    component: 'OptimizeBridges',
   },
 ];
 

@@ -3,10 +3,17 @@
     <Game
      :type="'Bridges'"
      :language="language"
+     :level="2"
     >
-      <p class="title" slot="title">{{ text.tasks.buildBridges.title }}</p>
-      <p class="card description" slot="intro">{{ text.tasks.buildBridges.intro }}</p>
-      <p slot="description">{{ text.tasks.buildBridges.description }}</p>
+      <p class="title" slot="title">
+        {{ text.tasks.buildBridges.title }}
+      </p>
+      <p class="card description" slot="intro">
+        {{ text.tasks.buildBridges.intro }}
+      </p>
+      <p slot="description">
+        {{ text.tasks.buildBridges.description }}
+      </p>
       <video loop controls muted slot="video">
         <source :src="require('@/assets/tutorials/add-weights.mp4')" />
         Your browser does not support the video tag.

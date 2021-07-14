@@ -5,17 +5,17 @@
        :language="language"
        :level="level"
        :s1="s1"
-       :s2="s2"
        @correct-solution="correctSolution = true"
-       @false-solution="correctSolution = false; tip = $event"/>
+       @false-solution="correctSolution = false; tip = $event"
+      />
 
       <StatementCheck v-if="level == 1"
-      :key="restartCounter"
-      :language="language"
-      :statements="statements"
-      @toggle="$refs.gameMap.toggleBox($event)"
-      @set-false="$refs.gameMap.setFalse($event)"
-      @set-true="$refs.gameMap.setTrue($event)"
+       :key="restartCounter"
+       :language="language"
+       :statements="statements"
+       @toggle-box="$refs.gameMap.toggleBox($event)"
+       @set-false="$refs.gameMap.setFalse($event)"
+       @set-true="$refs.gameMap.setTrue($event)"
       />
     </div>
 </template>
@@ -65,16 +65,14 @@ export default class Towers extends Vue {
 
   counter = 0;
 
-  reloadCounter = 0; // enables reloading the map component to restart by creating a new instance
+  reloadCounter = 1; // enables reloading the map component to restart by creating a new instance
 
   restartCounter = 0; // enables reloading the check component to restart by creating a new instance
 
   s1 = -1; // user's answer to statement 1
 
-  s2 = -1;
-
   // eslint-disable-next-line max-len
-  statements = [[1, this.text.tasks.checkTowers.statements.s1], [2, this.text.tasks.checkTowers.statements.s2]];
+  statements = [[1, this.text.tasks.checkTowers.statements.s1]];
 
   correctSolution = false;
 
@@ -98,8 +96,11 @@ export default class Towers extends Vue {
   restart():void {
     if (this.level === 1) {
       this.restartCounter += 1;
+      this.s1 = -1;
+      this.tip = this.text.tasks.checkTowers.tips.tip1;
     } else {
-      this.reloadCounter += 1;
+      this.reloadCounter -= 1;
+      this.tip = this.text.tasks.buildTowers.tips.tip1;
     }
     this.correctSolution = false;
   }

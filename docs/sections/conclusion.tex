@@ -1,0 +1,30 @@
+\chapter{Conclusion}
+\label{chapter:conclusion}
+The objective of this bachelor thesis project was to build a learning environment for topics from the book 'einfach Informatik 3/4'. This goal to create a new platform has been achieved, and several games have been implemented. 
+
+As for the first subtask \ref{subsection:t1}, the platform design and concept have been worked out and can be seen in the chapters on \nameref{chapter:design} and \nameref{chapter:concept}. For each task, a design was modelled, implemented and reviewed (see \nameref{chapter:weights}, \nameref{chapter:towers}, and \nameref{chapter:kiosks}).
+
+The second point \ref{subsection:t2} could be adhered to, and the results and details can be found in the chapters on \nameref{chapter:design}, \nameref{chapter:architecture}, \nameref{chapter:testing} and in the learning environment itself. The most important requirement in the task description has been met, since the program is, as required, stable and works fluently on common operating systems.
+
+Personally, my expectations were more than fulfilled. Arguably, the result of this Bachelor's thesis even succeeds my original plans. I'm very satisfied with the learning environment and thankful for the opportunity I received to implement commercial software. I learnt a lot with this project, and I am content with the overall outcome.
+
+\section{Obstacles}
+\label{section:obstacles}
+In the beginning, the decisions concerning design and implementation techniques were a main obstacle. The details of the project were not fully clear (see chapter on \nameref{chapter:design}) and had to be worked out as a first step. As soon as the details were sorted out, the project could be organized, planned, and split up into single steps and intermediate goals.
+
+Another obstacle that emerged was the implementation technique for \nameref{chapter:towers} and \nameref{chapter:kiosks} maps. The following fact brought several difficulties: There existed no fitting graph library with a graphical user interface such that created graphs can be displayed well. Furthermore, some existing graph libraries that met all requirements were either not well compatible or too expensive, so the choice was made to stick to fixed graphs that then had to be manually implemented. This turned out well, but was no easy assignment.
+
+\section{Limitation}
+\label{section:limitation}
+In completing the fixture, it became clear that the number of tasks that can be implemented is limited by the short amount of time that is assigned to the Bachelor's thesis. 
+
+In one design choice, the limitation of the project became particularly obvious. When implementing the task sets with towers and kiosks, the question arose whether a dynamic graph creator could be used. However, as mentioned before, several problems like compatibility, design and cost prevented its usage. 
+As a consequence, graphs cannot be randomly created in this program and all maps had to be manually implemented. This heavily limits the scope of task instances and requires other approaches to provide a high number of exercises.
+
+
+\section{Future Work}
+\label{section:future}
+The environment can be translated into various languages that then could be selected in the navigation bar. The underlying code concept enables the editor to simply add a new JSON file to add a new language to the learning environment (see section \ref{subsection:language}). 
+Alternatively, more topics from the textbook 'einfach Informatik 3/4' could be implemented to further enlarge the variety of tasks. Especially, additional tasks containing graphs could be implemented, and the existing ones could be extended by a graph library.
+
+Another next step could be to embed this learning environment into an even bigger learning platform, such that other chapters or even all topics of the textbook "einfach Informatik 3/4" can be covered. 

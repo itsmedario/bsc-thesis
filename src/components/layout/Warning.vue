@@ -1,15 +1,13 @@
 <template>
   <div id="tutorial-wrapper" class="modal-mask"
-   @mousedown.stop="$emit('close-tutorial')">
+   @mousedown.stop="$emit('close-warning')">
     <div class="modal-wrapper">
-      <div class="modal-container" @mousedown.stop >
+      <div class="modal-container" @mousedown.stop>
         <div class="modal-header">
           <p class="title">{{ text.game.warning.title }}</p>
-          <a href="/">
-            <button class="exit-button" style="margin:0.5em;" @click="$emit('close-tutorial')">
+            <button class="exit-button" style="margin:0.5em;" @click="$emit('close-warning')">
             &times;
             </button>
-          </a>
         </div>
         <div class="flex-item flex-center flex-space-between flex-col">
           {{ text.game.warning.info }}

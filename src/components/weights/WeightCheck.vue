@@ -2,23 +2,28 @@
   <div>
     <div class="card info-card" style="max-width: 1500px">
         <img :src="require(`@/assets/faces/face${counter + 1}.png`)"
-        style="height: 80px" draggable="false">
+        style="height: 80px"
+        draggable="false">
         <div id="intro">
           <p>{{ names[(counter)] }} {{ text.tasks.checkWeights.intro }}</p>
         </div>
-        <img v-for="i in weights" :key="i" :src="require(`@/assets/weights/size${i}.png`)"
-         draggable="false" style="height: 60px">
+        <img v-for="i in weights"
+         :key="i"
+         :src="require(`@/assets/weights/size${i}.png`)"
+         draggable="false"
+         style="height: 60px">
     </div>
 
     <table>
       <tr id="0" v-for="i in boatCapacities.length" :key="i">
         <td>
-          <p style="font-size: 1.3em" class="hidden-mobile">Boot {{ i }}</p>
           <img :src="require(`@/assets/transport/boatmax${boatCapacities[i - 1]}.png`)"
-           style="width: 40%; min-width: 120px; max-width:150px" draggable="false">
+           style="width: 40%; min-width: 120px; max-width:150px"
+           draggable="false">
         </td>
         <td v-for="j in rows[0].length" :key="j" class="fixedField">
-          <img :src="require(`@/assets/weights/size${rows[i - 1][j - 1]}.png`)" draggable="false">
+          <img :src="require(`@/assets/weights/size${rows[i - 1][j - 1]}.png`)"
+           draggable="false">
         </td>
       </tr>
     </table>
@@ -188,7 +193,6 @@ export default class WeightCheck extends Vue {
     if (chosenWeightSum + randomWeight < newWeightSum + 5 && Math.random() > 0.3) {
       this.chosenWeights.add(randomWeight);
       chosenWeightSum += randomWeight;
-      console.log(chosenWeightSum);
     }
 
     // transform to array
@@ -198,6 +202,7 @@ export default class WeightCheck extends Vue {
     // distribute weights among boats
     const tolerance = 2;
 
+    // iterate through all chosen weights and distribute them
     for (let i = this.weights.length - 1; i >= 0; i -= 1) {
       // distribute weights as well as possible
       for (let j = 0; j < this.boatCapacities.length; j += 1) {
@@ -224,15 +229,11 @@ export default class WeightCheck extends Vue {
     this.boatOverloadCheck();
     if (!this.boatOverload && Math.random() > 0.3) {
       randomWeight = 1 + Math.floor(Math.random() * (maxWeightSize / 2));
-      // eslint-disable-next-line prefer-template
-      console.log('Try to distribute extra weight ' + randomWeight);
       for (let j = 0; j < this.boatCapacities.length; j += 1) {
         if (this.actualBoatLoad[j] + randomWeight
          <= this.boatCapacities[j] + tolerance) {
           this.addWeight(randomWeight, j);
           this.actualBoatLoad[j] += randomWeight;
-          // eslint-disable-next-line prefer-template
-          console.log(randomWeight + ' extra distributed');
           break;
         }
       }

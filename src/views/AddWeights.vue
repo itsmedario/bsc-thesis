@@ -5,7 +5,9 @@
      :level="2"
      :language="language"
     >
-      <p class="title" slot="title">{{ text.tasks.addWeights.title }}</p>
+      <p class="title" slot="title">
+        {{ text.tasks.addWeights.title }}
+      </p>
       <p class="card description" slot="intro">
         {{ text.tasks.addWeights.intro }}
       </p>

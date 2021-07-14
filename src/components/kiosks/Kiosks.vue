@@ -4,14 +4,26 @@
        :is="this.maps[counter]"
        :language="language"
        :level="level"
+       :s1="s1"
        @correct-solution="correctSolution = true"
-       @false-solution="correctSolution = false; tip = $event"/>
+       @false-solution="correctSolution = false; tip = $event"
+      />
+
+      <StatementCheck v-if="level == 1"
+       :key="restartCounter"
+       :language="language"
+       :statements="statements"
+       @toggle-box="$refs.gameMap.toggleBox($event)"
+       @set-false="$refs.gameMap.setFalse($event)"
+       @set-true="$refs.gameMap.setTrue($event)"
+      />
     </div>
 </template>
 
 <script lang="ts">
 /* eslint-disable no-restricted-syntax */
 import { Component, Vue, Prop } from 'vue-property-decorator';
+import StatementCheck from '@/components/tools/StatementCheck.vue';
 import Map3 from '@/components/kiosks/Map3.vue';
 import Map5 from '@/components/kiosks/Map5.vue';
 import Map11 from '@/components/kiosks/Map11.vue';
@@ -25,6 +37,7 @@ import Map18 from '@/components/kiosks/Map18.vue';
 
 @Component({
   components: {
+    StatementCheck,
     Map3,
     Map5,
     Map11,
@@ -52,6 +65,13 @@ export default class Kiosks extends Vue {
 
   reloadCounter = 0; // enables reloading the component to restart by creating a new instance
 
+  restartCounter = 0; // enables reloading the check component to restart by creating a new instance
+
+  s1 = -1; // user's answer to statement 1
+
+  // eslint-disable-next-line max-len
+  statements = [[1, this.text.tasks.checkKiosks.statements.s1]];
+
   correctSolution = false;
 
   tip = '';
@@ -68,15 +88,18 @@ export default class Kiosks extends Vue {
 
   nextTask():void {
     this.restart();
-    if (this.level === 1) {
-      this.reloadCounter += 1;
-    } else {
-      this.counter = (this.counter + 1) % this.maps.length;
-    }
+    this.counter = (this.counter + 1) % this.maps.length;
   }
 
   restart():void {
-    this.reloadCounter += 1;
+    if (this.level === 1) {
+      this.restartCounter += 1;
+      this.s1 = -1;
+      this.tip = this.text.tasks.checkKiosks.tips.tip1;
+    } else {
+      this.reloadCounter -= 1;
+      this.tip = this.text.tasks.buildKiosks.tips.tip1;
+    }
     this.correctSolution = false;
   }
 }

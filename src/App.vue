@@ -1,6 +1,13 @@
 <template>
-  <div id="app">
-    <Header/>
+  <div id="app" :key="counter">
+    <Warning id="mobile-warning"
+     :language="language"
+      v-if="displayWarning"
+      @close-warning="displayWarning = false"/>
+    <Header
+     :language="language"
+     @switch-language="switchLanguage()"
+    />
     <router-view id="container"
      :language="language"
      />
@@ -12,22 +19,30 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import Header from '@/components/layout/Header.vue';
+import Warning from '@/components/layout/Warning.vue';
 
 @Component({
   components: {
     Header,
+    Warning,
   },
 })
 
 export default class App extends Vue {
-  language = 'de';
+  counter = 0;
+
+  language = 'de'; // change when needed using a toggle button in the navbar
+
+  languagePool = ['de', 'en'];
 
   // eslint-disable-next-line global-require
   text = require(`@/text_${this.language}.json`);
 
-  // eslint-disable-next-line class-methods-use-this
-  beforeMount():void {
-    console.log(this.$route.name);
+  displayWarning = true;
+
+  switchLanguage():void {
+    this.counter = (this.counter + 1) % this.languagePool.length;
+    this.language = this.languagePool[this.counter];
   }
 }
 </script>
@@ -42,7 +57,7 @@ body{
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 1em;
   text-align: center;
-  max-width: 1500px;
+  position: relative;
 }
 
 hr{
@@ -226,10 +241,30 @@ video {
   font-size: 2em;
 }
 
+@media print{
+  @page {size: landscape; width: 100vw;}
+  #button-menu{display: none !important;}
+  }
+
 @media (max-width: 1430px) {
+        .hidden-smallscreen {
+          display: none !important;
+        }
+}
+
+@media (max-width: 600px) {
         .hidden-mobile {
           display: none !important;
         }
+}
+
+@media (max-height: 400px) {
+  #game-button-menu {
+    position: fixed !important;
+    left: 0;
+    top: 20px !important;
+    z-index: 9997;
+  }
 }
 
 @media (max-width: 700px) {

@@ -1,26 +1,35 @@
 <template>
   <div class="tower-game">
     <div class="map-container">
-      <div id="i" v-for="i in nrOfFields" :key="i" class="square" :class="getClass(i - 1)"
-           @click="fieldClicked(i - 1)" @dragover.prevent
-           @drop.stop.prevent="dropTower(i - 1)">
-            <img :src="require(`@/assets/bridges/tower_${fields[i - 1]}.png`)"
-            draggable="true"
-            @dragstart="fieldClicked(i - 1); towerSelected = true">
+      <div id="i" v-for="i in nrOfFields"
+       :key="i"
+       class="square"
+       :class="getClass(i - 1)"
+       @click="fieldClicked(i - 1)"
+       @dragover.prevent
+       @drop.stop.prevent="dropTower(i - 1)">
+        <img :src="require(`@/assets/bridges/tower_${fields[i - 1]}.png`)"
+         :draggable="level !== 1"
+         @dragstart="fieldClicked(i - 1); towerSelected = true"
+        />
       </div>
     </div>
 
     <div class="item-stock">
-      <div class="tower-field card clickable" v-if="level !== 1"
+      <div class="tower-field card clickable"
+      v-if="level !== 1"
       @click="selectTower()"
-      @dragstart="towerSelected = true" draggable="false"
+      @dragstart="towerSelected = true"
+      draggable="false"
       :class="{ locked: availableTowers < 1 && level != 4,
        selected: towerSelected == true && (level == 4 || availableTowers >= 1)}">
         <img :src="require('/src/assets/bridges/tower.png')"
          :draggable="availableTowers >= 1 || level == 4">
       </div>
       <div class="card item-display" v-if="level !== 4 && level !== 1">
-        <div>{{ availableTowers }}&#215;</div>
+        <div>
+          {{ getAvailableTowers() }}&#215;
+        </div>
       </div>
     </div>
   </div>
@@ -46,13 +55,12 @@ export default class TowersTemplate extends Vue {
   @Prop({ required: true })
   s1!: number;
 
-  @Prop({ required: true })
-  s2!: number;
-
   // eslint-disable-next-line global-require, import/no-dynamic-require
   text = require(`@/text_${this.language}.json`);
 
   availableTowers = 0;
+
+  maxAvailableTowers = 0;
 
   optimalNrOfTowers = 0;
 
@@ -64,12 +72,10 @@ export default class TowersTemplate extends Vue {
 
   correctProposition = false;
 
-  correctUserSolution = false;
+  optimalProposition = false;
 
   // eslint-disable-next-line max-len
-  statements = [[1, this.text.tasks.checkTowers.statements.s1], [2, this.text.tasks.checkTowers.statements.s2]];
-
-  statementCorrectness = [false];
+  statements = [[1, this.text.tasks.checkTowers.statements.s1]];
 
   towerSelected = false;
 
@@ -77,10 +83,11 @@ export default class TowersTemplate extends Vue {
 
   beforeMount():void {
     this.initGraph();
+    this.maxAvailableTowers = this.availableTowers;
     if (this.level === 1) {
       const r = new RandomGenerator();
       // eslint-disable-next-line max-len
-      this.fields = r.generateSolution(this.fields, (this.optimalNrOfTowers > 1 ? this.optimalNrOfTowers - 1 : 1), this.availableTowers);
+      this.fields = r.generateSolution(this.fields, (this.optimalNrOfTowers > 1 ? this.optimalNrOfTowers : 1), this.availableTowers + 1);
       for (let i = 0; i < this.fields.length; i += 1) {
         if (this.fields[i] === true) {
           this.usedFields.add(i);
@@ -88,34 +95,32 @@ export default class TowersTemplate extends Vue {
       }
       const arr = Array.from(this.usedFields);
       this.correctProposition = this.map.isVertexCover(arr);
-      this.statementCorrectness[0] = this.correctProposition;
+      this.optimalProposition = this.usedFields.size <= this.optimalNrOfTowers;
+      this.checkSolution(this.level);
     }
   }
 
   checkSolution(level:number):void {
-    const arr = Array.from(this.usedFields);
-    const isVC = this.map.isVertexCover(arr);
     if (level === 1) {
       const s1sol = this.s1 === 0;
-      const s2sol = this.s2 === 0;
-      const optSol = this.usedFields.size === this.optimalNrOfTowers;
-      console.log('Check sol');
-      if (this.s1 === -1 || this.s2 === -1) {
+      if (this.s1 === -1) {
         this.$emit('false-solution', this.text.tasks.checkTowers.tips.tip1);
-      } else if (s1sol !== isVC && s2sol === optSol) {
+      } else if (s1sol !== this.correctProposition) {
         this.$emit('false-solution', this.text.tasks.checkTowers.tips.tip2);
-      } else if (s1sol === isVC && s2sol !== optSol) {
-        this.$emit('false-solution', this.text.tasks.checkTowers.tips.tip3);
-      } else if (s1sol === isVC && s2sol === optSol) {
+      } else if (s1sol === this.correctProposition) {
         this.$emit('correct-solution');
       }
     } else if (level === 2) {
+      const arr = Array.from(this.usedFields);
+      const isVC = this.map.isVertexCover(arr);
       if (isVC) {
         this.$emit('correct-solution');
       } else {
         this.$emit('false-solution', this.text.tasks.buildTowers.tips.tip2);
       }
     } else if (level === 4) {
+      const arr = Array.from(this.usedFields);
+      const isVC = this.map.isVertexCover(arr);
       if (isVC && this.optimalNrOfTowers === this.usedFields.size) {
         this.$emit('correct-solution');
       } else if (isVC) {
@@ -148,11 +153,6 @@ export default class TowersTemplate extends Vue {
     for (let i = 0; i < this.nrOfFields; i += 1) {
       this.map.addVertex(i);
     }
-
-    /* if (this.level === 1) {
-      this.fields = this.map.createProposition(5, 7);
-      console.log(this.fields);
-    } */
   }
 
   fieldClicked(i:number):void {
@@ -166,6 +166,11 @@ export default class TowersTemplate extends Vue {
       this.towerSelected = false; // ensure propagation
       this.checkSolution(this.level);
     }
+  }
+
+  getAvailableTowers():string {
+    // eslint-disable-next-line prefer-template
+    return 'max ' + this.maxAvailableTowers;
   }
 
   restart():void {
@@ -188,10 +193,10 @@ export default class TowersTemplate extends Vue {
 
   // switch answer n to true if false and vice versa
   toggleBox(n:number):void {
-    if (n === 1) {
-      this.s1 = (this.s1 + 1) % 2;
-    } else if (n === 2) {
-      this.s2 = (this.s2 + 1) % 2;
+    if (this.s1 !== 0) {
+      this.s1 = 0;
+    } else {
+      this.s1 = 1;
     }
     this.checkSolution(this.level);
   }
@@ -200,8 +205,6 @@ export default class TowersTemplate extends Vue {
   setTrue(n:number):void {
     if (n === 1) {
       this.s1 = 0;
-    } else if (n === 2) {
-      this.s2 = 0;
     }
     this.checkSolution(this.level);
   }
@@ -210,18 +213,13 @@ export default class TowersTemplate extends Vue {
   setFalse(n:number):void {
     if (n === 1) {
       this.s1 = 1;
-    } else if (n === 2) {
-      this.s2 = 1;
     }
     this.checkSolution(this.level);
   }
 
   // check state of statement n
   checkState(n:number):number {
-    if (n === 1) {
-      return this.s1;
-    }
-    return this.s2;
+    return this.s1;
   }
 }
 </script>

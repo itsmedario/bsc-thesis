@@ -5,11 +5,17 @@
      :level="2"
      :language="language"
     >
-      <p class="title" slot="title">{{ text.tasks.buildTowers.title }}</p>
-      <p class="card description" slot="intro">{{ text.tasks.buildTowers.intro }}</p>
-      <p slot="description">{{ text.tasks.buildTowers.description }}</p>
+      <p class="title" slot="title">
+        {{ text.tasks.buildTowers.title }}
+      </p>
+      <p class="card description" slot="intro">
+        {{ text.tasks.buildTowers.intro }}
+      </p>
+      <p slot="description">
+        {{ text.tasks.buildTowers.description }}
+      </p>
       <video loop controls muted slot="video">
-        <source :src="require('@/assets/tutorials/add-weights.mp4')" />
+        <source :src="require('@/assets/tutorials/build-towers.mp4')" />
         Your browser does not support the video tag.
       </video>
     </Game>

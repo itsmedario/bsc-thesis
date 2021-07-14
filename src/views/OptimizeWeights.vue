@@ -5,7 +5,9 @@
      :level="3"
      :language="language"
     >
-      <p class="title" slot="title">{{ text.tasks.optimizeWeights.title }}</p>
+      <p class="title" slot="title">
+        {{ text.tasks.optimizeWeights.title }}
+      </p>
       <p class="card description" slot="intro">
         {{ text.tasks.optimizeWeights.intro }}
       </p>
@@ -13,7 +15,7 @@
         {{ text.tasks.optimizeWeights.description }}
       </p>
       <video loop controls muted slot="video">
-        <source :src="require('@/assets/tutorials/add-weights.mp4')" />
+        <source :src="require('@/assets/tutorials/optimize-weights.mp4')" />
         Your browser does not support the video tag.
       </video>
     </Game>

@@ -5,11 +5,17 @@
      :level="1"
      :language="language"
     >
-      <p class="title" slot="title">{{ text.tasks.checkKiosks.title }}</p>
-      <p class="card description" slot="intro">{{ text.tasks.checkKiosks.intro }}</p>
-      <p slot="description">{{ text.tasks.checkKiosks.description }}</p>
+      <p class="title" slot="title">
+        {{ text.tasks.checkKiosks.title }}
+      </p>
+      <p class="card description" slot="intro">
+        {{ text.tasks.checkKiosks.intro }}
+      </p>
+      <p slot="description">
+        {{ text.tasks.checkKiosks.description }}
+      </p>
       <video loop controls muted slot="video">
-        <source :src="require('@/assets/tutorials/add-weights.mp4')" />
+        <source :src="require('@/assets/tutorials/check-kiosks.mp4')" />
         Your browser does not support the video tag.
       </video>
     </Game>

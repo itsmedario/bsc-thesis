@@ -3,7 +3,7 @@
     <hr>
     <div class="task-box">
       <div v-for="[n, s] in statements" :key="n" class="statement-box">
-        <div @click="toggle(n); $emit('toggle', n)" class="statement">
+        <div @click="toggleBox(n); $emit('toggle-box', n)" class="statement">
           {{ s }}
         </div>
         <div class="buttons">
@@ -102,27 +102,6 @@ export default class StatementCheck extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-table {
-  border-spacing: 0.3em 0.7em;
-}
-
-p, table h3, img {
-  display: inline-block;
-  margin: 0.5em;
-  vertical-align: middle;
-}
-
-td img {
-  width: 100px;
-}
-
-#intro {
-  height: 80px;
-  display: flex;
-  align-items: center;
-}
-
 .task-box {
   width: 100%;
 }
@@ -194,11 +173,11 @@ td img {
 }
 
 .activetrue {
-  border: 3px solid white;
+  border: 2px solid white;
 }
 
 .activefalse {
-  border: 3px solid white;
+  border: 2px solid white;
 }
 
 </style>

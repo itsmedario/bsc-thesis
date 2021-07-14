@@ -4,18 +4,32 @@
        :is="this.maps[counter]"
        :language="language"
        :level="level"
+       :s1="s1"
+       :s2="s2"
        @correct-solution="correctSolution = true"
-       @false-solution="correctSolution = false"/>
+       @false-solution="correctSolution = false; tip = $event"
+      />
+
+      <StatementCheck v-if="level == 1"
+       :key="restartCounter"
+       :language="language"
+       :statements="statements"
+       @toggle="$refs.gameMap.toggleBox($event)"
+       @set-false="$refs.gameMap.setFalse($event)"
+       @set-true="$refs.gameMap.setTrue($event)"
+      />
     </div>
 </template>
 
 <script lang="ts">
 /* eslint-disable no-restricted-syntax */
 import { Component, Vue, Prop } from 'vue-property-decorator';
+import StatementCheck from '@/components/tools/StatementCheck.vue';
 import Map1 from '@/components/bridges/Map1.vue';
 
 @Component({
   components: {
+    StatementCheck,
     Map1,
   },
 })
@@ -34,15 +48,26 @@ export default class Bridges extends Vue {
 
   reloadCounter = 0; // enables reloading the component to restart by creating a new instance
 
+  restartCounter = 0; // enables reloading the check component to restart by creating a new instance
+
   correctSolution = false;
 
   maps = ['Map1'];
+
+  s1 = -1; // user's answer to statement 1
+
+  s2 = -1;
+
+  // eslint-disable-next-line max-len
+  statements = [[1, this.text.tasks.checkBridges.statements.s1], [2, this.text.tasks.checkBridges.statements.s2]];
+
+  tip = '';
 
   checkSolution(level:number):void {
     if (this.correctSolution) {
       this.$emit('correct-solution');
     } else {
-      this.$emit('false-solution', this.text.tasks.buildBridges.tips.tip1);
+      this.$emit('false-solution', this.tip);
     }
   }
 
@@ -56,7 +81,11 @@ export default class Bridges extends Vue {
   }
 
   restart():void {
-    this.reloadCounter += 1;
+    if (this.level === 1) {
+      this.restartCounter += 1;
+    } else {
+      this.reloadCounter -= 1;
+    }
     this.correctSolution = false;
   }
 }

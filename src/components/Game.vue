@@ -1,13 +1,11 @@
 <template>
   <div id="game">
-    <Warning id="mobile-warning" :language="language"/>
     <Tutorial
      :language="language"
      :show-modal=showTutorial
      @close-tutorial="showTutorial = false">
       <slot name="description" slot="description"/>
-      <slot name="video" slot="video"
-      />
+      <slot name="video" slot="video"/>
     </Tutorial>
 
     <Verifier
@@ -24,12 +22,11 @@
      @restart="$refs.gameComp.restart()"
      @check-solution="$refs.gameComp.checkSolution(level); showSolution = true"
      @show-tutorial="showTutorial = true"
-     @switch-difficulty="$refs.gameComp.switchDifficulty()"
      />
 
     <div id="game-page">
       <div id="task-description">
-        <div v-if="this.type=='WeightCheck'" class="switch">
+        <div v-if="this.type=='WeightCheck'" class="switch hidden-mobile">
           <img :src="require('@/assets/beavers/beaver.png')" draggable="false"/>
           <div class="toggle-button r" id="difficulty-switch"
            @click="$refs.gameComp.switchDifficulty()">
@@ -65,7 +62,6 @@ import Kiosks from '@/components/kiosks/Kiosks.vue';
 import Bridges from '@/components/bridges/Bridges.vue';
 import Weights from '@/components/weights/Weights.vue';
 import WeightCheck from '@/components/weights/WeightCheck.vue';
-import Warning from '@/components/layout/Warning.vue';
 
 @Component({
   components: {
@@ -77,7 +73,6 @@ import Warning from '@/components/layout/Warning.vue';
     Bridges,
     Weights,
     WeightCheck,
-    Warning,
   },
 })
 
@@ -209,7 +204,7 @@ export default class Game extends Vue {
 
 .switch {
   position: absolute;
-  right: 20px;
+  right: 0px;
   display: flex;
 }
 

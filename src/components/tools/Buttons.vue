@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div id="button-menu" class="buttons">
-      <router-link to="/#start">
+    <div id="game-button-menu" class="buttons button-bar">
+      <!--<router-link to="/#start">
         <button class="flex-item flex-center card clickable responsive">
           <p>{{ text.game.buttons.back }}</p>
           <img :src="require('/src/assets/icons/back.png')"/>
         </button>
-      </router-link>
+      </router-link>-->
 
       <button class="flex-item flex-center card clickable responsive" @click="$emit('next-task')">
         <p>{{ text.game.buttons.next }}</p>
@@ -55,7 +55,7 @@ export default class Buttons extends Vue {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.buttons {
+.button-bar {
   position: fixed !important;
   left: 0;
   top: 170px;

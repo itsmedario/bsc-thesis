@@ -4,22 +4,22 @@
     "pages": {
         "home": {
             "title": "Willkommen in der Lernumgebung",
-            "introduction": "Hier findest Du viele Rätsel zu bekannten Informatik-Problemen. Klicke Dich durch die verschiedenen Aufgaben und meistere die Herausforderungen. Viel Spass!",
+            "introduction": "Hier findest Du Rätsel zu bekannten Informatik-Problemen. Klicke Dich durch die verschiedenen Aufgaben und meistere die Herausforderungen. Viel Spass!",
             "bottom": "Zur Aufgaben-Auswahl ↓",
             "top": "Nach oben ↑"
         },
         "about": {
             "title": "Impressum",
-            "descrption": "Diese Lernumgebung wurde im Zusammenhang mit dem Buch 'einfach Informatik 3/4' erstellt. Feedback ist sehr erwünscht: dnaepfer@student.ethz.ch",
-            "author": "Autor: Dario Naepfer",
-            "oldVersion": "Version 3.0 - Neu: Jeweils 2 Spiele der zweiten und der dritten Spiele-Serie sind fertig!",
-            "version": "Version 3.2 - Neue Navigationsleiste und verbessertes In-Game Erlebnis"
+            "descrption": "Diese Lernumgebung wurde für das Lehrmittel 'einfach Informatik 3/4' erstellt.",
+            "author": "Entwickler: Dario Naepfer",
+            "version": "Version 4.2",
+            "oldVersion": ""
         },
         "feedback": {
+            "button": "Feedback",
             "title": "Feedback zur Lernumgebung",
             "text": "Hilf mit, die Lernumgebung zu verbessern:",
-            "click": "Klicke hier",
-            "link": "https://forms.gle/pg2zMFHspbVQMrr9A"
+            "click": "Klicke hier"
         },
         "notFound": {
             "title": "Seite nicht gefunden! Error 404",
@@ -41,13 +41,14 @@
         "tutorial": "Anleitung zum Spiel", 
         "warning": {
             "title": "Achtung!",
-            "info": "Diese Seite ist nicht für Smartphones optimiert. Versuche es mit einem anderen Gerät",
+            "info": "Diese Seite ist nicht für Smartphones optimiert. Versuche es im Querformat und Vollbildmodus.",
             "play": "Trotzdem spielen →"
         }
     },
     "tasks": {
         "checkWeights": {
             "id": 1,
+            "level": "1",
             "path": "/check-weights",
             "img": "/transport/wood.png",
             "title": "Gewichte überprüfen",
@@ -69,6 +70,7 @@
         },
         "distributeWeights": {
             "id": 2,
+            "level": "2",
             "path": "/distribute-weights",
             "img": "/transport/wood.png",
             "title": "Gewichte verteilen",
@@ -77,6 +79,7 @@
         },
         "addWeights":  {
             "id": 3,
+            "level": "2",
             "path": "/add-weights",
             "img": "/transport/wood.png",
             "title": "Gewichte ergänzen",
@@ -85,6 +88,7 @@
         },
         "optimizeWeights":  {
             "id": 4,
+            "level": "3",
             "path": "/optimize-weights",
             "img": "/transport/wood.png",
             "title":  "Gewichte optimal verteilen",
@@ -96,8 +100,29 @@
                 "tip3": "Guter Versuch! Schaffst Du es, eine noch bessere Lösung zu finden?"
             }
         },
+        "checkTowers":  {
+            "id": 5,
+            "level": "1",
+            "path": "/check-towers",
+            "img": "/bridges/tower.png",
+            "title":  "Türme überprüfen",
+            "intro": "Überprüfe, ob die Türme so gesetzt sind, dass man mit den Türmen alle Kanäle überwachen kann.",
+            "description": "Überprüfe, ob die Türme so gesetzt sind, dass man mit den Türmen alle Kanäle überwachen kann. Von einem gesetzten Turm kann man alle angrenzenden Kanäle bis zur nächsten Kreuzung überwachen. Beantworte dann die untenstehende Frage, indem du auf 'Richtig' oder 'Falsch' klickst. Viel Erfolg!",
+            "statements": {
+                "s1": "Mit den Türmen kann man alle Kanäle überwachen.",
+                "s2": "Es gibt eine korrekte Lösung, bei der weniger Türme verwendet werden als hier.",
+                "true": "Richtig",
+                "false": "Falsch"
+            },
+            "tips": {
+                "tip1": "Beantworte alle Fragen, bevor du auf Überprüfen klickst!",
+                "tip2": "Sind alle Kanäle überwacht?",
+                "tip3": "Tipp: Überlege, ob es noch eine andere Lösung für dieses Rätsel gibt"                
+            }
+        },
         "buildTowers":  {
             "id": 6,
+            "level": "2",
             "path": "/build-towers",
             "img": "/bridges/tower.png",
             "title":  "Türme bauen",
@@ -107,19 +132,9 @@
                 "tip1": "Sind wirklich alle Kanäle überwacht?"
             }
         },
-        "buildKiosks":  {
-            "id": 7,
-            "path": "/build-kiosks",
-            "img": "/bridges/kiosk_true.png",
-            "title":  "Kioske bauen",
-            "intro": "Setze die Kioske so, dass jeder Punkt selbst oder in der Nähe einen Kiosk hat.",
-            "description": "Setze die Kioske so, dass auf jedem Punkt entweder selbst ein Kiosk steht oder auf einem angrenzenden Punkt. Klicke auf einen Kiosk und ziehe ihn an den gewünschten Platz. Klicke auf einen Kiosk, um ihn wieder aus der Landschaft zu entfernen. Viel Erfolg!",
-            "tips": {
-                "tip1": "Noch nicht alle Punkte haben einen Kiosk in der Nähe!"
-            }
-        },
         "optimizeTowers":  {
-            "id": 9,
+            "id": 7,
+            "level": "3",
             "path": "/optimize-towers",
             "img": "/bridges/tower.png",
             "title":  "Türme optimal verteilen",
@@ -130,54 +145,49 @@
                 "tip2": "Findest du eine Lösung, bei der du weniger Türme verwendest?"
             }
         },
+        "checkKiosks":  {
+            "id": 8,
+            "level": "1",
+            "path": "/check-kiosks",
+            "img": "/bridges/kiosk_true.png",
+            "title":  "Kioske überprüfen",
+            "intro": "Überprüfe, ob die Kioske so gesetzt sind, dass jeder Punkt einen Kiosk auf einem benachbarten Punkt hat.",
+            "description": "Überprüfe, ob die Kioske so gesetzt sind, dass auf jedem Punkt entweder selbst ein Kiosk steht oder auf einem benachbarten Punkt    . Beantworte dann die untenstehende Frage, indem du auf 'Richtig' oder 'Falsch' klickst. Viel Erfolg!",
+            "statements": {
+                "s1": "Jedes Dorf hat einen Kiosk in der Nähe.",
+                "s2": "Es gibt eine korrekte Lösung, bei der weniger Kioske verwendet werden als hier.",
+                "true": "Richtig",
+                "false": "Falsch"
+            },
+            "tips": {
+                "tip1": "Beantworte alle Fragen, bevor du auf Überprüfen klickst!",
+                "tip2": "Haben alle Punkte einen Kiosk in der Nähe?",
+                "tip3": "Tipp: Überlege, ob es noch eine andere Lösung für dieses Rätsel gibt" 
+            }
+        },
+        "buildKiosks":  {
+            "id": 9,
+            "level": "2",
+            "path": "/build-kiosks",
+            "img": "/bridges/kiosk_true.png",
+            "title":  "Kioske bauen",
+            "intro": "Setze die Kioske so, dass jeder Punkt selbst oder auf einem benachbarten Punkt einen Kiosk hat.",
+            "description": "Setze die Kioske so, dass auf jedem Punkt entweder selbst ein Kiosk steht oder auf einem angrenzenden Punkt. Klicke auf einen Kiosk und ziehe ihn an den gewünschten Platz. Klicke auf einen Kiosk, um ihn wieder aus der Landschaft zu entfernen. Viel Erfolg!",
+            "tips": {
+                "tip1": "Noch nicht alle Punkte haben einen Kiosk in der Nähe!"
+            }
+        },
         "optimizeKiosks":  {
             "id": 10,
+            "level": "3",
             "path": "/optimize-kiosks",
             "img": "/bridges/kiosk_true.png",
             "title":  "Kioske optimal verteilen",
-            "intro": "Benutze so wenig Kioske wie möglich, dass jeder Punkt selbst oder in der Nähe einen Kiosk hat.",
+            "intro": "Benutze so wenig Kioske wie möglich, dass jeder Punkt selbst oder auf einem benachbarten Punkt einen Kiosk hat.",
             "description": "Setze die Kioske so, dass auf jedem Punkt entweder selbst ein Kiosk steht oder auf einem angrenzenden Punkt. Klicke auf einen Kiosk und ziehe ihn an den gewünschten Platz. Klicke auf einen Kiosk, um ihn wieder aus der Landschaft zu entfernen. Versuche dabei, so wenig Kioske wie möglich zu verwenden. Viel Erfolg!",
             "tips": {
                 "tip1": "Noch nicht alle Punkte haben einen Kiosk in der Nähe!",
                 "tip2": "Findest du eine Lösung, bei der du weniger Kioske verwendest?"
-            }
-        },
-        "checkTowers":  {
-            "id": 5,
-            "path": "/check-towers",
-            "img": "/bridges/tower.png",
-            "title":  "Türme überprüfen",
-            "intro": "Überprüfe, ob die Türme so gesetzt sind, dass man mit den Türmen alle Kanäle überwachen kann.",
-            "description": "Überprüfe, ob die Türme so gesetzt sind, dass man mit den Türmen alle Kanäle überwachen kann. Von einem gesetzten Turm kann man alle angrenzenden Kanäle bis zur nächsten Kreuzung überwachen. Viel Erfolg!",
-            "statements": {
-                "s1": "Mit den Türmen kann man alle Kanäle überwachen.",
-                "s2": "Es gibt noch eine bessere Lösung mit weniger Türmen.",
-                "true": "Richtig",
-                "false": "Falsch"
-            },
-            "tips": {
-                "tip1": "Beantworte alle Fragen, bevor du auf Überprüfen klickst!",
-                "tip2": "Sind wirklich alle Kanäle überwacht?",
-                "tip3": "Tipp: Überlege, ob es noch eine andere Lösung für dieses Rätsel gibt?"                
-            }
-        },
-        "checkKiosks":  {
-            "id": 11,
-            "path": "/check-kiosks",
-            "img": "/bridges/kiosk_true.png",
-            "title":  "Kioske überprüfen",
-            "intro": "Überprüfe, ob die Kioske so gesetzt sind, dass damit jeder Punkt einen Kiosk in der Nähe hat.",
-            "description": "Überprüfe, ob die Kioske so gesetzt sind, dass auf jedem Punkt entweder selbst ein Kiosk steht oder in einem Nachbardorf. Viel Erfolg!",
-            "statements": {
-                "s1": "Jedes Dorf hat einen Kiosk in der Nähe.",
-                "s2": "Es gibt noch eine bessere Lösung, bei der man weniger Kioske verwendet.",
-                "true": "Richtig",
-                "false": "Falsch"
-            },
-            "tips": {
-                "tip1": "Beantworte alle Fragen, bevor du auf Überprüfen klickst!",
-                "tip2": "Haben wirklich alle Punkte einen Kiosk in der Nähe?",
-                "tip3": "Tipp: Überlege, ob es noch eine andere Lösung für dieses Rätsel gibt?" 
             }
         }
     }

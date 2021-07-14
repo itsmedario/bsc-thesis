@@ -1,10 +1,15 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable prefer-template */
 /* eslint-disable guard-for-in */
+/* eslint-disable no-console */
 class Graph {
   numberOfVertices;
 
   adjList;
+
+  visitedNodes = new Set();
+
+  queue = [0];
 
   constructor(vertices:number) {
     this.numberOfVertices = vertices;
@@ -39,14 +44,21 @@ class Graph {
     return proposition;
   } */
 
+  DFS(n:number):void {
+    if (!this.visitedNodes.has(n)) {
+      this.visitedNodes.add(n);
+      for (const i of this.adjList.get(n)) {
+        if (!this.visitedNodes.has(i)) {
+          this.queue.push(Number(i));
+        }
+      }
+    }
+  }
+
   isEmptyGraph():boolean {
     let empty = true;
     const getKeys = this.adjList.keys();
-
-    this.printGraph();
-
     for (const i of getKeys) {
-      console.log(i);
       if (this.adjList.get(i).size > 0) {
         empty = false;
       }
@@ -54,20 +66,16 @@ class Graph {
     return empty;
   }
 
-  isVertexCover(arr:unknown[]):boolean { // checks the placed towers actually form a vertex cover
+  isVertexCover(arr:unknown[]):boolean { // checks if the placed towers actually form a vertex cover
     for (let i = 0; i < arr.length; i += 1) {
       this.removeVertex(Number(arr[i]));
     }
 
     const solution = this.isEmptyGraph();
-
-    console.log(solution);
     return solution;
   }
 
   isDominatingSet(arr:unknown[]):boolean { // tests if the the selection is a dominating set
-    console.log('is dom set?');
-
     const coveredVertices = new Set();
     for (let i = 0; i < arr.length; i += 1) {
       for (const j of this.adjList.get(arr[i])) {
@@ -76,38 +84,37 @@ class Graph {
       coveredVertices.add(arr[i]);
     }
 
-    // if every vertex has a marked neighbor, the set is empty
-    const solution = coveredVertices.size === this.numberOfVertices;
-    console.log(coveredVertices.size);
-    console.log(this.numberOfVertices);
-
+    // if every vertex has a marked neighbor, set size = total number of vertices
+    const solution = coveredVertices.size === this.numberOfVertices; // assigns a boolean value
     return solution;
   }
 
-  /* isMST(arr:unknown[]):boolean {
-    return true;
-  } */
+  isMST():boolean {
+    this.visitedNodes.clear();
+    this.queue = [];
+    const startNode = 0;
+    this.queue.push(startNode);
+    while (this.queue.length > 0) {
+      const n = this.queue.pop();
+      this.DFS(Number(n));
+    }
+    return this.visitedNodes.size === this.adjList.size;
+  }
 
   removeAdjVertices(v:number):void { // remove the vertex and all its adjacent vertices
     for (const i of this.adjList.get(v)) {
       if (this.adjList.has(i)) {
         this.adjList.delete(i);
-        console.log(i);
       }
     }
     this.adjList.delete(v);
-    console.log('removed vertex ' + v);
-    console.log('graph ' + this.adjList.keys);
   }
 
   removeVertex(v:number):void { // remove a vertex and all its incident edges
     for (const i of this.adjList.get(v)) {
-      console.log(i);
       this.adjList.get(i).delete(v);
     }
     this.adjList.delete(v);
-    console.log('removed vertex ' + v);
-    console.log('graph ' + this.adjList);
   }
 
   printGraph():void { // prints the adjacency list of every vertex
@@ -120,7 +127,6 @@ class Graph {
       for (const j of getValues) {
         conc += j + ' ';
       }
-      console.log(i + ' -> ' + conc);
     }
   }
 }
