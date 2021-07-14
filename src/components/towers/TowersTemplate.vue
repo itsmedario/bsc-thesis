@@ -182,7 +182,7 @@ export default class TowersTemplate extends Vue {
   }
 
   selectTower():void { // select the tower in the inventory
-    if (this.availableTowers > 0) {
+    if (this.availableTowers > 0 || this.level !== 2) {
       if (this.towerSelected) {
         this.towerSelected = false;
       } else {

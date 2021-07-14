@@ -1,5 +1,9 @@
 <template>
   <div id="home">
+    <Warning id="mobile-warning"
+     :language="language"
+      v-if="displayWarning"
+      @close-warning="$emit('close-warning')"/>
     <div id="start">
       <p id="top" class="title">
         {{ text.pages.home.title }}
@@ -50,15 +54,20 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import Footer from '@/components/layout/Footer.vue';
 import views from '@/views/Views';
+import Warning from '@/components/layout/Warning.vue';
 
 @Component({
   components: {
     Footer,
+    Warning,
   },
 })
 export default class Home extends Vue {
   @Prop({ required: true })
   language!: string;
+
+  @Prop({ required: true })
+  displayWarning!: boolean;
 
   // eslint-disable-next-line global-require, import/no-dynamic-require
   text = require(`@/text_${this.language}.json`);

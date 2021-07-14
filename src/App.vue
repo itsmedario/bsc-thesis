@@ -1,15 +1,13 @@
 <template>
   <div id="app" :key="counter">
-    <Warning id="mobile-warning"
-     :language="language"
-      v-if="displayWarning"
-      @close-warning="displayWarning = false"/>
     <Header
      :language="language"
      @switch-language="switchLanguage()"
     />
     <router-view id="container"
      :language="language"
+     :displayWarning="displayWarning"
+     @close-warning="displayWarning = false"
      />
   </div>
 </template>
@@ -19,12 +17,10 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import Header from '@/components/layout/Header.vue';
-import Warning from '@/components/layout/Warning.vue';
 
 @Component({
   components: {
     Header,
-    Warning,
   },
 })
 

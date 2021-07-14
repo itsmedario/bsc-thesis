@@ -144,7 +144,6 @@ export default class Weights extends Vue {
   }
 
   isPossibleSolution():boolean {
-    console.log('check if possible');
     let usedBoats = 0;
     for (let i = 0; i < this.boatUsedOpt.length; i += 1) {
       if (this.boatUsedOpt[i]) {
@@ -153,20 +152,13 @@ export default class Weights extends Vue {
     }
 
     if (this.weights.length > usedBoats * 5) {
-      console.log('too many weights');
-      // eslint-disable-next-line prefer-template
-      console.log(this.weights.length + ' in  ' + usedBoats);
       return false;
     }
 
     if (this.boatUsedOpt[2] === true && this.weightSum > 20
      && this.weightSum <= 30 && this.weights.length >= 6) {
-      console.log('30 problem');
       return false;
     }
-
-    // eslint-disable-next-line prefer-template
-    console.log('correct with sum ' + this.weightSum);
     return true;
   }
 

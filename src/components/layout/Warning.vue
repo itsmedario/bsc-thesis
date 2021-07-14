@@ -1,6 +1,6 @@
 <template>
   <div id="tutorial-wrapper" class="modal-mask"
-   @mousedown.stop="$emit('close-warning')">
+   @mousedown.stop>
     <div class="modal-wrapper">
       <div class="modal-container" @mousedown.stop>
         <div class="modal-header">

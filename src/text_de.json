@@ -12,7 +12,7 @@
             "title": "Impressum",
             "descrption": "Diese Lernumgebung wurde für das Lehrmittel 'einfach Informatik 3/4' erstellt.",
             "author": "Entwickler: Dario Naepfer",
-            "version": "Version 4.2",
+            "version": "Version 4.3",
             "oldVersion": ""
         },
         "feedback": {
@@ -154,14 +154,14 @@
             "intro": "Überprüfe, ob die Kioske so gesetzt sind, dass jeder Punkt einen Kiosk auf einem benachbarten Punkt hat.",
             "description": "Überprüfe, ob die Kioske so gesetzt sind, dass auf jedem Punkt entweder selbst ein Kiosk steht oder auf einem benachbarten Punkt    . Beantworte dann die untenstehende Frage, indem du auf 'Richtig' oder 'Falsch' klickst. Viel Erfolg!",
             "statements": {
-                "s1": "Jedes Dorf hat einen Kiosk in der Nähe.",
+                "s1": "Jedes Dorf hat einen Kiosk auf einem benachbarten Punkt.",
                 "s2": "Es gibt eine korrekte Lösung, bei der weniger Kioske verwendet werden als hier.",
                 "true": "Richtig",
                 "false": "Falsch"
             },
             "tips": {
                 "tip1": "Beantworte alle Fragen, bevor du auf Überprüfen klickst!",
-                "tip2": "Haben alle Punkte einen Kiosk in der Nähe?",
+                "tip2": "Haben alle Punkte einen Kiosk auf einem benachbarten Punkt?",
                 "tip3": "Tipp: Überlege, ob es noch eine andere Lösung für dieses Rätsel gibt" 
             }
         },
@@ -174,7 +174,7 @@
             "intro": "Setze die Kioske so, dass jeder Punkt selbst oder auf einem benachbarten Punkt einen Kiosk hat.",
             "description": "Setze die Kioske so, dass auf jedem Punkt entweder selbst ein Kiosk steht oder auf einem angrenzenden Punkt. Klicke auf einen Kiosk und ziehe ihn an den gewünschten Platz. Klicke auf einen Kiosk, um ihn wieder aus der Landschaft zu entfernen. Viel Erfolg!",
             "tips": {
-                "tip1": "Noch nicht alle Punkte haben einen Kiosk in der Nähe!"
+                "tip1": "Noch nicht alle Punkte haben einen Kiosk auf einem benachbarten Punkt!"
             }
         },
         "optimizeKiosks":  {
@@ -186,7 +186,7 @@
             "intro": "Benutze so wenig Kioske wie möglich, dass jeder Punkt selbst oder auf einem benachbarten Punkt einen Kiosk hat.",
             "description": "Setze die Kioske so, dass auf jedem Punkt entweder selbst ein Kiosk steht oder auf einem angrenzenden Punkt. Klicke auf einen Kiosk und ziehe ihn an den gewünschten Platz. Klicke auf einen Kiosk, um ihn wieder aus der Landschaft zu entfernen. Versuche dabei, so wenig Kioske wie möglich zu verwenden. Viel Erfolg!",
             "tips": {
-                "tip1": "Noch nicht alle Punkte haben einen Kiosk in der Nähe!",
+                "tip1": "Noch nicht alle Punkte haben einen Kiosk auf einem benachbarten Punkt!",
                 "tip2": "Findest du eine Lösung, bei der du weniger Kioske verwendest?"
             }
         }

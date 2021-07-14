@@ -178,7 +178,7 @@ export default class KiosksTemplate extends Vue {
   }
 
   selectKiosk():void { // select the kiosk in the inventory
-    if (this.availableKiosks > 0) {
+    if (this.availableKiosks > 0 || this.level !== 2) {
       if (this.kioskSelected) {
         this.kioskSelected = false;
       } else {
